@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import Dashboard from './pages/Dashboard.tsx'
+import { dashboardLoader } from './loaders/DashboardLoader.ts'
 import './index.css'
 import {
   createBrowserRouter,
@@ -9,7 +10,8 @@ import {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Dashboard />,
+    loader: dashboardLoader,
   },
 ]);
 
