@@ -1,8 +1,8 @@
 import { fetchDataFromLocalStorage } from "../helper";
 export const dashboardLoader = () => {
-  const data = fetchDataFromLocalStorage("dashboard");
+  const data = fetchDataFromLocalStorage("userName");
   if (data) {
     return { userName: data as string };
   }
-  return null;
+  return { userName: "" };
 };
