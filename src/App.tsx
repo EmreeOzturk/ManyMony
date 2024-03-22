@@ -1,15 +1,16 @@
 import { Outlet, useLoaderData } from "react-router-dom"
+import wave from "./assets/wave.svg"
 import Header from "./components/Header";
 function App() {
   const { userName } = useLoaderData() as { userName: string };
   return (
-    <main>
+    <div className="layout">
       <Header userName={userName} />
-      <Outlet />
-      <h2>
-        This is Layout Footer
-      </h2>
-    </main>
+      <main>
+        <Outlet />
+      </main>
+      <img src={wave} alt="wave" />
+    </div>
   )
 }
 

@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Error from './pages/Error.tsx'
 import App from './App.tsx'
+import { logoutAction } from './actions/logoutAction.ts'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         loader: dashboardLoader,
         errorElement: <Error />,
       },
+      {
+        path: "logout",
+        action: logoutAction,
+      }
     ],
   },
 ]);
