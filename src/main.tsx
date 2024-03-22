@@ -4,6 +4,8 @@ import Dashboard from './pages/Dashboard.tsx'
 import { dashboardLoader } from './loaders/DashboardLoader.ts'
 import { mainLoader } from './loaders/mainLoader.ts'
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,6 +13,7 @@ import {
 import Error from './pages/Error.tsx'
 import App from './App.tsx'
 import { logoutAction } from './actions/logoutAction.ts'
+import { dashboardAction } from './actions/dashboardAction.ts'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,6 +26,7 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         loader: dashboardLoader,
         errorElement: <Error />,
+        action: dashboardAction
       },
       {
         path: "logout",
@@ -35,5 +39,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer />
   </React.StrictMode>,
 )
