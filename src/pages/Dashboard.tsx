@@ -1,13 +1,12 @@
-import { ReactNode } from "react"
 import { useLoaderData } from "react-router-dom"
 const Dashboard = () => {
-    const data = useLoaderData();
+    const { userName } = useLoaderData() as { userName: string };
     return (
         <div>
-            {data ? (
+            {userName ? (
                 <div>
                     <h1>Dashboard</h1>
-                    <p>{data as ReactNode}</p>
+                    <p>{userName as string}</p>
                 </div>
             ) : (
                 <div>
