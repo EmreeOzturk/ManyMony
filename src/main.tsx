@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Dashboard from './pages/Dashboard.tsx'
 import { expensesLoader } from './loaders/expensesLoader.ts'
+import { expensesAction } from './actions/expensesAction.ts'
 import { mainLoader } from './loaders/mainLoader.ts'
 import { dashboardLoader } from './loaders/DashboardLoader.ts'
 import './index.css'
@@ -16,6 +17,9 @@ import App from './App.tsx'
 import AllExpenses from './pages/AllExpenses.tsx'
 import { logoutAction } from './actions/logoutAction.ts'
 import { dashboardAction } from './actions/dashboardAction.ts'
+import BudgetDetail from './pages/BudgetDetail.tsx'
+import { budgetDetailLoader } from './loaders/budgetDetailLoader.ts'
+import { budgetDetailAction } from './actions/budgetDetailAction.ts'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,8 +42,17 @@ const router = createBrowserRouter([
         path: "/expenses",
         element: <AllExpenses />,
         loader: expensesLoader,
+        action: expensesAction,
         errorElement: <Error />,
+      },
+      {
+        path: "/budgets/:budgetId",
+        element: <BudgetDetail />,
+        errorElement: <Error />,
+        loader: budgetDetailLoader,
+        action: budgetDetailAction
       }
+
     ],
   },
 ]);
