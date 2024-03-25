@@ -1,8 +1,7 @@
-import type { ActionFunction } from "react-router-dom";
-
+import { redirect, type ActionFunction } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createExpense } from "../helper";
-import { Expense } from "../types";
+import { Budget, Expense } from "../types";
 
 export const budgetDetailAction: ActionFunction = async ({
   request,
@@ -11,7 +10,6 @@ export const budgetDetailAction: ActionFunction = async ({
 }) => {
   const formData = await request.formData();
   const actionType = formData.get("_action");
-
   if (actionType === "createExpense") {
     try {
       const budgetId = formData.get("newExpenseBudget");
@@ -41,6 +39,22 @@ export const budgetDetailAction: ActionFunction = async ({
     } catch (error) {
       toast.error("Failed to delete expense");
       throw new Error("Failed to delete expense");
+    }
+  }
+
+  if (actionType === "deleteBudget") {
+    try {
+      const budgetId = formData.get("budgetId");
+      const budgets = JSON.parse(localStorage.getItem("budgets") || "[]");
+      const updatedBudgets = budgets.filter(
+        (budget: Budget) => budget.id !== budgetId
+      );
+      localStorage.setItem("budgets", JSON.stringify(updatedBudgets));
+      toast.success("Budget deleted successfully");
+      return redirect("/");
+    } catch (error) {
+      toast.error("Failed to delete budget");
+      throw new Error("Failed to delete budget");
     }
   }
 };

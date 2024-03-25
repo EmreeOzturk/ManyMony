@@ -41,6 +41,8 @@ const BudgetItem = (
                             }
                         }}
                     >
+                        <input type="hidden" name="_action" value="deleteBudget" />
+                        <input type="hidden" name="budgetId" value={id} />
                         <button type="submit" className="btn btn--warning">
                             <span>Delete Budget</span>
                             <Trash />
