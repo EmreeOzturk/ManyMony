@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Dashboard from './pages/Dashboard.tsx'
-import { dashboardLoader } from './loaders/DashboardLoader.ts'
+import { expensesLoader } from './loaders/expensesLoader.ts'
 import { mainLoader } from './loaders/mainLoader.ts'
+import { dashboardLoader } from './loaders/DashboardLoader.ts'
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
@@ -12,6 +13,7 @@ import {
 } from "react-router-dom";
 import Error from './pages/Error.tsx'
 import App from './App.tsx'
+import AllExpenses from './pages/AllExpenses.tsx'
 import { logoutAction } from './actions/logoutAction.ts'
 import { dashboardAction } from './actions/dashboardAction.ts'
 const router = createBrowserRouter([
@@ -31,6 +33,12 @@ const router = createBrowserRouter([
       {
         path: "/logout",
         action: logoutAction,
+      },
+      {
+        path: "/expenses",
+        element: <AllExpenses />,
+        loader: expensesLoader,
+        errorElement: <Error />,
       }
     ],
   },
