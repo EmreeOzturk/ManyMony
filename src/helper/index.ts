@@ -51,6 +51,11 @@ export const findBudgetPropsById = (budgetId: string) => {
   return budget;
 };
 
+export const findExpensesByBudgetId = (budgetId: string) => {
+  const expenses: Expense[] = fetchDataFromLocalStorage("expenses") ?? [];
+  return expenses.filter((expense) => expense.budgetId === budgetId);
+};
+
 export const createBudget = async (
   budgetName: string,
   budgetAmount: string
