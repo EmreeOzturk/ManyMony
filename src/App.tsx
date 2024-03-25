@@ -9,7 +9,9 @@ function App() {
       <main>
         <Outlet />
       </main>
-      <img src={wave} alt="wave" />
+      <footer>
+        <img src={wave} alt="wave" />
+      </footer>
     </div>
   )
 }
