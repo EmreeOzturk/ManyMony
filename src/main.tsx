@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         action: dashboardAction
       },
       {
-        path: "logout",
+        path: "/logout",
         action: logoutAction,
       }
     ],
