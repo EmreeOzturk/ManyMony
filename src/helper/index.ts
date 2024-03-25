@@ -42,3 +42,24 @@ export const createBudget = async (
     newBudget,
   ] as unknown as []);
 };
+
+export const createExpense = async (
+  budgetId: string,
+  expenseName: string,
+  expenseAmount: string
+) => {
+  await wait(2000);
+  const newExpense = {
+    id: crypto.randomUUID(),
+    name: expenseName,
+    amount: +expenseAmount,
+    budgetId,
+    createdAt: Date.now(),
+  };
+
+  const expenses = fetchDataFromLocalStorage("expenses") ?? [];
+  return saveDataToLocalStorage("expenses", [
+    ...expenses,
+    newExpense,
+  ] as unknown as []);
+};
