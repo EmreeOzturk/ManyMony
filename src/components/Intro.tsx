@@ -1,5 +1,5 @@
 import illus from "../assets/illustration.jpg"
-import CreateAccountForm from "./CreateAccountForm"
+import CreateAccountForm from "./forms/CreateAccountForm"
 const Intro = () => {
     return (
         <div className='intro'>
