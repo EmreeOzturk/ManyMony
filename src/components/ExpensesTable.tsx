@@ -6,11 +6,11 @@ const ExpensesTable = (
     { expenses }: { expenses: Expense[] }
 ) => {
     const location = useLocation();
-    const tableHeaders = ["Name", "Amount", "Date"]
+    const tableHeaders = ["Name", "Amount", "Date", "Actions"]
     if (location.pathname === "/expenses") {
         tableHeaders.push("Budget")
-        tableHeaders.push("Actions")
     }
+
     return (
         <div className="table">
             <table>
