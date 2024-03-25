@@ -45,6 +45,12 @@ export const calculateTotalExpensesByBudgetId = (budgetId: string) => {
     .reduce((acc, expense) => acc + expense.amount, 0);
 };
 
+export const findBudgetPropsById = (budgetId: string) => {
+  const budgets: Budget[] = fetchDataFromLocalStorage("budgets") ?? [];
+  const budget = budgets.find((budget) => budget.id === budgetId);
+  return budget;
+};
+
 export const createBudget = async (
   budgetName: string,
   budgetAmount: string
