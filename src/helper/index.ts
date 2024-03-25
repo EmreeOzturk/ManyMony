@@ -1,4 +1,4 @@
-import { Budget } from "../types";
+import { Budget, Expense } from "../types";
 
 export const fetchDataFromLocalStorage = (key: string) => {
   const data = localStorage.getItem(key);
@@ -23,11 +23,33 @@ export const clearLocalStorage = () => {
 export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
+export const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(amount);
+};
+
+export const formatPercentage = (total: number, value: number) => {
+  return `${Math.round((value / total) * 100)}%`;
+};
+
+export const formatDateToLocaleString = (date: number) => {
+  return new Date(date).toLocaleString();
+};
+
+export const calculateTotalExpensesByBudgetId = (budgetId: string) => {
+  const expenses: Expense[] = fetchDataFromLocalStorage("expenses") ?? [];
+  return expenses
+    .filter((expense) => expense.budgetId === budgetId)
+    .reduce((acc, expense) => acc + expense.amount, 0);
+};
+
 export const createBudget = async (
   budgetName: string,
   budgetAmount: string
 ) => {
-  await wait(2000);
+  await wait(1000);
   const newBudget: Budget = {
     id: crypto.randomUUID(),
     name: budgetName,
@@ -48,7 +70,7 @@ export const createExpense = async (
   expenseName: string,
   expenseAmount: string
 ) => {
-  await wait(2000);
+  await wait(1000);
   const newExpense = {
     id: crypto.randomUUID(),
     name: expenseName,
