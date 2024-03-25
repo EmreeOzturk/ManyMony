@@ -1,6 +1,9 @@
 import { formatCurrency, formatDateToLocaleString } from "../helper"
+import { Expense } from "../types"
 
-const ExpenseItem = ({ expense }) => {
+const ExpenseItem = ({ expense }
+    : { expense: Expense }
+) => {
     return (
         <>
             <td>{expense.name}</td>
