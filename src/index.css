@@ -30,7 +30,7 @@ svg {
   --lh-1-4: 1.4;
 
   /* colors */
-  --accent: 183 74% 44%;
+  --accent: 186 74% 44%;
   --bkg: 190 60% 98%;
   --text: 185 26% 9%;
   --muted: 183 8% 55%;
@@ -516,10 +516,6 @@ select {
 }
 
 progress {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border: none;
   width: 100%;
   height: var(--space-sm);
   border-radius: 100vmax;
@@ -540,7 +536,7 @@ progress[value]::-moz-progress-bar {
 }
 
 progress[value]::-webkit-progress-value {
-  background-color: hsl(var(--backdrop));
+  background-color: hsl(var(--accent));
   -webkit-transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
