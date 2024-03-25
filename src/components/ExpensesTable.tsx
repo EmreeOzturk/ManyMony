@@ -1,15 +1,23 @@
 import { Expense } from '../types'
 import ExpenseItem from "./ExpenseItem"
+import { useLocation } from 'react-router-dom'
+
 const ExpensesTable = (
     { expenses }: { expenses: Expense[] }
 ) => {
+    const location = useLocation();
+    const tableHeaders = ["Name", "Amount", "Date"]
+    if (location.pathname === "/expenses") {
+        tableHeaders.push("Budget")
+        tableHeaders.push("Actions")
+    }
     return (
         <div className="table">
             <table>
                 <thead>
                     <tr>
                         {
-                            ["Name", "Amount", "Date"].map((i, index) => (
+                            tableHeaders.map((i, index) => (
                                 <th key={index}>{i}</th>
                             ))
                         }
