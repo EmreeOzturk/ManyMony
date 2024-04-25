@@ -1,4 +1,6 @@
-/* ⚠️ CSS optimized for the tutorial, not for expanding to a larger site. ⚠️ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *,
 *::before,
@@ -284,7 +286,7 @@ p {
 .layout > img {
   width: 100%;
 }
-
+/* 
 main {
   max-width: 1500px;
   width: 100%;
@@ -293,7 +295,7 @@ main {
   display: -ms-grid;
   display: grid;
   place-items: start;
-}
+} */
 
 /* navbar */
 nav {
@@ -597,4 +599,11 @@ table a {
 /* toast */
 .Toastify__toast-body {
   font-size: var(--fs-300);
+}
+
+
+/* hide scroll */
+
+::-webkit-scrollbar {
+  display: none;
 }
