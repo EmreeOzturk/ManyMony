@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Dashboard from './pages/Dashboard.tsx'
+// import Dashboard from './pages/Dashboard.tsx'
+import LangingPage from './pages/LangingPage.tsx'
 import { expensesLoader } from './loaders/expensesLoader.ts'
 import { expensesAction } from './actions/expensesAction.ts'
 import { mainLoader } from './loaders/mainLoader.ts'
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Dashboard />,
+        element: <LangingPage />,
         loader: dashboardLoader,
         errorElement: <Error />,
         action: dashboardAction
