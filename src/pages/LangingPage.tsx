@@ -77,7 +77,7 @@ const LangingPage = () => {
             </WobbleCard>
             <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-950/40 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
               <div >
-                <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
+                <div className="w-14 h-14 rounded-md bg-gray-900  flex justify-center items-center">
                   <ChartIcon />
                 </div>
                 <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
@@ -105,9 +105,11 @@ const LangingPage = () => {
 
             </WobbleCard>
           </div>
-
-
         </div>
+      </div>
+
+      <div className="h-screen">
+
       </div>
       {/* </section> */}
     </>
