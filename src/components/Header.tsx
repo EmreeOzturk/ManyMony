@@ -1,21 +1,30 @@
-import logomark from '../assets/logomark.svg'
-import { Form, NavLink } from 'react-router-dom'
-import Trash from '../assets/icons/Trash'
+// import logomark from '../assets/logomark.svg'
+import { NavLink } from 'react-router-dom'
+// import Trash from '../assets/icons/Trash'
+import WalletIcon from './icons/WalletIcon'
 const Header = (
-    { userName }: { userName: string }
+    // { userName }: { userName: string }
 ) => {
     return (
-        <header className='bg-slate-600/40 text-white max-w-7xl fixed left-0 right-0 mt-4 rounded-xl shadow-lg mx-auto flex justify-between items-center'>
+        <header className='bg-slate-800/50 text-white max-w-7xl fixed left-0 right-0 mt-4 rounded-xl shadow-lg mx-auto flex justify-between items-center h-16 px-12'>
             <div>
-                Logo
+                <NavLink to="/" className="flex items-center justify-center gap-3 text-2xl tracking-widest font-mono
+                    bg-gradient-to-r from-violet-500 to-blue-700 text-transparent bg-clip-text logoAnimation
+                ">
+                    <WalletIcon />
+                    <span>
+                        ManyMony
+                    </span>
+                </NavLink>
             </div>
-
-            <div>
-                <nav>
-                    <p>Login</p>
-                    <p>Register</p>
-                </nav>
-            </div>
+            <nav className='flex items-center justify-center gap-4 text-2xl font-mono'>
+                <NavLink to="/login" aria-label='login link'>
+                    Login
+                </NavLink>
+                <NavLink to="/register" aria-label='register link'>
+                    Register
+                </NavLink>
+            </nav>
         </header>
     )
 }
