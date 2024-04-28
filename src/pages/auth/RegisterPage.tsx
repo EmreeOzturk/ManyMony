@@ -56,7 +56,7 @@ const RegisterPage = () => {
                             </span>
                         </h1>
                         <p className="text-neutral-300 dark:text-neutral-700 mt-2">
-                            Fill in the form to get started
+                            Fill in the form and start your journey
                         </p>
                     </div>
                     <div className="w-full">
