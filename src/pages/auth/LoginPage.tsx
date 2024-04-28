@@ -5,6 +5,7 @@ import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import BackToHome from "../../components/BackToHome";
 
 const LoginPage = () => {
   const radius = 500;
@@ -22,6 +23,7 @@ const LoginPage = () => {
   }
   return (
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+      <BackToHome />
       <div className="w-[600px] z-20  mx-auto p-4">
         <motion.form
           style={{
