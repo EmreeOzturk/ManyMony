@@ -108,9 +108,7 @@ const LangingPage = () => {
         </div>
       </div>
 
-      <div className="h-screen">
 
-      </div>
       {/* </section> */}
     </>
   )
