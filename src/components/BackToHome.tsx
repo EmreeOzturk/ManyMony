@@ -6,7 +6,7 @@ const BackToHome = () => {
         <div className="absolute top-10 left-10 cursor-pointer z-20">
             <Link
                 to="/"
-                className="text-neutral-500 hover:text-neutral-300 flex items-center gap-1 justify-center ">
+                className="text-neutral-500 hover:text-neutral-300 transition-all flex items-center gap-1 justify-center ">
                 <LeftArrow />
                 Back To Home
 
