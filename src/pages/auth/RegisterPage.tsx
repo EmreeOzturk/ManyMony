@@ -4,15 +4,9 @@ import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-const BottomGradient = () => {
+import BackToHome from "../../components/BackToHome";
+import BottomGradient from "../../components/ui/bottom-gradient";
 
-    return (
-        <>
-            <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-            <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
-        </>
-    );
-};
 const RegisterPage = () => {
     const radius = 500;
     const [visible, setVisible] = useState(false);
@@ -29,6 +23,7 @@ const RegisterPage = () => {
     }
     return (
         <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+            <BackToHome />
             <div className="w-[600px] z-20 mx-auto p-4">
                 <motion.form
                     style={{
