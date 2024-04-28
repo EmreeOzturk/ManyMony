@@ -3,12 +3,12 @@ import { BackgroundBeams } from "../../components/ui/background-beams";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
-import * as React from "react";
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   const radius = 500;
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -53,10 +53,16 @@ const LoginPage = () => {
               Fill in the form to get started
             </p>
           </div>
-          <Input id="email" placeholder="youremail@manymony.com" type="email" />
-          <Input id="password" placeholder="*********" type="password" />
+          <div className="w-full">
+            <label className="text-neutral-400" htmlFor="email">Email</label>
+            <Input id="email" placeholder="youremail@manymony.com" type="email" />
+          </div>
+          <div className="w-full">
+            <label htmlFor="password" className="text-neutral-400">Password</label>
+            <Input id="password" placeholder="*********" type="password" />
+          </div>
           <button
-            className="bg-gradient-to-br relative group/btn from-black  to-neutral-600 block  w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block  w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
           >
             <span
@@ -66,11 +72,26 @@ const LoginPage = () => {
             </span>
             <BottomGradient />
           </button>
+
+          <div
+            className="flex flex-col items-start justify-center w-full text-center mt-4"
+          >
+            <Link to="#" className="text-neutral-400 dark:text-neutral-700
+              hover:text-neutral-500 hover:underline
+            ">Forgot your password?</Link>
+            <Link to="/register" className="text-neutral-400 dark:text-neutral-700 mt-2 hover:text-neutral-500 hover:underline">Don't have an account? {" "}
+              <span
+                className="font-bold"
+              >
+                Register
+              </span>
+            </Link>
+          </div>
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         </motion.form>
-      </div>
+      </div >
       <BackgroundBeams />
-    </div>
+    </div >
   )
 }
 
