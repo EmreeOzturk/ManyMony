@@ -6,12 +6,12 @@ const Header = (
     // { userName }: { userName: string }
 ) => {
     return (
-        <header className='bg-slate-800/50 z-10 text-white max-w-7xl fixed left-0 right-0 mt-4 rounded-xl shadow-lg mx-auto flex justify-between items-center h-16 px-12'>
+        <header className='bg-transparent backdrop-blur-md z-10 text-neutral-400 max-w-7xl fixed left-0 right-0 mt-4 rounded-xl shadow-lg mx-auto flex justify-between items-center h-16 px-12'>
             <div>
                 <NavLink to="/" className="flex items-center justify-center gap-3 text-2xl tracking-widest font-mono
                     bg-gradient-to-r from-violet-500 to-blue-700 text-transparent bg-clip-text logoAnimation
                 ">
-                    <WalletIcon />
+                    <WalletIcon className="logoAnimation" />
                     <span>
                         ManyMony
                     </span>
