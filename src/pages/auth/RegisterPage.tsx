@@ -8,7 +8,7 @@ import BackToHome from "../../components/BackToHome";
 import BottomGradient from "../../components/ui/bottom-gradient";
 
 const RegisterPage = () => {
-    const radius = 500;
+    const radius = 600;
     const [visible, setVisible] = useState(false);
 
     const mouseX = useMotionValue(0);
@@ -38,7 +38,7 @@ const RegisterPage = () => {
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => setVisible(true)}
                     onMouseLeave={() => setVisible(false)}
-                    className="border border-violet-800/40 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
+                    className="backdrop-blur-[2px] shadow-sm shadow-violet-700/70 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
                     <div className="mb-10 w-full">
                         <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
                             Welcome to {" "}
@@ -87,9 +87,11 @@ const RegisterPage = () => {
                     <div
                         className="flex flex-col items-start justify-center w-full text-center mt-4"
                     >
-                        <Link to="/login" className="text-neutral-400 dark:text-neutral-700 hover:text-neutral-500 hover:underline">Already have an account? {" "}
+                        <Link to="/login" className="group text-neutral-500  hover:text-neutral-400 ">Already have an account? {" "}
                             <span
-                                className="font-bold"
+                                className="font-bold
+                                    group-hover:underline
+                                "
                             >
                                 Log in
                             </span>
