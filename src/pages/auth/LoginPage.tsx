@@ -10,6 +10,8 @@ import BackToHome from "../../components/BackToHome";
 const LoginPage = () => {
   const radius = 500;
   const [visible, setVisible] = useState(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -20,6 +22,15 @@ const LoginPage = () => {
 
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
+  }
+
+  function handleInputChanges(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target
+    if (name === 'email') {
+      setEmail(value)
+    } else {
+      setPassword(value)
+    }
   }
   return (
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
@@ -65,11 +76,31 @@ const LoginPage = () => {
           </div>
           <div className="w-full">
             <label className="text-neutral-400" htmlFor="email">Email</label>
-            <Input id="email" placeholder="youremail@manymony.com" type="email" />
+            <Input
+              id="email"
+              placeholder="youremail@manymony.com"
+              type="email"
+              name="email"
+              aria-label="email"
+              aria-describedby="user-email"
+              aria-invalid="false"
+              value={email}
+              onChange={handleInputChanges}
+            />
           </div>
           <div className="w-full">
             <label htmlFor="password" className="text-neutral-400">Password</label>
-            <Input id="password" placeholder="*********" type="password" />
+            <Input
+              id="password"
+              placeholder="*********"
+              type="password"
+              name="password"
+              aria-label="password"
+              aria-describedby="user-password"
+              aria-invalid="false"
+              value={password}
+              onChange={handleInputChanges}
+            />
           </div>
           <button
             className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block hover:text-neutral-300 transition-all  w-full text-neutral-500 rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
