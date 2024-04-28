@@ -2,8 +2,8 @@ import { Input } from "../../components/ui/input"
 import { BackgroundBeams } from "../../components/ui/background-beams";
 import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
-import * as React from "react";
-
+import {useState} from "react";
+import { Link } from "react-router-dom";
 const BottomGradient = () => {
 
     return (
@@ -15,7 +15,7 @@ const BottomGradient = () => {
 };
 const RegisterPage = () => {
     const radius = 500;
-    const [visible, setVisible] = React.useState(false);
+    const [visible, setVisible] = useState(false);
 
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -73,6 +73,20 @@ const RegisterPage = () => {
                         </span>
                         <BottomGradient />
                     </button>
+                    <div
+                        className="flex flex-col items-start justify-center w-full text-center mt-4"
+                    >
+                        <Link to="#" className="text-neutral-400 dark:text-neutral-700
+              hover:text-neutral-500 hover:underline
+            ">Forgot your password?</Link>
+                        <Link to="/register" className="text-neutral-400 dark:text-neutral-700 mt-2 hover:text-neutral-500 hover:underline">Don't have an account? {" "}
+                            <span
+                                className="font-bold"
+                            >
+                                Register
+                            </span>
+                        </Link>
+                    </div>
                     <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
                 </motion.form>
             </div>
