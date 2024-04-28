@@ -25,8 +25,12 @@ const LoginPage = () => {
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <BackToHome />
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        initial={{
+          opacity: 0
+        }}
+        animate={{
+          opacity: 1
+        }}
         transition={{ duration: 1 }}
         className="w-[600px] z-20  mx-auto p-4">
         <motion.form
@@ -56,7 +60,7 @@ const LoginPage = () => {
               </span>
             </h1>
             <p className="text-neutral-300 dark:text-neutral-700 mt-2">
-              Fill in the form to continue
+              Fill in the form to continue your journey with us
             </p>
           </div>
           <div className="w-full">
@@ -68,7 +72,7 @@ const LoginPage = () => {
             <Input id="password" placeholder="*********" type="password" />
           </div>
           <button
-            className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block  w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block hover:text-neutral-300 transition-all  w-full text-neutral-500 rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
           >
             <span
@@ -95,7 +99,7 @@ const LoginPage = () => {
               </span>
             </Link>
           </div>
-          <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+          <div className="bg-gradient-to-r from-transparent via-violet-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         </motion.form>
       </motion.div >
       <BackgroundBeams />
