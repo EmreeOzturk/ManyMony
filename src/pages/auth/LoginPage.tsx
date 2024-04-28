@@ -38,7 +38,7 @@ const LoginPage = () => {
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setVisible(true)}
           onMouseLeave={() => setVisible(false)}
-          className="border border-violet-800/40 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
+          className=" backdrop-blur-[2px] shadow-sm shadow-violet-300 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
           <div className="mb-10 w-full">
             <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
               Welcome to {" "}
@@ -78,12 +78,14 @@ const LoginPage = () => {
           <div
             className="flex flex-col items-start justify-center w-full text-center mt-4"
           >
-            <Link to="#" className="text-neutral-400 dark:text-neutral-700
-              hover:text-neutral-500 hover:underline
+            <Link to="#" className="text-neutral-500 
+              hover:text-neutral-300 
             ">Forgot your password?</Link>
-            <Link to="/register" className="text-neutral-400 dark:text-neutral-700 mt-2 hover:text-neutral-500 hover:underline">Don't have an account? {" "}
+            <Link to="/register" className="group text-neutral-500  mt-2 hover:text-neutral-400">Don't have an account? {" "}
               <span
-                className="font-bold"
+                className="font-bold
+                  group-hover:underline
+                "
               >
                 Register
               </span>
