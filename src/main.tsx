@@ -21,6 +21,8 @@ import { dashboardAction } from './actions/dashboardAction.ts'
 import BudgetDetail from './pages/BudgetDetail.tsx'
 import { budgetDetailLoader } from './loaders/budgetDetailLoader.ts'
 import { budgetDetailAction } from './actions/budgetDetailAction.ts'
+import LoginPage from './pages/auth/LoginPage.tsx'
+import RegisterPage from './pages/auth/RegisterPage.tsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,9 +55,18 @@ const router = createBrowserRouter([
         loader: budgetDetailLoader,
         action: budgetDetailAction
       }
-
     ],
   },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
+
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
