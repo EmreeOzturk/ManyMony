@@ -24,7 +24,11 @@ const LoginPage = () => {
   return (
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <BackToHome />
-      <div className="w-[600px] z-20  mx-auto p-4">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="w-[600px] z-20  mx-auto p-4">
         <motion.form
           style={{
             background: useMotionTemplate`
@@ -93,7 +97,7 @@ const LoginPage = () => {
           </div>
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
         </motion.form>
-      </div >
+      </motion.div >
       <BackgroundBeams />
     </div >
   )
