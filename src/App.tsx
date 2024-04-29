@@ -1,13 +1,13 @@
-import { Outlet, useLoaderData } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 // import wave from "./assets/wave.svg"
 import Header from "./components/Header";
 function App() {
-  const { userName } = useLoaderData() as { userName: string };
+  // const { userName } = useLoaderData() as { userName: string };
   return (
     <
       // className="layout"
       >
-      <Header userName={userName} />
+      <Header />
       <main>
         <Outlet />
       </main>
