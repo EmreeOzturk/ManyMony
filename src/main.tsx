@@ -24,6 +24,8 @@ import { budgetDetailAction } from './actions/budgetDetailAction.ts'
 import LoginPage from './pages/auth/LoginPage.tsx'
 import RegisterPage from './pages/auth/RegisterPage.tsx'
 import AuthProvider from './context/AuthProvider.tsx'
+import PrivateRoute from './pages/PrivateRoute.tsx'
+import { authAction } from './actions/authAction.ts'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,35 +41,40 @@ const router = createBrowserRouter([
         action: dashboardAction
       },
       {
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/expenses",
+            element: <AllExpenses />,
+            loader: expensesLoader,
+            action: expensesAction,
+            errorElement: <Error />,
+          },
+          {
+            path: "/budgets/:budgetId",
+            element: <BudgetDetail />,
+            errorElement: <Error />,
+            loader: budgetDetailLoader,
+            action: budgetDetailAction
+          }
+        ]
+      },
+      {
         path: "/logout",
         action: logoutAction,
       },
-      {
-        path: "/expenses",
-        element: <AllExpenses />,
-        loader: expensesLoader,
-        action: expensesAction,
-        errorElement: <Error />,
-      },
-      {
-        path: "/budgets/:budgetId",
-        element: <BudgetDetail />,
-        errorElement: <Error />,
-        loader: budgetDetailLoader,
-        action: budgetDetailAction
-      }
     ],
   },
   {
     path: "/login",
     element: <LoginPage />,
+    action: authAction,
   },
   {
     path: "/register",
     element: <RegisterPage />,
+    action: authAction,
   },
-
-
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
