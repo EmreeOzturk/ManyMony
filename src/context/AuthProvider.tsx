@@ -27,11 +27,12 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 throw new Error("Please provide a valid password");
             }
 
-            const result = await account.createEmailPasswordSession(
+            const response = await account.createEmailPasswordSession(
                 email as string,
                 password as string
             );
-            setUser(result);
+            console.log(response)
+            setUser(response);
             toast.success("Login successful");
             return redirect("/");
         } catch (error) {
@@ -62,10 +63,21 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 throw new Error("Please provide a valid name");
             }
 
-            console.log("hoop vurda")
-            // const result = await account.create(ID.unique(), email as string, password as string, name as string);
-            // console.log(result)
+            const response = await account.create(ID.unique(), email as string, password as string, name as string);
+            console.log(response)
             toast.success("Register successful");
+            return redirect("/login");
+        } catch (error) {
+            toast.error((error as Error).message);
+            throw new Error((error as Error).message);
+        }
+    }
+
+    const logoutAction = async () => {
+        try {
+            await account.deleteSession("current");
+            setUser(null);
+            toast.success("Logout successful");
             return redirect("/login");
         } catch (error) {
             toast.error((error as Error).message);
