@@ -1,6 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
-
 interface defaultAuthContext {
     user: string | null;
     setUser?: (user: string) => void;
@@ -17,8 +15,7 @@ const AuthContext = createContext<defaultAuthContext | undefined>(defaultAuthCon
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<string | null>(null)
-    const [token, setToken] = useState(localStorage.getItem("site") || "");
-
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
 
     return (
         <AuthContext.Provider value={
@@ -33,10 +30,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         </AuthContext.Provider>
     )
 }
-
 export default AuthProvider
-
-
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
