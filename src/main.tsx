@@ -25,7 +25,6 @@ import LoginPage from './pages/auth/LoginPage.tsx'
 import RegisterPage from './pages/auth/RegisterPage.tsx'
 import AuthProvider from './context/AuthProvider.tsx'
 import PrivateRoute from './pages/PrivateRoute.tsx'
-import { authAction } from './actions/authAction.ts'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -68,13 +67,11 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
-    action: authAction,
     errorElement: <Error />,
   },
   {
     path: "/register",
     element: <RegisterPage />,
-    action: authAction,
     errorElement: <Error />,
   },
 ]);
