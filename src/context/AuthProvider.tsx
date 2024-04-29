@@ -3,24 +3,52 @@ import { emailRegex, passwordRegex } from "../helper/consts";
 import { account } from "../lib/appwrite";
 import { toast } from "react-toastify";
 import { redirect } from "react-router-dom";
+import type { Models } from "appwrite";
+// export interface defaultAuthContext {
+//     user: Models.Session | null;
+//     setUser?: (Models.Session | null) => void;
+//     loginAction: (email: string, password: string) => void;
+//     logoutAction?: () => void;
+// };
 
-interface defaultAuthContext {
-    user: string | null;
-    setUser?: (user: string) => void;
-    token: string;
-    setToken?: (token: string) => void;
-}
+// const defaultAuthContext: defaultAuthContext = {
+//     user: null,
+//     loginAction: async (email: string, password: string) => {
+//         try {
+//             if (email === "" || password === "") {
+//                 throw new Error("Please provide a valid input");
+//             }
 
-const defaultAuthContext: defaultAuthContext = {
-    user: null,
-    token: "",
-}
+//             if (!emailRegex.test(email as string)) {
+//                 throw new Error("Please provide a valid email");
+//             }
 
-const AuthContext = createContext<defaultAuthContext | undefined>(defaultAuthContext)
+//             if (!passwordRegex.test(password as string)) {
+//                 throw new Error("Please provide a valid password");
+//             }
+
+//             const result: Models.Session = await account.createEmailPasswordSession(
+//                 email as string,
+//                 password as string
+//             );
+
+
+
+//             toast.success("Login successful");
+//             return redirect("/");
+//         } catch (error) {
+//             toast.error((error as Error).message);
+//             throw new Error((error as Error).message);
+//         }
+//     },
+// }
+
+const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [user, setUser] = useState<string | null>(null)
-    const [token, setToken] = useState(localStorage.getItem("token") || "");
+
+    const [user, setUser] = useState<Models.Session | null>(null);
+
 
     const loginAction = async (email: string, password: string) => {
         try {
@@ -40,7 +68,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 email as string,
                 password as string
             );
-
+            console.log("denedikkk")
+            setUser(result);
             toast.success("Login successful");
             return redirect("/");
         } catch (error) {
@@ -49,15 +78,17 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }
 
+    const registerAction = async (email: string, password: string, name: string) => { }
+
+    const store = {
+        user,
+        loginAction
+    }
+
     return (
-        <AuthContext.Provider value={
-            {
-                user,
-                token,
-                setUser,
-                setToken
-            }
-        }>
+        <AuthContext.Provider
+            value={store}
+        >
             {children}
         </AuthContext.Provider>
     )
