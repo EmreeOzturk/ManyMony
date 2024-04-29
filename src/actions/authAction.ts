@@ -2,6 +2,7 @@ import type { ActionFunction } from "react-router-dom";
 import { toast } from "react-toastify";
 import { redirect } from "react-router-dom";
 import { emailRegex, passwordRegex } from "../helper/consts";
+import { account } from "../lib/appwrite";
 
 type authActionProps = {
   request: Request;
@@ -28,9 +29,11 @@ export const authAction: ActionFunction<authActionProps> = async ({
         throw new Error("Please provide a valid password");
       }
 
-      // call login action
-      //   loginAction();
-      // appwrite api endpoint
+      const result = await account.createEmailPasswordSession(
+        email as string,
+        password as string
+      );
+
       toast.success("Login successful");
       return redirect("/");
     } catch (error) {
