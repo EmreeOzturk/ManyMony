@@ -5,8 +5,8 @@ function App() {
   const { userName } = useLoaderData() as { userName: string };
   return (
     <
-    // className="layout"
-    >
+      // className="layout"
+      >
       <Header userName={userName} />
       <main>
         <Outlet />
