@@ -2,16 +2,15 @@ import { Input } from "../../components/ui/input"
 import { BackgroundBeams } from "../../components/ui/background-beams";
 import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { Link } from "react-router-dom";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import BackToHome from "../../components/BackToHome";
-
-
+import { useAuth } from "../../context/AuthProvider";
 const LoginPage = () => {
   const radius = 500;
   const [visible, setVisible] = useState(false);
-
+  const auth = useAuth();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -22,6 +21,17 @@ const LoginPage = () => {
     mouseY.set(clientY - top);
   }
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const email = (e.currentTarget.email as HTMLInputElement).value;
+    const password = (e.currentTarget.password as HTMLInputElement).value;
+    console.log(email, password)
+    try {
+      (auth as { loginAction: (email: string, password: string) => void }).loginAction(email, password);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
@@ -35,7 +45,7 @@ const LoginPage = () => {
         }}
         transition={{ duration: 1 }}
         className="w-[600px] z-20  mx-auto p-4">
-        <motion.div
+        <motion.form
           style={{
             background: useMotionTemplate`
   radial-gradient(
@@ -48,6 +58,7 @@ const LoginPage = () => {
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setVisible(true)}
           onMouseLeave={() => setVisible(false)}
+          onSubmit={handleSubmit as FormEventHandler<HTMLFormElement>}
           className=" backdrop-blur-[2px] shadow-sm shadow-violet-300 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
           <div className="mb-10 w-full">
             <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
@@ -114,7 +125,7 @@ const LoginPage = () => {
             </Link>
           </div>
           <div className="bg-gradient-to-r from-transparent via-violet-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-        </motion.div>
+        </motion.form>
       </motion.div >
       <BackgroundBeams />
     </div >
