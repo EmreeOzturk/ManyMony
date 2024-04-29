@@ -7,6 +7,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import BackToHome from "../../components/BackToHome";
 
+
+
+
+
 const LoginPage = () => {
   const radius = 500;
   const [visible, setVisible] = useState(false);
@@ -32,6 +36,26 @@ const LoginPage = () => {
       setPassword(value)
     }
   }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    // check if email and password are valid
+    if (email === '' || password === '') {
+      alert("please provide a valid input");
+      return
+    }
+    if (!emailRegex.test(email)) {
+      alert("please provide a valid email");
+      return
+    }
+    if (!passwordRegex.test(password)) {
+      alert("please provide a valid password");
+      return
+    }
+
+    console.log(email, password)
+  }
+
   return (
     <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
       <BackToHome />
@@ -45,6 +69,7 @@ const LoginPage = () => {
         transition={{ duration: 1 }}
         className="w-[600px] z-20  mx-auto p-4">
         <motion.form
+          onSubmit={handleSubmit}
           style={{
             background: useMotionTemplate`
   radial-gradient(
