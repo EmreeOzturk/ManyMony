@@ -89,6 +89,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         user,
         loginAction,
         registerAction,
+        logoutAction
     }
 
     return (
