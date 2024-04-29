@@ -1,4 +1,4 @@
-import React from 'react'
+
 import ReactDOM from 'react-dom/client'
 // import Dashboard from './pages/Dashboard.tsx'
 import LangingPage from './pages/LangingPage.tsx'
