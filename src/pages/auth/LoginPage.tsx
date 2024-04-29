@@ -6,7 +6,7 @@ import { FormEventHandler, useState } from "react";
 import { Link } from "react-router-dom";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import BackToHome from "../../components/BackToHome";
-import { useAuth } from "../../context/AuthProvider";
+import { useAuth } from '../../hooks/useAuth'
 const LoginPage = () => {
   const radius = 500;
   const [visible, setVisible] = useState(false);
