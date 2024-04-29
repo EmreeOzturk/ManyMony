@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { emailRegex, passwordRegex, userNameRexex } from "../helper/consts";
 import { account } from "../lib/appwrite";
 import { toast } from "react-toastify";
@@ -6,7 +6,7 @@ import { redirect } from "react-router-dom";
 import type { Models } from "appwrite";
 import { ID } from "appwrite";
 
-const AuthContext = createContext({})
+export const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<Models.Session | null>(null);
@@ -14,7 +14,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         checkUserStatus();
-        console.log(user)
     }, []);
     const checkUserStatus = async () => {
         try {
@@ -114,10 +113,3 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     )
 }
 export default AuthProvider
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAuth = () => {
-    return useContext(AuthContext)
-}
-
-
