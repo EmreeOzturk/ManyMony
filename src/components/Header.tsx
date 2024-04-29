@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom'
 // import Trash from '../assets/icons/Trash'
 import WalletIcon from './icons/WalletIcon'
-import { useAuth } from '../context/AuthProvider'
+import { useAuth } from '../hooks/useAuth'
 const Header = (
     // { userName }: { userName: string }
 ) => {
