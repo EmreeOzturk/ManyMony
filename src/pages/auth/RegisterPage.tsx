@@ -2,15 +2,15 @@ import { Input } from "../../components/ui/input"
 import { BackgroundBeams } from "../../components/ui/background-beams";
 import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { Link } from "react-router-dom";
 import BackToHome from "../../components/BackToHome";
 import BottomGradient from "../../components/ui/bottom-gradient";
-
+import { useAuth } from "../../context/AuthProvider";
 const RegisterPage = () => {
     const radius = 600;
     const [visible, setVisible] = useState(false);
-
+    const auth = useAuth();
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -20,6 +20,21 @@ const RegisterPage = () => {
 
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
+    }
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const email = (e.currentTarget.email as HTMLInputElement).value;
+        const password = (e.currentTarget.password as HTMLInputElement).value;
+        const name = (e.currentTarget.name as unknown as HTMLInputElement).value;
+        const confPassword = (e.currentTarget.confPassword as HTMLInputElement).value;
+
+        try {
+            (auth as { registerAction: (email: string, password: string, confPassword: string, name: string) => void }).registerAction(email, password, confPassword, name);
+        } catch (error) {
+            console.log(error)
+        }
+
     }
     return (
         <div className="h-screen w-full bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
@@ -42,6 +57,7 @@ const RegisterPage = () => {
                     onMouseMove={handleMouseMove}
                     onMouseEnter={() => setVisible(true)}
                     onMouseLeave={() => setVisible(false)}
+                    onSubmit={handleSubmit as FormEventHandler<HTMLFormElement>}
                     className="backdrop-blur-[2px] shadow-sm shadow-violet-700/70 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
                     <div className="mb-10 w-full">
                         <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
@@ -61,20 +77,48 @@ const RegisterPage = () => {
                     </div>
                     <div className="w-full">
                         <label className="text-neutral-400" htmlFor="email">Name</label>
-                        <Input id="name" placeholder="emre öztürk" type="text" />
+                        <Input
+                            id="name"
+                            placeholder="emre öztürk"
+                            type="text"
+                            name="name"
+                            aria-label="name"
+                            aria-describedby="user-name"
+                            aria-invalid="false"
+
+                        />
                     </div>
                     <div className="w-full">
                         <label className="text-neutral-400" htmlFor="email">Email</label>
-                        <Input id="email" placeholder="youremail@manymony.com" type="email" />
+                        <Input
+                            id="email"
+                            placeholder="youremail@manymony.com"
+                            type="email"
+                            name="email"
+                            aria-label="email"
+                            aria-describedby="user-email"
+                            aria-invalid="false"
+                        />
                     </div>
                     <div className="w-full">
                         <label htmlFor="password" className="text-neutral-400">Password</label>
-                        <Input id="password" placeholder="*********" type="password" />
+                        <Input
+                            id="password"
+                            placeholder="*********"
+                            type="password"
+                            name="password"
+                            aria-label="password"
+                            aria-describedby="user-password"
+                            aria-invalid="false"
+
+                        />
                     </div>
 
                     <div className="w-full">
-                        <label htmlFor="password" className="text-neutral-400">Confirm Password</label>
-                        <Input id="password" placeholder="*********" type="password" />
+                        <label htmlFor="conf-password" className="text-neutral-400">Confirm Password</label>
+                        <Input id="confPassword" placeholder="*********" type="password"
+                            name="confPassword" aria-label="conf-password" aria-describedby="user-conf-password" aria-invalid="false"
+                        />
                     </div>
 
                     <button
@@ -105,7 +149,7 @@ const RegisterPage = () => {
                 </motion.form>
             </motion.div>
             <BackgroundBeams />
-        </div>
+        </div >
     )
 }
 
