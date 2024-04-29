@@ -23,6 +23,7 @@ import { budgetDetailLoader } from './loaders/budgetDetailLoader.ts'
 import { budgetDetailAction } from './actions/budgetDetailAction.ts'
 import LoginPage from './pages/auth/LoginPage.tsx'
 import RegisterPage from './pages/auth/RegisterPage.tsx'
+import AuthProvider from './context/AuthProvider.tsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -71,7 +72,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer />
+    <AuthProvider>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </AuthProvider>
   </React.StrictMode>,
 )
