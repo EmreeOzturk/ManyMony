@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { emailRegex, passwordRegex, userNameRexex } from "../helper/consts";
 import { account } from "../lib/appwrite";
 import { toast } from "react-toastify";
@@ -9,10 +9,23 @@ import { ID } from "appwrite";
 const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-
     const [user, setUser] = useState<Models.Session | null>(null);
+    const [loading, setLoading] = useState(true);
 
-
+    useEffect(() => {
+        checkUserStatus();
+        console.log(user)
+    }, []);
+    const checkUserStatus = async () => {
+        try {
+            const accountDetails = await account.get();
+            setUser(accountDetails as unknown as Models.Session | null);
+        } catch (error) {
+            console.error("Error checking user status:", error); // Log or handle error
+        } finally {
+            setLoading(false);
+        }
+    };
     const loginAction = async (email: string, password: string) => {
         try {
             if (email === "" || password === "") {
@@ -96,7 +109,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         <AuthContext.Provider
             value={store}
         >
-            {children}
+            {loading ? <div>Loading...</div> : children}
         </AuthContext.Provider>
     )
 }
