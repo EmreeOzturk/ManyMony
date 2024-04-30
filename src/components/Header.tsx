@@ -1,8 +1,9 @@
 // import logomark from '../assets/logomark.svg'
 import { NavLink } from 'react-router-dom'
 // import Trash from '../assets/icons/Trash'
-import WalletIcon from './icons/WalletIcon'
 import { useAuth } from '../hooks/useAuth'
+import { Models } from 'appwrite';
+import WalletIcon from './icons/WalletIcon';
 const Header = (
     // { userName }: { userName: string }
 ) => {
@@ -19,23 +20,30 @@ const Header = (
                     </span>
                 </NavLink>
             </div>
-            <nav className='flex items-center justify-center gap-4 text-2xl font-mono'>
-                <NavLink to="/login" aria-label='login link'>
-                    Login
-                </NavLink>
-                <NavLink to="/register" aria-label='register link'>
-                    Register
-                </NavLink>
-            </nav>
-            <button
-                onClick={() => {
-                    (auth as {
-                        logoutAction: () => void
-                    })?.logoutAction()
-                }}
-            >
-                Logout
-            </button>
+            {
+                (auth as {
+                    user: Models.Session
+                })?.user ? (
+                    <button
+                        onClick={() => {
+                            (auth as {
+                                logoutAction: () => void
+                            })?.logoutAction()
+                        }}
+                    >
+                        Logout
+                    </button>
+                ) : (
+                    <nav className='flex items-center justify-center gap-4 text-2xl font-mono'>
+                        <NavLink to="/login" aria-label='login link'>
+                            Login
+                        </NavLink>
+                        <NavLink to="/register" aria-label='register link'>
+                            Register
+                        </NavLink>
+                    </nav>
+                )
+            }
         </header>
     )
 }
