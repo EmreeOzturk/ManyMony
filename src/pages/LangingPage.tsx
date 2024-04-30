@@ -108,7 +108,6 @@ const LangingPage = () => {
         </div>
       </div>
 
-
       {/* </section> */}
     </>
   )
