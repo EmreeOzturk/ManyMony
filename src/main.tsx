@@ -33,6 +33,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
+        path: "/",
         element: <LangingPage />,
         loader: dashboardLoader,
         errorElement: <Error />,
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
             errorElement: <Error />,
           },
           {
-            path: "/dashboard",
+            path: "dashboard",
             element: <div>dashboard page</div>,
             // loader: dashboardLoader,
             // action: dashboardAction,
