@@ -85,7 +85,6 @@ const RegisterPage = () => {
                             aria-label="name"
                             aria-describedby="user-name"
                             aria-invalid="false"
-
                         />
                     </div>
                     <div className="w-full">
@@ -110,7 +109,6 @@ const RegisterPage = () => {
                             aria-label="password"
                             aria-describedby="user-password"
                             aria-invalid="false"
-
                         />
                     </div>
 
@@ -125,9 +123,7 @@ const RegisterPage = () => {
                         className="bg-gradient-to-br relative group/btn hover:text-neutral-300 transition-all from-black  to-neutral-800 block  w-full text-neutral-500 rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
                         type="submit"
                     >
-                        <span
-                            className=""
-                        >
+                        <span>
                             Register
                         </span>
                         <BottomGradient />
