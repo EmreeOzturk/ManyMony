@@ -7,4 +7,4 @@
 // 6. username must be between 3 and 20 characters long
 export const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 export const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-export const userNameRexex = /^[a-zA-Z0-9._-]{3,20}$/;
+export const userNameRexex = /^[a-zA-Z-].{6,20}$/;
