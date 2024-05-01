@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import BackToHome from "../../components/BackToHome";
 import { useAuth } from '../../hooks/useAuth'
+import { toast } from "react-toastify";
 const LoginPage = () => {
   const radius = 500;
   const [visible, setVisible] = useState(false);
@@ -25,11 +26,12 @@ const LoginPage = () => {
     e.preventDefault();
     const email = (e.currentTarget.email as HTMLInputElement).value;
     const password = (e.currentTarget.password as HTMLInputElement).value;
-    console.log(email, password)
     try {
       (auth as { loginAction: (email: string, password: string) => void }).loginAction(email, password);
     } catch (error) {
-      console.log(error)
+      toast.error((error as Error).message, {
+        position: "bottom-right"
+      });
     }
   }
 
@@ -82,11 +84,12 @@ const LoginPage = () => {
             <Input
               id="email"
               placeholder="youremail@manymony.com"
-              type="email"
+              type="text"
               name="email"
               aria-label="email"
               aria-describedby="user-email"
               aria-invalid="false"
+              required
             />
           </div>
           <div className="w-full">
