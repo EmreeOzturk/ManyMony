@@ -1,4 +1,5 @@
 import { Budget, Expense } from "../types";
+import { emailRegex, passwordRegex, userNameRexex } from "./consts";
 
 export const fetchDataFromLocalStorage = (key: string) => {
   const data = localStorage.getItem(key);
@@ -95,4 +96,26 @@ export const createExpense = async (
     ...expenses,
     newExpense,
   ] as unknown as []);
+};
+
+export const checkFormData = (
+  email: string,
+  password: string,
+  name?: string
+) => {
+  if (email === "" || password === "" || name === "") {
+    throw new Error("Please provide a valid input");
+  }
+
+  if (!emailRegex.test(email as string)) {
+    throw new Error("Please provide a valid email");
+  }
+
+  if (!passwordRegex.test(password as string)) {
+    throw new Error("Please provide a valid password");
+  }
+
+  if (name && !userNameRexex.test(name as string)) {
+    throw new Error("Please provide a valid name");
+  }
 };
