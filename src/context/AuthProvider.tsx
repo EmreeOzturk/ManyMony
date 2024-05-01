@@ -38,9 +38,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 toast.success("Login successful", {
                     position: "bottom-right"
                 });
+            }).then(() => {
                 window.location.replace("/dashboard");
             });
-
         } catch (error) {
             toast.error((error as Error).message, {
                 position: "bottom-right"
