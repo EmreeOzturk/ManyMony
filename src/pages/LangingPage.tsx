@@ -74,8 +74,8 @@ const LangingPage = () => {
               With our real-time expense tracking feature, you can monitor your spending as it happens. Keep a close eye on your expenses, categorized by type, and instantly see how much you've spent in each category.
             </p>
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-950/40 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
-            <div >
+          <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-950/40 h-[350px]">
+            <div className="flex flex-col items-start justify-center" >
               <div className="w-14 h-14 rounded-md bg-gray-900  flex justify-center items-center">
                 <ChartIcon />
               </div>
@@ -88,8 +88,8 @@ const LangingPage = () => {
             </div>
 
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-2 bg-violet-950/40 min-h-[500px] lg:min-h-[600px] xl:min-h-[300px]">
-            <div >
+          <WobbleCard containerClassName="col-span-1 lg:col-span-2 bg-violet-950/40 h-[350px]">
+            <div className="flex flex-col items-start justify-center " >
               <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
                 <TagIcon />
               </div>
