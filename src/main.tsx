@@ -24,7 +24,7 @@ import RegisterPage from './pages/auth/RegisterPage.tsx'
 import AuthProvider from './context/AuthProvider.tsx'
 import PrivateRoute from './pages/constraints/PrivateRoute.tsx'
 import UnauthenticatedRoute from './pages/constraints/UnauthenticatedRoute.tsx'
-import Dashboard from './pages/dashboard/Dashboard.tsx'
+// import Dashboard from './pages/dashboard/Dashboard.tsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
           },
           {
             path: "/dashboard",
-            element: <Dashboard />,
+            element: <div>dashboard page</div>,
             // loader: dashboardLoader,
             // action: dashboardAction,
             errorElement: <Error />,
