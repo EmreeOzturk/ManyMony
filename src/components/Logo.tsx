@@ -5,7 +5,7 @@ const Logo = () => {
     return (
         <div>
             <NavLink to="/expenses" className="flex items-center justify-center gap-3 text-2xl  font-mono font-bold
-                    bg-gradient-to-r from-violet-950 via-blue-800 to-violet-950 text-transparent bg-clip-text 
+                    bg-gradient-to-r from-cyan-700  to-violet-800 text-transparent bg-clip-text 
                 ">
                 <WalletIcon />
                 <span>
