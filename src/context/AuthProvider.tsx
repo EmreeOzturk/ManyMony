@@ -40,7 +40,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     position: "bottom-right"
                 });
             }).then(() => {
-                window.location.replace("/dashboard");
+                window.location.assign("/dashboard");
             }).catch((error) => {
                 toast.error((error as Error).message, {
                     position: "bottom-right"
@@ -66,7 +66,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             toast.success("Register successful", {
                 position: "bottom-right"
             });
-            window.location.replace("/login");
+            window.location.assign("/login");
         } catch (error) {
             toast.error((error as Error).message, {
                 position: "bottom-right"
