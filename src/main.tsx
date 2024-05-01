@@ -1,12 +1,11 @@
 
+import './index.css'
 import ReactDOM from 'react-dom/client'
-// import Dashboard from './pages/Dashboard.tsx'
 import LangingPage from './pages/LangingPage.tsx'
 import { expensesLoader } from './loaders/expensesLoader.ts'
 import { expensesAction } from './actions/expensesAction.ts'
 import { mainLoader } from './loaders/mainLoader.ts'
 import { dashboardLoader } from './loaders/DashboardLoader.ts'
-import './index.css'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import {
@@ -15,16 +14,18 @@ import {
 } from "react-router-dom";
 import Error from './pages/Error.tsx'
 import App from './App.tsx'
-import AllExpenses from './pages/AllExpenses.tsx'
+import AllExpenses from './pages/dashboard/AllExpenses.tsx'
 import { logoutAction } from './actions/logoutAction.ts'
 import { dashboardAction } from './actions/dashboardAction.ts'
-import BudgetDetail from './pages/BudgetDetail.tsx'
+import BudgetDetail from './pages/dashboard/BudgetDetail.tsx'
 import { budgetDetailLoader } from './loaders/budgetDetailLoader.ts'
 import { budgetDetailAction } from './actions/budgetDetailAction.ts'
 import LoginPage from './pages/auth/LoginPage.tsx'
 import RegisterPage from './pages/auth/RegisterPage.tsx'
 import AuthProvider from './context/AuthProvider.tsx'
-import PrivateRoute from './pages/PrivateRoute.tsx'
+import PrivateRoute from './pages/constraints/PrivateRoute.tsx'
+import UnauthenticatedRoute from './pages/constraints/UnauthenticatedRoute.tsx'
+import Dashboard from './pages/dashboard/Dashboard.tsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -50,6 +51,13 @@ const router = createBrowserRouter([
             errorElement: <Error />,
           },
           {
+            path: "/dashboard",
+            element: <Dashboard />,
+            loader: dashboardLoader,
+            action: dashboardAction,
+            errorElement: <Error />,
+          },
+          {
             path: "/budgets/:budgetId",
             element: <BudgetDetail />,
             errorElement: <Error />,
@@ -65,15 +73,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <LoginPage />,
-    errorElement: <Error />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-    errorElement: <Error />,
-  },
+    element: <UnauthenticatedRoute />,
+    children: [
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
