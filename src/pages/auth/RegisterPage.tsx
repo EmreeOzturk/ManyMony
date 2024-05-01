@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import BackToHome from "../../components/BackToHome";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import { useAuth } from '../../hooks/useAuth'
+import { toast } from "react-toastify";
 const RegisterPage = () => {
     const radius = 600;
     const [visible, setVisible] = useState(false);
@@ -32,7 +33,9 @@ const RegisterPage = () => {
         try {
             (auth as { registerAction: (email: string, password: string, confPassword: string, name: string) => void }).registerAction(email, password, confPassword, name);
         } catch (error) {
-            console.log(error)
+            toast.error((error as Error).message, {
+                position: "bottom-right"
+            });
         }
 
     }
