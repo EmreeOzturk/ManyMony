@@ -40,6 +40,10 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 });
             }).then(() => {
                 window.location.replace("/dashboard");
+            }).catch((error) => {
+                toast.error((error as Error).message, {
+                    position: "bottom-right"
+                });
             });
         } catch (error) {
             toast.error((error as Error).message, {
