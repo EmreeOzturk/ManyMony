@@ -5,6 +5,7 @@ import { redirect } from "react-router-dom";
 import type { Models } from "appwrite";
 import { ID } from "appwrite";
 import { checkFormData } from "../helper";
+import Loading from "../pages/Loading";
 
 export const AuthContext = createContext({})
 
@@ -101,7 +102,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         <AuthContext.Provider
             value={store}
         >
-            {loading ? <div>Loading...</div> : children}
+            {loading ? <Loading /> : children}
         </AuthContext.Provider>
     )
 }
