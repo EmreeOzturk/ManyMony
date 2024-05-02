@@ -99,20 +99,20 @@ export const createExpense = async (
 };
 
 export const checkFormData = (
-  email: string,
-  password: string,
+  email?: string,
+  password?: string,
   name?: string,
   phone?: string | number
 ) => {
-  if (email === "" || password === "" || name === "") {
+  if (email === "" || password === "" || name === "" || phone === "") {
     throw new Error("Please provide a valid input");
   }
 
-  if (!emailRegex.test(email as string)) {
+  if (email && !emailRegex.test(email as string)) {
     throw new Error("Please provide a valid email");
   }
 
-  if (!passwordRegex.test(password as string)) {
+  if (password && !passwordRegex.test(password as string)) {
     throw new Error("Please provide a valid password");
   }
 
