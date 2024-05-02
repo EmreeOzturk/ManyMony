@@ -1,11 +1,9 @@
 import './index.css'
+import 'react-toastify/dist/ReactToastify.css';
 import ReactDOM from 'react-dom/client'
 import LangingPage from './pages/LangingPage.tsx'
 import { expensesLoader } from './loaders/expensesLoader.ts'
 import { expensesAction } from './actions/expensesAction.ts'
-import { mainLoader } from './loaders/mainLoader.ts'
-import { dashboardLoader } from './loaders/DashboardLoader.ts'
-import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import {
   createBrowserRouter,
@@ -14,8 +12,6 @@ import {
 import Error from './pages/Error.tsx'
 import App from './App.tsx'
 import AllExpenses from './pages/dashboard/AllExpenses.tsx'
-import { logoutAction } from './actions/logoutAction.ts'
-import { dashboardAction } from './actions/dashboardAction.ts'
 import BudgetDetail from './pages/dashboard/BudgetDetail.tsx'
 import { budgetDetailLoader } from './loaders/budgetDetailLoader.ts'
 import { budgetDetailAction } from './actions/budgetDetailAction.ts'
@@ -28,15 +24,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: mainLoader,
     errorElement: <Error />,
     children: [
       {
         path: "/",
         element: <LangingPage />,
-        loader: dashboardLoader,
         errorElement: <Error />,
-        action: dashboardAction
       },
       {
         element: <UnauthenticatedRoute />,
@@ -55,36 +48,44 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           {
+            path: "/dashboard",
+            element: <Dashboard />,
+            errorElement: <Error />,
+            // action adn loader
+          },
+          {
+            path: "/budgets",
+            errorElement: <Error />,
+            element: <div>budgets</div>
+          },
+          {
             path: "/expenses",
             element: <AllExpenses />,
             loader: expensesLoader,
             action: expensesAction,
             errorElement: <Error />,
           },
-
           {
             path: "/budgets/:budgetId",
             element: <BudgetDetail />,
             errorElement: <Error />,
             loader: budgetDetailLoader,
             action: budgetDetailAction
-          }
+          },
+          {
+            path: "/analytics",
+            errorElement: <Error />,
+            element: <div>analytics</div>
+          },
+          {
+            path: "/settings",
+            errorElement: <Error />,
+            element: <div>settings</div>
+          },
         ]
-      },
-      {
-        path: "/logout",
-        action: logoutAction,
       },
     ],
   },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-    loader: dashboardLoader,
-    action: dashboardAction,
-    errorElement: <Error />,
-  },
-
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
