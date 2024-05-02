@@ -40,7 +40,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     position: "bottom-right"
                 });
             }).then(() => {
-                window.location.assign("/dashboard");
+                window.location.href = "/dashboard";
             }).catch((error) => {
                 toast.error((error as Error).message, {
                     position: "bottom-right"
