@@ -21,7 +21,6 @@ const LoginPage = () => {
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
   }
-
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const email = (e.currentTarget.email as HTMLInputElement).value;
@@ -29,6 +28,7 @@ const LoginPage = () => {
     try {
       (auth as { loginAction: (email: string, password: string) => void }).loginAction(email, password);
     } catch (error) {
+      console.log(error)
       toast.error((error as Error).message, {
         position: "bottom-right"
       });
