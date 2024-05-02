@@ -49,6 +49,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     });
                 });
                 setPhoneVerification(true);
+                navigate("/dashboard");
             } else {
                 console.log("buraya mı girdi")
                 if (!emailRegex.test(email as string)) {
