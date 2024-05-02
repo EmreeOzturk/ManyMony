@@ -6,11 +6,14 @@ import { ID } from "appwrite";
 import { checkFormData } from "../helper";
 import Loading from "../pages/Loading";
 import { useNavigate } from "react-router-dom";
+import { emailRegex, passwordRegex, phoneRegex } from "../helper/consts";
 export const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<Models.Session | null>(null);
     const [loading, setLoading] = useState(true);
+    const [phoneVerification, setPhoneVerification] = useState(false);
+    const [userId, setUserId] = useState<string | null>(null);
     useEffect(() => {
         checkUserStatus();
     }, []);
@@ -26,23 +29,50 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    const loginAction = async (email: string, password: string) => {
+    const loginAction = async (email?: string, password?: string, phone?: string) => {
+        console.log("burada")
+        console.log(phone)
         try {
-            checkFormData(email, password);
-            account.createEmailPasswordSession(
-                email as string,
-                password as string
-            ).then((response) => {
-                setUser(response);
-                toast.success("Login successful", {
-                    position: "bottom-right"
+            if (phone) {
+                console.log("buradaaa")
+                console.log(phone)
+                if (!phoneRegex.test(phone as string)) {
+                    throw new Error("Please provide a valid phone number");
+                }
+                account.createPhoneToken(ID.unique(), `+90${phone as string}`).then((response) => {
+                    console.log(response)
+                    setUserId(response.userId)
+                    setPhoneVerification(true);
+                }).catch((error) => {
+                    toast.error((error as Error).message, {
+                        position: "bottom-right"
+                    });
                 });
-                navigate("/dashboard");
-            }).catch((error) => {
-                toast.error((error as Error).message, {
-                    position: "bottom-right"
+                setPhoneVerification(true);
+            } else {
+                console.log("buraya mı girdi")
+                if (!emailRegex.test(email as string)) {
+                    throw new Error("Please provide a valid email");
+                }
+
+                if (!passwordRegex.test(password as string)) {
+                    throw new Error("Please provide a valid password");
+                }
+                account.createEmailPasswordSession(
+                    email as string,
+                    password as string
+                ).then((response) => {
+                    setUser(response);
+                    toast.success("Login successful", {
+                        position: "bottom-right"
+                    });
+                    navigate("/dashboard");
+                }).catch((error) => {
+                    toast.error((error as Error).message, {
+                        position: "bottom-right"
+                    });
                 });
-            });
+            }
         } catch (error) {
             toast.error((error as Error).message, {
                 position: "bottom-right"
@@ -88,11 +118,29 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }
 
+    const phoneVerificationAction = async (token: string) => {
+        try {
+            console.log(token)
+            const session = await account.updatePhoneSession(
+                userId as string,
+                token as string
+            )
+            setUser(session);
+            console.log(session)
+        } catch (error) {
+            toast.error((error as Error).message, {
+                position: "bottom-right"
+            });
+            throw new Error((error as Error).message);
+        }
+    }
     const store = {
         user,
         loginAction,
         registerAction,
-        logoutAction
+        logoutAction,
+        phoneVerification,
+        phoneVerificationAction
     }
 
     return (
