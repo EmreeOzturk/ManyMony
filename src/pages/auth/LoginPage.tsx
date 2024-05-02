@@ -2,19 +2,37 @@ import { Input } from "../../components/ui/input"
 import { BackgroundBeams } from "../../components/ui/background-beams";
 import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, useState, useRef, useEffect, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import BackToHome from "../../components/BackToHome";
 import { useAuth } from '../../hooks/useAuth'
 import { toast } from "react-toastify";
 const LoginPage = () => {
-  const radius = 500;
+  const digit1 = useRef<HTMLInputElement>(null);
+  const digit2 = useRef<HTMLInputElement>(null);
+  const digit3 = useRef<HTMLInputElement>(null);
+  const digit4 = useRef<HTMLInputElement>(null);
+  const digit5 = useRef<HTMLInputElement>(null);
+  const digit6 = useRef<HTMLInputElement>(null);
+
+  const digits = [digit1, digit2, digit3, digit4, digit5, digit6];
+  const radius = 600;
   const [visible, setVisible] = useState(false);
   const auth = useAuth();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const phoneVerificationPhase = (auth as { phoneVerification: boolean }).phoneVerification;
 
+  useEffect(() => {
+    if (phoneVerificationPhase && digit1.current?.value.length === 0) {
+      digit1.current?.focus();
+    }
+
+  }, [phoneVerificationPhase, digit1.current?.value]);
+
+
+  console.log("phoneVerificationPhase", phoneVerificationPhase)
   function handleMouseMove({ currentTarget, clientX, clientY }: { currentTarget: HTMLElement, clientX: number, clientY: number }) {
     const { left, top } = currentTarget.getBoundingClientRect();
 
@@ -25,10 +43,27 @@ const LoginPage = () => {
     e.preventDefault();
     const email = (e.currentTarget.email as HTMLInputElement).value;
     const password = (e.currentTarget.password as HTMLInputElement).value;
+    const phone = (e.currentTarget.phone as HTMLInputElement).value;
     try {
-      (auth as { loginAction: (email: string, password: string) => void }).loginAction(email, password);
+      if (phone) {
+        (auth as { loginAction: (email?: string, password?: string, phone?: string) => void }).
+          loginAction(email, password, phone);
+      } else {
+        (auth as { loginAction: (email?: string, password?: string, phone?: string) => void }).loginAction(email, password);
+      }
     } catch (error) {
       console.log(error)
+      toast.error((error as Error).message, {
+        position: "bottom-right"
+      });
+    }
+  }
+
+  async function handlePhoneSubmit() {
+    const resultDigits = digits.map(digit => digit.current?.value).join("");
+    try {
+      (auth as { phoneVerificationAction: (token: string) => void }).phoneVerificationAction(resultDigits);
+    } catch (error) {
       toast.error((error as Error).message, {
         position: "bottom-right"
       });
@@ -47,88 +82,206 @@ const LoginPage = () => {
         }}
         transition={{ duration: 1 }}
         className="w-[600px] z-20  mx-auto p-4">
-        <motion.form
-          style={{
-            background: useMotionTemplate`
-  radial-gradient(
-    ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
-    var(--violet-950),
-    transparent 100%
-  )
-`,
-          }}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setVisible(true)}
-          onMouseLeave={() => setVisible(false)}
-          onSubmit={handleSubmit as FormEventHandler<HTMLFormElement>}
-          className=" backdrop-blur-[2px] shadow-sm shadow-violet-300 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
-          <div className="mb-10 w-full">
-            <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
-              Welcome to {" "}
-              <span
-                className={cn(
-                  `text-gradient bg-gradient-to-r from-cyan-700 to-violet-800 `,
-                  "bg-clip-text text-transparent"
-                )}
-              >
-                ManyMony
-              </span>
-            </h1>
-            <p className="text-neutral-300 dark:text-neutral-700 mt-2">
-              Fill in the form to continue your journey with us
-            </p>
-          </div>
+        {
+          !phoneVerificationPhase ? (
+            <motion.form
+              style={{
+                background: useMotionTemplate`radial-gradient(${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,var(--violet-950),transparent 100%)`,
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setVisible(true)}
+              onMouseLeave={() => setVisible(false)}
+              onSubmit={handleSubmit as FormEventHandler<HTMLFormElement>}
+              className=" backdrop-blur-[2px] shadow-sm shadow-violet-300 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
+              <div className="mb-10 w-full">
+                <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
+                  Welcome to {" "}
+                  <span
+                    className={cn(
+                      `text-gradient bg-gradient-to-r from-cyan-700 to-violet-800 `,
+                      "bg-clip-text text-transparent"
+                    )}
+                  >
+                    ManyMony
+                  </span>
+                </h1>
+                <p className="text-neutral-300 dark:text-neutral-700 mt-2">
+                  Fill in the form to continue your journey with us
+                </p>
+              </div>
 
-          <div className="w-full">
-            <label className="text-neutral-400" htmlFor="email">Email</label>
-            <Input
-              id="email"
-              placeholder="youremail@manymony.com"
-              type="text"
-              name="email"
-              aria-label="email"
-              aria-describedby="user-email"
-              aria-invalid="false"
-              required
-            />
-          </div>
-          <div className="w-full">
-            <label htmlFor="password" className="text-neutral-400">Password</label>
-            <Input
-              id="password"
-              placeholder="*********"
-              type="password"
-              name="password"
-              aria-label="password"
-              aria-describedby="user-password"
-              aria-invalid="false"
-            />
-          </div>
-          <button
-            className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block hover:text-neutral-300 transition-all  w-full text-neutral-500 rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            type="submit"
-          >
-            Login
-            <BottomGradient />
-          </button>
-          <div
-            className="flex flex-col items-start justify-center w-full text-center mt-4"
-          >
-            <Link to="#" className="text-neutral-500 
+              <div className="w-full">
+                <label className="text-neutral-400" htmlFor="email">Email</label>
+                <Input
+                  id="email"
+                  placeholder="youremail@manymony.com"
+                  type="text"
+                  name="email"
+                  aria-label="email"
+                  aria-describedby="user-email"
+                  aria-invalid="false"
+                />
+              </div>
+              <div className="w-full">
+                <label htmlFor="password" className="text-neutral-400">Password</label>
+                <Input
+                  id="password"
+                  placeholder="*********"
+                  type="password"
+                  name="password"
+                  aria-label="password"
+                  aria-describedby="user-password"
+                  aria-invalid="false"
+                />
+              </div>
+              <button
+                className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block hover:text-neutral-300 transition-all  w-full text-neutral-500 rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+                type="submit"
+              >
+                Login with Email
+                <BottomGradient />
+              </button>
+              <div
+                className="flex flex-col items-start justify-center w-full text-center mt-4"
+              >
+                <Link to="#" className="text-neutral-500 
               hover:text-neutral-300 
             ">Forgot your password?</Link>
-            <Link to="/register" className="group text-neutral-500  mt-2 hover:text-neutral-400">Don't have an account? {" "}
-              <span
-                className="font-bold
+                <Link to="/register" className="group text-neutral-500  mt-2 hover:text-neutral-400">Don't have an account? {" "}
+                  <span
+                    className="font-bold
                   group-hover:underline
                 "
+                  >
+                    Register
+                  </span>
+                </Link>
+              </div>
+              <div className="bg-gradient-to-r from-transparent via-violet-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+              <div className="w-full">
+                <label className="text-neutral-400" htmlFor="email">Phone Number</label>
+                <Input
+                  id="phone"
+                  placeholder="553-881-75**"
+                  type="tel"
+                  name="phone"
+                  aria-label="phone"
+                  aria-describedby="user-phone"
+                  aria-invalid="false"
+                  maxLength={10}
+                />
+              </div>
+
+              <button
+                className="bg-gradient-to-br relative group/btn from-black  to-neutral-800 block hover:text-neutral-300 transition-all  w-full text-neutral-500 rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+                type="submit"
               >
-                Register
-              </span>
-            </Link>
-          </div>
-          <div className="bg-gradient-to-r from-transparent via-violet-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
-        </motion.form>
+                Login with Phone Number
+                <BottomGradient />
+              </button>
+            </motion.form>
+          ) : (
+            <motion.div
+              style={{
+                background: useMotionTemplate`radial-gradient(${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,var(--violet-950),transparent 100%)`,
+              }}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setVisible(true)}
+              onMouseLeave={() => setVisible(false)}
+              className=" backdrop-blur-[2px] shadow-sm shadow-violet-300 p-12 rounded-xl bg-transparent flex gap-5 flex-col items-center justify-center " >
+              <div className="mb-10 w-full">
+                <h1 className="text-4xl font-bold text-neutral-400 dark:text-neutral-900">
+                  Phone Verification
+                </h1>
+                <p className="text-neutral-300 dark:text-neutral-700 mt-2">
+                  Enter the code sent to your phone number
+                </p>
+              </div>
+              <div className="w-full">
+                <div className="flex items-center justify-center gap-4">
+                  <div
+                    className="w-12 h-12 border rounded-md">
+                    <input type="text"
+                      maxLength={1}
+                      ref={digit1}
+                      className="w-full caret-transparent h-full bg-transparent text-center text-3xl font-semibold text-neutral-400 dark:text-neutral-900"
+                      onChange={(e) => {
+                        if (e.currentTarget.value.length === 1) {
+                          digit2.current?.focus();
+                        }
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="w-12 h-12 border rounded-md">
+                    <input type="text"
+                      maxLength={1}
+                      ref={digit2}
+                      className="w-full h-full caret-transparent  bg-transparent text-center text-3xl font-semibold text-neutral-400 dark:text-neutral-900"
+                      onChange={(e) => {
+                        if (e.currentTarget.value.length === 1) {
+                          digit3.current?.focus();
+                        }
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="w-12 h-12 border rounded-md">
+                    <input type="text"
+                      maxLength={1}
+                      ref={digit3}
+                      className="w-full h-full caret-transparent  bg-transparent text-center text-3xl font-semibold text-neutral-400 dark:text-neutral-900"
+                      onChange={(e) => {
+                        if (e.currentTarget.value.length === 1) {
+                          digit4.current?.focus();
+                        }
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="w-12 h-12 border rounded-md">
+                    <input type="text"
+                      maxLength={1}
+                      ref={digit4}
+                      className="w-full h-full caret-transparent  bg-transparent text-center text-3xl font-semibold text-neutral-400 dark:text-neutral-900"
+                      onChange={(e) => {
+                        if (e.currentTarget.value.length === 1) {
+                          digit5.current?.focus();
+                        }
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="w-12 h-12 border rounded-md">
+                    <input type="text"
+                      maxLength={1}
+                      ref={digit5}
+                      className="w-full h-full caret-transparent bg-transparent text-center text-3xl font-semibold text-neutral-400 dark:text-neutral-900"
+                      onChange={(e) => {
+                        if (e.currentTarget.value.length === 1) {
+                          digit6.current?.focus();
+                        }
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="w-12 h-12 border rounded-md">
+                    <input type="text"
+                      maxLength={1}
+                      ref={digit6}
+                      className="w-full h-full caret-transparent  bg-transparent text-center text-3xl font-semibold text-neutral-400 dark:text-neutral-900"
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        if (e.currentTarget.value.length === 1) {
+                          handlePhoneSubmit()
+                        }
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )
+        }
       </motion.div >
       <BackgroundBeams />
     </div >
