@@ -49,6 +49,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                     });
                 });
                 setPhoneVerification(true);
+                toast.success("Login successful", {
+                    position: "bottom-right"
+                });
                 navigate("/dashboard");
             } else {
                 console.log("buraya mı girdi")
