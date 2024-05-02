@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect } from "react";
 import { account } from "../lib/appwrite";
 import { toast } from "react-toastify";
-import { redirect } from "react-router-dom";
 import type { Models } from "appwrite";
 import { ID } from "appwrite";
 import { checkFormData } from "../helper";
 import Loading from "../pages/Loading";
+import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -14,6 +14,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         checkUserStatus();
     }, []);
+    const navigate = useNavigate();
     const checkUserStatus = async () => {
         try {
             const accountDetails = await account.get();
@@ -36,7 +37,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 toast.success("Login successful", {
                     position: "bottom-right"
                 });
-                window.location.href = "/dashboard";
+                navigate("/dashboard");
             }).catch((error) => {
                 toast.error((error as Error).message, {
                     position: "bottom-right"
@@ -62,7 +63,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             toast.success("Register successful", {
                 position: "bottom-right"
             });
-            window.location.assign("/login");
+            navigate("/login");
         } catch (error) {
             toast.error((error as Error).message, {
                 position: "bottom-right"
@@ -78,7 +79,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             toast.success("Logout successful", {
                 position: "bottom-right"
             });
-            return redirect("/login");
+            navigate("/");
         } catch (error) {
             toast.error((error as Error).message, {
                 position: "bottom-right"
