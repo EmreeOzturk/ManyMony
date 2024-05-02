@@ -49,13 +49,7 @@ const router = createBrowserRouter([
             action: expensesAction,
             errorElement: <Error />,
           },
-          {
-            path: "dashboard",
-            element: <div>dashboard page</div>,
-            // loader: dashboardLoader,
-            // action: dashboardAction,
-            errorElement: <Error />,
-          },
+
           {
             path: "/budgets/:budgetId",
             element: <BudgetDetail />,
@@ -70,6 +64,13 @@ const router = createBrowserRouter([
         action: logoutAction,
       },
     ],
+  },
+  {
+    path: "dashboard",
+    element: <div>dashboard page</div>,
+    // loader: dashboardLoader,
+    // action: dashboardAction,
+    errorElement: <Error />,
   },
   {
     element: <UnauthenticatedRoute />,
