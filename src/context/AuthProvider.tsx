@@ -6,17 +6,14 @@ import type { Models } from "appwrite";
 import { ID } from "appwrite";
 import { checkFormData } from "../helper";
 import Loading from "../pages/Loading";
-
 export const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<Models.Session | null>(null);
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         checkUserStatus();
     }, []);
-
     const checkUserStatus = async () => {
         try {
             const accountDetails = await account.get();
@@ -39,7 +36,6 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 toast.success("Login successful", {
                     position: "bottom-right"
                 });
-            }).then(() => {
                 window.location.href = "/dashboard";
             }).catch((error) => {
                 toast.error((error as Error).message, {
