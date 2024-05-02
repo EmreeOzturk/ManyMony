@@ -1,5 +1,4 @@
 // import { useLoaderData, Link } from "react-router-dom"
-import Intro from "../../components/Intro";
 // import AddBudgetForm from "../../components/forms/AddBudgetForm";
 // import { Budget, Expense } from "../../types";
 // import AddExpenseForm from "../../components/forms/AddExpenseForm";
@@ -8,7 +7,9 @@ import Intro from "../../components/Intro";
 const Dashboard = () => {
     // const { userName, budgets, expenses } = useLoaderData() as { userName: string, budgets: Budget[], expenses: Expense[] };
     return (
-        <Intro />
+        <div>
+            its dashnoard
+        </div>
     )
 }
 
