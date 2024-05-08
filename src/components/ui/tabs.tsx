@@ -11,7 +11,7 @@ import {
 } from "@/src/components/ui/dropdown-menu"
 import LogoutIcon from "../icons/LogoutIcon";
 import UserIcon from "../icons/UserIcon";
-
+import { useAuth } from "@/src/hooks/useAuth";
 type Tab = {
     title: string;
     value: string;
@@ -41,7 +41,7 @@ export const Tabs = ({
         setTabs(newTabs);
         setActive(newTabs[0]);
     };
-
+    const auth = useAuth();
     const [hovering, setHovering] = useState(false);
 
     return (
@@ -85,6 +85,11 @@ export const Tabs = ({
                 <div className="absolute right-0 flex gap-2 items-center" >
                     <button
                         className={cn("relative px-4 py-2 rounded-md bg-transparent border border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300")}
+                        onClick={() => {
+                            (auth as {
+                                logoutAction: () => void
+                            })?.logoutAction()
+                        }}
                     >
                         <span className="relative block text-zinc-600 group-hover:text-indigo-300">
                             <LogoutIcon />
