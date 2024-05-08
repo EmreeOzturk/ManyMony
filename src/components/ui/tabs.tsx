@@ -9,6 +9,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
+import LogoutIcon from "../icons/LogoutIcon";
+import UserIcon from "../icons/UserIcon";
 
 type Tab = {
     title: string;
@@ -68,13 +70,13 @@ export const Tabs = ({
                                 layoutId="clickedbutton"
                                 transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                                 className={cn(
-                                    "absolute inset-0  bg-cyan-950 rounded-full ",
+                                    "absolute inset-0  bg-indigo-950 rounded-full ",
                                     activeTabClassName
                                 )}
                             />
                         )}
 
-                        <span className="relative block text-white dark:text-white">
+                        <span className="relative block text-zinc-300 ">
                             {tab.title}
                         </span>
                     </button>
@@ -82,19 +84,19 @@ export const Tabs = ({
 
                 <div className="absolute right-0 flex gap-2 items-center" >
                     <button
-                        className={cn("relative px-4 py-2 rounded-md bg-transparent border border-zinc-800 hover:scale-105 transition-all group hover:border-zinc-300")}
+                        className={cn("relative px-4 py-2 rounded-md bg-transparent border border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300")}
                     >
-                        <span className="relative block text-zinc-600 group-hover:text-zinc-300">
-                            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M304 336v40a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V136a40 40 0 0 1 40-40h152c22.09 0 48 17.91 48 40v40m64 160 80-80-80-80m-192 80h256"></path></svg>
+                        <span className="relative block text-zinc-600 group-hover:text-indigo-300">
+                            <LogoutIcon />
                         </span>
                     </button>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild >
                             <button
-                                className={cn("relative px-4 py-2 rounded-md bg-transparent border border-zinc-800 hover:scale-105 transition-all group hover:border-zinc-300")}
+                                className={cn("relative px-4 py-2 rounded-md bg-transparent border border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300")}
                             >
-                                <span className="relative block text-zinc-600 group-hover:text-zinc-300 ">
-                                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1.3em" width="1.3em" xmlns="http://www.w3.org/2000/svg"><g id="User"><g><path d="M17.438,21.937H6.562a2.5,2.5,0,0,1-2.5-2.5V18.61c0-3.969,3.561-7.2,7.938-7.2s7.938,3.229,7.938,7.2v.827A2.5,2.5,0,0,1,17.438,21.937ZM12,12.412c-3.826,0-6.938,2.78-6.938,6.2v.827a1.5,1.5,0,0,0,1.5,1.5H17.438a1.5,1.5,0,0,0,1.5-1.5V18.61C18.938,15.192,15.826,12.412,12,12.412Z"></path><path d="M12,9.911a3.924,3.924,0,1,1,3.923-3.924A3.927,3.927,0,0,1,12,9.911Zm0-6.847a2.924,2.924,0,1,0,2.923,2.923A2.926,2.926,0,0,0,12,3.064Z"></path></g></g></svg>
+                                <span className="relative block text-zinc-600 group-hover:text-indigo-300 ">
+                                    <UserIcon />
                                 </span>
                             </button>
 
