@@ -8,7 +8,7 @@ const TeamCard = ({ src, name, role, middle }: {
 }) => {
     return (
 
-        <div className={`w-full min-h-[400px]  relative max-w-xs group ${middle && 'scale-110'}`}>
+        <div className={`w-full min-h-[400px]  relative max-w-xs group ${middle && 'md:scale-110'}`}>
             <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-blue-500 to-teal-500 transform scale-[0.80] bg-red-500 rounded-full blur-3xl" />
             <div className="relative shadow-xl h-full min-h-[400px] bg-gray-900 border border-gray-800 py-8  overflow-hidden rounded-2xl flex flex-col justify-start items-start">
                 <div className="h-full w-full flex justify-center ">
