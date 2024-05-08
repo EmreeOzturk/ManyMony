@@ -11,7 +11,7 @@ const FAQs = () => {
                 <h1>FAQs</h1>
             </div>
             <Accordion type="single" collapsible className="w-full" >
-                <AccordionItem value="item-1" color="#fff">
+                <AccordionItem value="item-1" >
                     <AccordionTrigger>Is your app free to use?</AccordionTrigger>
                     <AccordionContent>
                         Yes, our app is completely free to use. You can access basic features for free and optionally upgrade to a premium plan for additional features you need.
