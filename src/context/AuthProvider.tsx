@@ -30,31 +30,24 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     const loginAction = async (email?: string, password?: string, phone?: string) => {
-        console.log("burada")
-        console.log(phone)
         try {
             if (phone) {
-                console.log("buradaaa")
-                console.log(phone)
                 if (!phoneRegex.test(phone as string)) {
                     throw new Error("Please provide a valid phone number");
                 }
                 account.createPhoneToken(ID.unique(), `+90${phone as string}`).then((response) => {
-                    console.log(response)
                     setUserId(response.userId)
                     setPhoneVerification(true);
+
+                    navigate("/dashboard");
                 }).catch((error) => {
                     toast.error((error as Error).message, {
                         position: "bottom-right"
                     });
+                    setPhoneVerification(false);
                 });
-                setPhoneVerification(true);
-                toast.success("Login successful", {
-                    position: "bottom-right"
-                });
-                navigate("/dashboard");
+
             } else {
-                console.log("buraya mı girdi")
                 if (!emailRegex.test(email as string)) {
                     throw new Error("Please provide a valid email");
                 }
@@ -92,8 +85,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 throw new Error("Passwords do not match");
             }
 
-            const response = await account.create(ID.unique(), email as string, password as string, name as string);
-            console.log(response)
+            await account.create(ID.unique(), email as string, password as string, name as string);
             toast.success("Register successful", {
                 position: "bottom-right"
             });
@@ -124,17 +116,20 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const phoneVerificationAction = async (token: string) => {
         try {
-            console.log(token)
             const session = await account.updatePhoneSession(
                 userId as string,
                 token as string
             )
             setUser(session);
-            console.log(session)
+            toast.success("Login successful", {
+                position: "bottom-right"
+            });
+            setPhoneVerification(false);
         } catch (error) {
             toast.error((error as Error).message, {
                 position: "bottom-right"
             });
+            setPhoneVerification(false);
             throw new Error((error as Error).message);
         }
     }
