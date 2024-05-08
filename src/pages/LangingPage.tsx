@@ -6,10 +6,15 @@ import WalletIcon2 from "../components/icons/WalletIcon2";
 import RealTimeIcon from "../components/icons/RealTimeIcon";
 import ChartIcon from "../components/icons/ChartIcon";
 import TagIcon from "../components/icons/TagIcon";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/src/components/ui/accordion"
 const LangingPage = () => {
   return (
     <>
-      {/* <section className="h-full absolute inset-0 -z-10  w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"> */}
       <LampContainer>
         <motion.div
           initial={{ opacity: 0.5, y: 100 }}
@@ -43,16 +48,16 @@ const LangingPage = () => {
           </HoverBorderGradient>
         </motion.div>
       </LampContainer>
-      <div className="h-[120vh] w-full bg-black bg-dot-white/[0.2]  relative flex flex-col items-center justify-center">
+      <div className="h-full select-none pb-52 pt-20 w-full bg-slate-950 bg-dot-white/[0.2]  relative flex flex-col gap-10 items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
           <WobbleCard
-            containerClassName="col-span-1 lg:col-span-2 h-full bg-green-950/60 min-h-[500px] lg:min-h-[300px]"
+            containerClassName="col-span-1 lg:col-span-2 h-full bg-gray-950/60  min-h-[500px] lg:min-h-[300px]"
           >
             <div>
               <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
                 <WalletIcon2 />
               </div>
-              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="text-left text-balance text-base md:text-xl lg:text-3xl font-semibold bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text">
                 Advanced Budgeting
               </h2>
               <p className="mt-4 text-left  text-base/6 text-neutral-200">
@@ -60,23 +65,23 @@ const LangingPage = () => {
               </p>
             </div>
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 min-h-[300px] bg-red-950/60">
+          <WobbleCard containerClassName="col-span-1 min-h-[300px] bg-gray-950/60 ">
             <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
               <RealTimeIcon />
             </div>
-            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+            <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text">
               Real-Time Expense Tracking
             </h2>
             <p className="mt-4 text-left  text-base/6 text-neutral-200">
               With our real-time expense tracking feature, you can monitor your spending as it happens. Keep a close eye on your expenses, categorized by type, and instantly see how much you've spent in each category.
             </p>
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-950/60 h-[350px]">
+          <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-gray-950/60  h-[350px]">
             <div className="flex flex-col items-start justify-center" >
               <div className="w-14 h-14 rounded-md bg-gray-900  flex justify-center items-center">
                 <ChartIcon />
               </div>
-              <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text">
                 Reports and Charts
               </h2>
               <p className="mt-4  text-left  text-base/6 text-neutral-200">
@@ -85,12 +90,12 @@ const LangingPage = () => {
             </div>
 
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-2 bg-violet-950/60 h-[350px]">
+          <WobbleCard containerClassName="col-span-1 lg:col-span-2 bg-gray-950/60 h-[350px]">
             <div className="flex flex-col items-start justify-center " >
               <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
                 <TagIcon />
               </div>
-              <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
+              <h2 className="max-w-sm md:max-w-lg  text-left text-balance text-base md:text-xl lg:text-3xl font-semibold bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text">
                 Expense Categorization and Tagging
               </h2>
               <p className="mt-4  text-left  text-base/6 text-neutral-200">
@@ -100,18 +105,54 @@ const LangingPage = () => {
             </div>
           </WobbleCard>
         </div>
-        <div>
-          {/* FAQ Section */}
-
-          <div className="bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl ">
+        <div className="absolute  w-[100%] right-0 bg-slate-950 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+        <div className="absolute  w-20 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+        <div className="absolute  w-20 h-[100%] right-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]" />
+        <div className="w-2/3 ">
+          <div className="bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text text-center text-4xl  py-4 font-medium   md:text-7xl ">
             <h1>FAQs</h1>
           </div>
-
-
+          <Accordion type="single" collapsible className="w-full" >
+            <AccordionItem value="item-1" color="#fff">
+              <AccordionTrigger>Is your app free to use?</AccordionTrigger>
+              <AccordionContent>
+                Yes, our app is completely free to use. You can access basic features for free and optionally upgrade to a premium plan for additional features you need.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Which devices is it compatible with?</AccordionTrigger>
+              <AccordionContent>
+                Since our app is web-based, it can be accessed through any web browser. Additionally, we have mobile apps available for iOS and Android devices.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>How can I integrate my bank accounts into the app?</AccordionTrigger>
+              <AccordionContent>
+                You can securely integrate your bank accounts into our app. Simply navigate to the account settings section within the app and select "Bank Accounts" to add your bank accounts.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>Are my data secure?</AccordionTrigger>
+              <AccordionContent>
+                User security is our priority. All your data is protected with strong encryption methods, and your privacy is always guaranteed. Moreover, our app follows regularly updated security protocols.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-5">
+              <AccordionTrigger>What are the advantages of the premium plan?</AccordionTrigger>
+              <AccordionContent>
+                Our premium plan provides access to more advanced features. These features include customized reports, automatic bill reminders, and expanded data storage space, among others.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
-      </div>
 
-      {/* </section> */}
+        <div className="w-2/3">
+        <div className="bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text text-center text-4xl  py-4 font-medium   md:text-7xl ">
+            <h1>Team</h1>
+          </div>
+        </div>
+      </div >
+
     </>
   )
 }
