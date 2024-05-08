@@ -12,7 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/src/components/ui/accordion"
-import TeamCard from "../components/TeamCard";
+import TeamCard from "../components/landing/TeamCard";
 const LangingPage = () => {
   return (
     <>
