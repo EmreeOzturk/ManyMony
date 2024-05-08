@@ -2,7 +2,6 @@ import { default as flattenColorPalette } from "tailwindcss/lib/util/flattenColo
 import svgToDataUri from "mini-svg-data-uri";
 /** @type {import('tailwindcss').Config} */
 
-
 export const content = [
   "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
   "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -28,10 +27,19 @@ export const theme = {
         from: { height: "var(--radix-accordion-content-height)" },
         to: { height: "0" },
       },
+      meteor: {
+        "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+        "70%": { opacity: "1" },
+        "100%": {
+          transform: "rotate(215deg) translateX(-500px)",
+          opacity: "0",
+        },
+      },
     },
     animation: {
       "accordion-down": "accordion-down 0.2s ease-out",
       "accordion-up": "accordion-up 0.2s ease-out",
+      "meteor-effect": "meteor 5s linear infinite",
     },
     colors: {
       border: "hsl(var(--border))",
