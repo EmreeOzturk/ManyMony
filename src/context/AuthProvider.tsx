@@ -11,13 +11,13 @@ export const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<Models.Session | null>(null);
-    const [loading, setLoading] = useState(false);
     const [phoneVerification, setPhoneVerification] = useState(false);
     const [userId, setUserId] = useState<string | null>(null);
-    // useEffect(() => {
-    //     checkUserStatus();
-    // }, []);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        checkUserStatus();
+    }, []);
     const checkUserStatus = async () => {
         try {
             const accountDetails = await account.get();
