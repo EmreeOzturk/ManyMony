@@ -15,7 +15,7 @@ import UserIcon from "../icons/UserIcon";
 type Tab = {
     title: string;
     value: string;
-    content?: string | React.ReactNode;
+    content?: string | React.ReactNode | JSX.Element
 };
 
 export const Tabs = ({
