@@ -32,7 +32,6 @@ const LoginPage = () => {
   }, [phoneVerificationPhase, digit1.current?.value]);
 
 
-  console.log("phoneVerificationPhase", phoneVerificationPhase)
   function handleMouseMove({ currentTarget, clientX, clientY }: { currentTarget: HTMLElement, clientX: number, clientY: number }) {
     const { left, top } = currentTarget.getBoundingClientRect();
 
