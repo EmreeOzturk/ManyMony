@@ -43,12 +43,10 @@ const LangingPage = () => {
           </HoverBorderGradient>
         </motion.div>
       </LampContainer>
-      <div className="h-[120vh] w-full bg-black bg-dot-white/[0.2]  relative flex items-center justify-center">
-        {/* Radial gradient for the container to give a faded look */}
+      <div className="h-[120vh] w-full bg-black bg-dot-white/[0.2]  relative flex flex-col items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
           <WobbleCard
-            containerClassName="col-span-1 lg:col-span-2 h-full bg-green-950/40 min-h-[500px] lg:min-h-[300px]"
-            className=""
+            containerClassName="col-span-1 lg:col-span-2 h-full bg-green-950/60 min-h-[500px] lg:min-h-[300px]"
           >
             <div>
               <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
@@ -61,9 +59,8 @@ const LangingPage = () => {
                 Our advanced budgeting feature allows you to create personalized budgets tailored to your specific needs and financial goals. Whether you're saving for a big purchase or aiming to reduce debt, you can easily allocate funds to different categories.
               </p>
             </div>
-
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 min-h-[300px] bg-red-950/40">
+          <WobbleCard containerClassName="col-span-1 min-h-[300px] bg-red-950/60">
             <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
               <RealTimeIcon />
             </div>
@@ -74,7 +71,7 @@ const LangingPage = () => {
               With our real-time expense tracking feature, you can monitor your spending as it happens. Keep a close eye on your expenses, categorized by type, and instantly see how much you've spent in each category.
             </p>
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-950/40 h-[350px]">
+          <WobbleCard containerClassName="col-span-1 lg:col-span-1 bg-blue-950/60 h-[350px]">
             <div className="flex flex-col items-start justify-center" >
               <div className="w-14 h-14 rounded-md bg-gray-900  flex justify-center items-center">
                 <ChartIcon />
@@ -88,7 +85,7 @@ const LangingPage = () => {
             </div>
 
           </WobbleCard>
-          <WobbleCard containerClassName="col-span-1 lg:col-span-2 bg-violet-950/40 h-[350px]">
+          <WobbleCard containerClassName="col-span-1 lg:col-span-2 bg-violet-950/60 h-[350px]">
             <div className="flex flex-col items-start justify-center " >
               <div className="w-14 h-14 rounded-md bg-gray-900 flex justify-center items-center">
                 <TagIcon />
@@ -101,8 +98,16 @@ const LangingPage = () => {
                 Easily organize your expenses with our categorization and tagging feature. Categorize your expenses into custom categories that reflect your spending habits and financial priorities. Additionally, tag transactions with keywords or labels to further classify your expenses or identify specific trends.
               </p>
             </div>
-
           </WobbleCard>
+        </div>
+        <div>
+          {/* FAQ Section */}
+
+          <div className="bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl ">
+            <h1>FAQs</h1>
+          </div>
+
+
         </div>
       </div>
 
