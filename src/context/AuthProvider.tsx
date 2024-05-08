@@ -11,12 +11,12 @@ export const AuthContext = createContext({})
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<Models.Session | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [phoneVerification, setPhoneVerification] = useState(false);
     const [userId, setUserId] = useState<string | null>(null);
-    useEffect(() => {
-        checkUserStatus();
-    }, []);
+    // useEffect(() => {
+    //     checkUserStatus();
+    // }, []);
     const navigate = useNavigate();
     const checkUserStatus = async () => {
         try {
