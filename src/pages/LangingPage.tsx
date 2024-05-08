@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/src/components/ui/accordion"
+import TeamCard from "../components/TeamCard";
 const LangingPage = () => {
   return (
     <>
@@ -48,7 +49,7 @@ const LangingPage = () => {
           </HoverBorderGradient>
         </motion.div>
       </LampContainer>
-      <div className="h-full select-none pb-52 pt-20 w-full bg-slate-950 bg-dot-white/[0.2]  relative flex flex-col gap-10 items-center justify-center">
+      <div className="h-full select-none pb-36 pt-20 w-full bg-slate-950 bg-dot-white/[0.2]  relative flex flex-col gap-10 items-center justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
           <WobbleCard
             containerClassName="col-span-1 lg:col-span-2 h-full bg-gray-950/60  min-h-[500px] lg:min-h-[300px]"
@@ -146,9 +147,14 @@ const LangingPage = () => {
           </Accordion>
         </div>
 
-        <div className="w-2/3">
-        <div className="bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text text-center text-4xl  py-4 font-medium   md:text-7xl ">
+        <div className="w-full relative">
+          <div className="bg-gradient-to-br from-slate-200 to-slate-500 text-transparent tracking-tight  bg-clip-text text-center text-4xl  py-4 font-medium   md:text-7xl ">
             <h1>Team</h1>
+          </div>
+          <div className="w-full flex items-center gap-10 py-10 justify-center">
+            <TeamCard src="/team/akin.png" role="Software Dev, DB Admin" name="Akın Buzkuş" />
+            <TeamCard src="/team/me.png" role="Software Dev, UI/UX Designer" name="Emre Öztürk" middle />
+            <TeamCard src="/team/hilal.png" role="Software Dev, Scrum Master" name="Hilal Şentürk" />
           </div>
         </div>
       </div >
