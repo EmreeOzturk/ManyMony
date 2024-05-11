@@ -1,25 +1,22 @@
-import './index.css'
-import 'react-toastify/dist/ReactToastify.css';
-import ReactDOM from 'react-dom/client'
-import LangingPage from './pages/LangingPage.tsx'
-import { expensesLoader } from './loaders/expensesLoader.ts'
-import { expensesAction } from './actions/expensesAction.ts'
-import { ToastContainer } from 'react-toastify';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Error from './pages/Error.tsx'
-import App from './App.tsx'
-import AllExpenses from './pages/dashboard/AllExpenses.tsx'
-import BudgetDetail from './pages/dashboard/BudgetDetail.tsx'
-import { budgetDetailLoader } from './loaders/budgetDetailLoader.ts'
-import { budgetDetailAction } from './actions/budgetDetailAction.ts'
-import LoginPage from './pages/auth/LoginPage.tsx'
-import RegisterPage from './pages/auth/RegisterPage.tsx'
-import PrivateRoute from './pages/constraints/PrivateRoute.tsx'
-import UnauthenticatedRoute from './pages/constraints/UnauthenticatedRoute.tsx'
-import Dashboard from './pages/dashboard/Dashboard.tsx'
+import "./index.css";
+import "react-toastify/dist/ReactToastify.css";
+import ReactDOM from "react-dom/client";
+import LangingPage from "./pages/LangingPage.tsx";
+import { expensesLoader } from "./loaders/expensesLoader.ts";
+import { expensesAction } from "./actions/expensesAction.ts";
+import { ToastContainer } from "react-toastify";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Error from "./pages/Error.tsx";
+import App from "./App.tsx";
+import AllExpenses from "./pages/dashboard/AllExpenses.tsx";
+import BudgetDetail from "./pages/dashboard/BudgetDetail.tsx";
+import { budgetDetailLoader } from "./loaders/budgetDetailLoader.ts";
+import { budgetDetailAction } from "./actions/budgetDetailAction.ts";
+import LoginPage from "./pages/auth/LoginPage.tsx";
+import RegisterPage from "./pages/auth/RegisterPage.tsx";
+import PrivateRoute from "./pages/constraints/PrivateRoute.tsx";
+import UnauthenticatedRoute from "./pages/constraints/UnauthenticatedRoute.tsx";
+import Dashboard from "./pages/dashboard/Dashboard.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,8 +38,8 @@ const router = createBrowserRouter([
           {
             path: "/register",
             element: <RegisterPage />,
-          }
-        ]
+          },
+        ],
       },
       {
         element: <PrivateRoute />,
@@ -56,7 +53,7 @@ const router = createBrowserRouter([
           {
             path: "/budgets",
             errorElement: <Error />,
-            element: <div>budgets</div>
+            element: <div>budgets</div>,
           },
           {
             path: "/expenses",
@@ -70,27 +67,27 @@ const router = createBrowserRouter([
             element: <BudgetDetail />,
             errorElement: <Error />,
             loader: budgetDetailLoader,
-            action: budgetDetailAction
+            action: budgetDetailAction,
           },
           {
             path: "/analytics",
             errorElement: <Error />,
-            element: <div>analytics</div>
+            element: <div>analytics</div>,
           },
           {
             path: "/settings",
             errorElement: <Error />,
-            element: <div>settings</div>
+            element: <div>settings</div>,
           },
-        ]
+        ],
       },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
     <RouterProvider router={router} />
     <ToastContainer />
   </>
-)
+);
