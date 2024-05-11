@@ -27,6 +27,11 @@ export const theme = {
         from: { height: "var(--radix-accordion-content-height)" },
         to: { height: "0" },
       },
+      shimmer: {
+        "100%": {
+          transform: "translateX(100%)",
+        },
+      },
       meteor: {
         "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
         "70%": { opacity: "1" },
