@@ -16,7 +16,7 @@ const RecentBudgetCard = ({
         <p className="text-[16px] text-zinc-300">{title}</p>
       </div>
       <div className="flex w-1/2 items-center ">
-        <div className="relative w-full mr-2 h-2 bg-gray-300 rounded-md ">
+        <div className="relative w-full mr-2 h-2 bg-zinc-400 rounded-md ">
           <motion.div
             className="absolute top-0 left-0 h-full bg-indigo-400 rounded-md"
             initial={{ width: 0 }}

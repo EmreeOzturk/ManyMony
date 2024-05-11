@@ -81,6 +81,16 @@ export const Tabs = ({
         ))}
 
         <div className="absolute right-0 flex gap-2 items-center">
+          <button className="border flex items-center border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300 justify-center rounded-md px-4 py-2">
+            <span className="relative block text-zinc-600 group-hover:text-indigo-300">
+              Add Budget
+            </span>
+          </button>
+          <button className="border flex items-center border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300 justify-center rounded-md px-4 py-2">
+            <span className="relative block text-zinc-600 group-hover:text-indigo-300">
+              Add Expense
+            </span>
+          </button>
           <button
             className={cn(
               "relative px-4 py-2 rounded-md bg-transparent border border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300"
@@ -119,21 +129,13 @@ export const Tabs = ({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="bg-transparent flex justify-between items-center text-white gap-2 rounded-md  absolute right-0 top-5 h-10 mt-10">
-          <button className="border flex items-center border-zinc-800 text-zinc-600 justify-center rounded-md px-4 py-2">
-            Create Budget
-          </button>
-          <button className="border  flex items-center border-zinc-800 text-zinc-600 justify-center rounded-md px-4 py-2">
-            Create Expense
-          </button>
-        </div>
       </div>
       <FadeInDiv
         tabs={tabs}
         active={active}
         key={active.value}
         hovering={hovering}
-        className={cn("mt-24", contentClassName)}
+        className={cn("mt-14", contentClassName)}
       />
     </>
   );
