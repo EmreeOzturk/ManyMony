@@ -7,7 +7,7 @@ import { expensesAction } from "./actions/expensesAction.ts";
 import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./pages/Error.tsx";
-import App from "./App.tsx";
+import App from "./App.tsx"; 
 import AllExpenses from "./pages/dashboard/AllExpenses.tsx";
 import BudgetDetail from "./pages/dashboard/BudgetDetail.tsx";
 import { budgetDetailLoader } from "./loaders/budgetDetailLoader.ts";
