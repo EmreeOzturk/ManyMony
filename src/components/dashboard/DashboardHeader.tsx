@@ -61,7 +61,7 @@ const DashboardHeader = () => {
                 <Label htmlFor="amount" className="text-right text-zinc-300">
                   Amount
                 </Label>
-                <Input id="amount" className="w-full" name="amount" />
+                <Input id="amount" className="w-full" name="amount" type="number" />
               </div>
               <div className="w-full">
                 <Label htmlFor="username" className="text-right text-zinc-300">
