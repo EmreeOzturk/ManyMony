@@ -1,30 +1,8 @@
 import { useMemo } from "react";
-import Analyze from "@/src/components/dashboard/Analyze";
 import Budgets from "@/src/components/dashboard/budgets/Budgets";
 import Overview from "@/src/components/dashboard/overview/Overview";
 import Transcations from "@/src/components/dashboard/transactions/Transactions";
-// export const tabs = [
-//   {
-//     title: "Overview",
-//     value: "overview",
-//     content: Overview,
-//   },
-//   {
-//     title: "Budgets",
-//     value: "budgets",
-//     content: Budgets,
-//   },
-//   {
-//     title: "Expenses",
-//     value: "expenses",
-//     content: Expenses,
-//   },
-//   {
-//     title: "Analyze",
-//     value: "analyze",
-//     content: Analyze,
-//   },
-// ];
+import Analytics from "@/src/components/dashboard/Analytics";
 
 const useTabs = () => {
   const tabs = useMemo(
@@ -45,9 +23,9 @@ const useTabs = () => {
         content: <Transcations />,
       },
       {
-        title: "Analyze",
-        value: "analyze",
-        content: <Analyze />,
+        title: "Analytics",
+        value: "analytics",
+        content: <Analytics />,
       },
     ],
     []
