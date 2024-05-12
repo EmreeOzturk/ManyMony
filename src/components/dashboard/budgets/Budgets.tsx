@@ -8,24 +8,28 @@ const Budgets = () => {
         amount={200}
         percentage={50}
         categories={["Groceries", "Eating Out"]}
+        index={1}
       />
       <BudgetCard
         name="Transport"
         amount={100}
         percentage={25}
         categories={["Fuel", "Public Transport"]}
+        index={2}
       />
       <BudgetCard
         name="Entertainment"
         amount={50}
         percentage={12.5}
         categories={["Movies", "Games"]}
+        index={3}
       />
       <BudgetCard
         name="Shopping"
         amount={100}
         percentage={25}
         categories={["Clothes", "Electronics"]}
+        index={4}
       />
 
       <BudgetCard
@@ -33,6 +37,7 @@ const Budgets = () => {
         amount={200}
         percentage={50}
         categories={["Groceries", "Eating Out"]}
+        index={5}
       />
 
       <BudgetCard
@@ -40,12 +45,14 @@ const Budgets = () => {
         amount={100}
         percentage={25}
         categories={["Fuel", "Public Transport"]}
+        index={6}
       />
       <BudgetCard
         name="Entertainment"
         amount={50}
         percentage={12.5}
         categories={["Movies", "Games"]}
+        index={7}
       />
     </div>
   );
