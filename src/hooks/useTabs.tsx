@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import Analyze from "@/src/components/dashboard/Analyze";
-import Budgets from "@/src/components/dashboard/Budgets";
+import Budgets from "@/src/components/dashboard/budgets/Budgets";
 import Expenses from "@/src/components/dashboard/Expenses";
-import Overview from "@/src/components/dashboard/Overview";
+import Overview from "@/src/components/dashboard/overview/Overview";
 // export const tabs = [
 //   {
 //     title: "Overview",
