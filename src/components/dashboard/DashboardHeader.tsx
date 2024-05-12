@@ -17,24 +17,12 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/src/components/ui/dialog";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
-
-import {
-  Command,
-  CommandEmpty,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/src/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/src/components/ui/popover";
 
 const DashboardHeader = () => {
   const auth = useAuth();
@@ -58,6 +46,43 @@ const DashboardHeader = () => {
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="w-full">
+                <Label htmlFor="username" className="text-right text-zinc-300">
+                  Budget
+                </Label>
+                <select
+                  name="budget"
+                  id="budget"
+                  className={cn(
+                    `flex h-10 w-full border border-violet-800/40 hover:bg-transparent bg-black text-neutral-400  shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
+          file:text-sm file:font-medium placeholder:text-neutral-600 
+          focus-visible:outline-none focus-visible:ring-[2px] 
+           disabled:cursor-not-allowed disabled:opacity-50
+           dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
+           group-hover/input:shadow-none transition duration-400
+           `
+                  )}
+                >
+                  <option className="bg-black" value="">
+                    Select Budget
+                  </option>
+                  <option className="bg-black" value="1">
+                    Budget 1
+                  </option>
+                  <option className="bg-black" value="2">
+                    Budget 2
+                  </option>
+                  <option className="bg-black" value="3">
+                    Budget 3
+                  </option>
+                  <option className="bg-black" value="4">
+                    Budget 4
+                  </option>
+                  <option className="bg-black" value="5">
+                    Budget 5
+                  </option>
+                </select>
+              </div>
+              <div className="w-full">
                 <Label htmlFor="amount" className="text-right text-zinc-300">
                   Amount
                 </Label>
@@ -68,53 +93,17 @@ const DashboardHeader = () => {
                   type="number"
                 />
               </div>
-              <div className="w-full">
-                <Label htmlFor="username" className="text-right text-zinc-300">
-                  Budget
-                </Label>
-
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      role="combobox"
-                      className={cn(
-                        `flex h-10 w-full border border-violet-800/40 hover:bg-transparent bg-black text-neutral-400  shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
-          file:text-sm file:font-medium placeholder:text-neutral-600 
-          focus-visible:outline-none focus-visible:ring-[2px] 
-           disabled:cursor-not-allowed disabled:opacity-50
-           dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
-           group-hover/input:shadow-none transition duration-400
-           `
-                      )}
-                    >
-                      Select Budget
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="">
-                    <Command>
-                      <CommandInput placeholder="Search framework..." />
-                      <CommandList>
-                        <CommandEmpty>No results found.</CommandEmpty>
-                        <CommandItem>Budget 1</CommandItem>
-                        <CommandItem>Budget 2</CommandItem>
-                        <CommandItem>Budget 3</CommandItem>
-                        <CommandItem>Budget 4</CommandItem>
-                        <CommandItem>Budget 5</CommandItem>
-                        <CommandItem>Budget 6</CommandItem>
-                      </CommandList>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-              </div>
             </div>
             <DialogFooter>
-              <Button type="submit">Add Expense</Button>
+              <Button variant={"ghost"} type="submit">
+                <DialogClose>Add Expense</DialogClose>
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
         <button className="border flex items-center border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300 justify-center rounded-md px-4 py-2">
           <span className="relative block text-zinc-600 group-hover:text-indigo-300">
-            Add Expense
+            Add Budget
           </span>
         </button>
         <button
