@@ -2,7 +2,13 @@ import { Ellipsis } from "lucide-react";
 import { TableCell } from "../../ui/table";
 import { motion } from "framer-motion";
 import { ReactElement } from "react";
-
+import { Button } from "../../ui/button";
+import { Edit, Trash } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/src/components/ui/popover";
 const TransactionTableRow = ({
   date,
   name,
@@ -39,7 +45,21 @@ const TransactionTableRow = ({
       </TableCell>
       <TableCell className="text-right">${amount}</TableCell>
       <TableCell className="flex justify-end pr-6">
-        <Ellipsis />
+        <Popover>
+          <PopoverTrigger>
+            <Ellipsis />
+          </PopoverTrigger>
+          <PopoverContent className="w-56 space-x-2  px-4 bg-zinc-900">
+            <Button className="text-xs bg-transparent text-zinc-300 " variant={"outline"}>
+              <Edit className="w-4 h-4 mr-2" />
+              Edit
+            </Button>
+            <Button className="text-xs" variant={"destructive"}>
+              <Trash className="w-4 h-4 mr-2" />
+              Delete
+            </Button>
+          </PopoverContent>
+        </Popover>
       </TableCell>
     </motion.tr>
   );
