@@ -32,12 +32,16 @@ const AddBudgetModal = () => {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="w-full">
-            <Label htmlFor="username" className="text-right text-zinc-300">
-              Budget
+            <Label htmlFor="name" className="text-right text-zinc-300">
+              Name
+            </Label>
+            <Input id="name" className="w-full" name="name" type="number" />
+            <Label htmlFor="category" className="text-right text-zinc-300">
+              Category
             </Label>
             <select
-              name="budget"
-              id="budget"
+              name="category"
+              id="category"
               className={cn(
                 `flex h-10 w-full border border-violet-800/40 hover:bg-transparent bg-black text-neutral-400  shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
           file:text-sm file:font-medium placeholder:text-neutral-600 
@@ -49,31 +53,26 @@ const AddBudgetModal = () => {
               )}
             >
               <option className="bg-black" value="">
-                Select Budget
+                Select Category
               </option>
               <option className="bg-black" value="1">
-                Budget 1
+                Food
               </option>
               <option className="bg-black" value="2">
-                Budget 2
+                Rent
               </option>
               <option className="bg-black" value="3">
-                Budget 3
+                Travel
               </option>
               <option className="bg-black" value="4">
-                Budget 4
+                Entertainment
               </option>
               <option className="bg-black" value="5">
-                Budget 5
+                Utilities
               </option>
             </select>
           </div>
-          <div className="w-full">
-            <Label htmlFor="amount" className="text-right text-zinc-300">
-              Amount
-            </Label>
-            <Input id="amount" className="w-full" name="amount" type="number" />
-          </div>
+          <div className="w-full"></div>
         </div>
         <DialogFooter>
           <Button variant={"ghost"} type="submit">
