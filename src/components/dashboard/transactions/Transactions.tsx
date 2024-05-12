@@ -2,12 +2,11 @@ import {
   Table,
   TableBody,
   TableCaption,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table";
-import { Ellipsis } from "lucide-react";
+import TransactionTableRow from "./TransactionTableRow";
 
 const Transcations = () => {
   return (
@@ -25,81 +24,62 @@ const Transcations = () => {
         </TableHeader>
 
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">
-              <span>12/12/2021</span>
-            </TableCell>
-            <TableCell>
-              <span>Food</span>
-            </TableCell>
-            <TableCell className="text-right">
-              <span>Groceries</span>
-            </TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-            <TableCell className="flex justify-end pr-6">
-              <Ellipsis className="" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="font-medium">
-              <span>12/12/2021</span>
-            </TableCell>
-            <TableCell>
-              <span>Food</span>
-            </TableCell>
-            <TableCell className="text-right">
-              <span>Groceries</span>
-            </TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-            <TableCell className="flex justify-end pr-6">
-              <Ellipsis className="" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="font-medium">
-              <span>12/12/2021</span>
-            </TableCell>
-            <TableCell>
-              <span>Food</span>
-            </TableCell>
-            <TableCell className="text-right">
-              <span>Groceries</span>
-            </TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-            <TableCell className="flex justify-end pr-6">
-              <Ellipsis className="" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="font-medium">
-              <span>12/12/2021</span>
-            </TableCell>
-            <TableCell>
-              <span>Food</span>
-            </TableCell>
-            <TableCell className="text-right">
-              <span>Groceries</span>
-            </TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-            <TableCell className="flex justify-end pr-6">
-              <Ellipsis className="" />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell className="font-medium">
-              <span>12/12/2021</span>
-            </TableCell>
-            <TableCell>
-              <span>Food</span>
-            </TableCell>
-            <TableCell className="text-right">
-              <span>Groceries</span>
-            </TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-            <TableCell className="flex justify-end pr-6">
-              <Ellipsis className="" />
-            </TableCell>
-          </TableRow>
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Food"
+            category="Groceries"
+            amount={200}
+            index={0}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Food"
+            category="Groceries"
+            amount={200}
+            index={1}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Transport"
+            category="Fuel"
+            amount={100}
+            index={2}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Entertainment"
+            category="Movies"
+            amount={50}
+            index={3}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Shopping"
+            category="Clothes"
+            amount={100}
+            index={4}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Food"
+            category="Groceries"
+            amount={200}
+            index={5}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Transport"
+            category="Fuel"
+            amount={100}
+            index={6}
+          />
+          <TransactionTableRow
+            date="12/12/2021"
+            name="Entertainment"
+            category="Movies"
+            amount={50}
+            index={7}
+          />
         </TableBody>
       </Table>
     </div>
