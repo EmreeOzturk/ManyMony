@@ -61,7 +61,12 @@ const DashboardHeader = () => {
                 <Label htmlFor="amount" className="text-right text-zinc-300">
                   Amount
                 </Label>
-                <Input id="amount" className="w-full" name="amount" type="number" />
+                <Input
+                  id="amount"
+                  className="w-full"
+                  name="amount"
+                  type="number"
+                />
               </div>
               <div className="w-full">
                 <Label htmlFor="username" className="text-right text-zinc-300">
@@ -85,29 +90,17 @@ const DashboardHeader = () => {
                       Select Budget
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-full p-0">
+                  <PopoverContent className="">
                     <Command>
                       <CommandInput placeholder="Search framework..." />
                       <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
-                        <CommandItem>
-                          <span>Calendar</span>
-                        </CommandItem>
-                        <CommandItem>
-                          <span>Search Emoji</span>
-                        </CommandItem>
-                        <CommandItem>
-                          <span>Calculator</span>
-                        </CommandItem>
-                        <CommandItem>
-                          <span>Profile</span>
-                        </CommandItem>
-                        <CommandItem>
-                          <span>Billing</span>
-                        </CommandItem>
-                        <CommandItem>
-                          <span>Settings</span>
-                        </CommandItem>
+                        <CommandItem>Budget 1</CommandItem>
+                        <CommandItem>Budget 2</CommandItem>
+                        <CommandItem>Budget 3</CommandItem>
+                        <CommandItem>Budget 4</CommandItem>
+                        <CommandItem>Budget 5</CommandItem>
+                        <CommandItem>Budget 6</CommandItem>
                       </CommandList>
                     </Command>
                   </PopoverContent>
