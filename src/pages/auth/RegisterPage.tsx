@@ -4,7 +4,7 @@ import { cn } from "../../utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { FormEventHandler, useState } from "react";
 import { Link } from "react-router-dom";
-import BackToHome from "../../components/BackToHome";
+import BackToHome from "../../components/header/BackToHome";
 import BottomGradient from "../../components/ui/bottom-gradient";
 import { useAuth } from '../../hooks/useAuth'
 import { toast } from "react-toastify";
