@@ -1,6 +1,7 @@
 import { Ellipsis } from "lucide-react";
 import { TableCell } from "../../ui/table";
 import { motion } from "framer-motion";
+import { ReactElement } from "react";
 
 const TransactionTableRow = ({
   date,
@@ -8,12 +9,14 @@ const TransactionTableRow = ({
   category,
   amount,
   index,
+  Icon,
 }: {
   date: string;
   name: string;
   category: string;
   amount: number;
   index: number;
+  Icon?: ReactElement;
 }) => {
   return (
     <motion.tr
@@ -26,7 +29,10 @@ const TransactionTableRow = ({
         <span>{date}</span>
       </TableCell>
       <TableCell>
-        <span>{name}</span>
+        <span className="flex items-center gap-2">
+          {Icon && Icon}
+          {name}
+        </span>
       </TableCell>
       <TableCell className="text-right">
         <span>{category}</span>
