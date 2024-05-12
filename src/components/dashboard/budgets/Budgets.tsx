@@ -41,6 +41,12 @@ const Budgets = () => {
         percentage={25}
         categories={["Fuel", "Public Transport"]}
       />
+      <BudgetCard
+        name="Entertainment"
+        amount={50}
+        percentage={12.5}
+        categories={["Movies", "Games"]}
+      />
     </div>
   );
 };
