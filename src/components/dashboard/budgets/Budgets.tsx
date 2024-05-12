@@ -27,6 +27,18 @@ const Budgets = () => {
         percentage={25}
         categories={["Clothes", "Electronics"]}
       />
+      <BudgetCard
+        name="Shopping"
+        amount={100}
+        percentage={25}
+        categories={["Clothes", "Electronics"]}
+      />
+      <BudgetCard
+        name="Shopping"
+        amount={100}
+        percentage={25}
+        categories={["Clothes", "Electronics"]}
+      />
    
     </div>
   );
