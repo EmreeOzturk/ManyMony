@@ -1,5 +1,6 @@
 import { Album } from "lucide-react";
 import { Badge } from "@/src/components/ui/badge";
+import { Link } from "react-router-dom";
 const BudgetCard = ({
   name,
   amount,
@@ -12,7 +13,7 @@ const BudgetCard = ({
   categories: string[];
 }) => {
   return (
-    <div className="relative flex flex-col ">
+    <Link to="/" className="relative flex flex-col cursor-pointer ">
       <div className="max-w-sm w-72 px-6 py-8 h-[270px] border bg-indigo-950/40 border-indigo-500/40 rounded-xl overflow-hidden shadow-lg">
         <div className="absolute top-0 right-0 px-3 py-3 rounded-bl-2xl border-zinc-600/40 border-l border-b  text-xs font-bold bg-zinc-900 text-zinc-300">
           {percentage}%
@@ -24,11 +25,13 @@ const BudgetCard = ({
         <p className="text-zinc-300 text-lg">${amount}</p>
         <div className="flex items-center justify-start mt-6 gap-2">
           {categories.map((category) => (
-            <Badge key={category}>{category}</Badge>
+            <Badge className="px-4 py-2 text-sm" key={category}>
+              {category}
+            </Badge>
           ))}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
