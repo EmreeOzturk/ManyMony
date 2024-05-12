@@ -5,7 +5,7 @@ import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import { FormEventHandler, useState, useRef, useEffect, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import BottomGradient from "../../components/ui/bottom-gradient";
-import BackToHome from "../../components/BackToHome";
+import BackToHome from "../../components/header/BackToHome";
 import { useAuth } from '../../hooks/useAuth'
 import { toast } from "react-toastify";
 const LoginPage = () => {
