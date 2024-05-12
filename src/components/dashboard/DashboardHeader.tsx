@@ -22,6 +22,20 @@ import {
 } from "@/src/components/ui/dialog";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
+
+import {
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/src/components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/src/components/ui/popover";
+
 const DashboardHeader = () => {
   const auth = useAuth();
   return (
@@ -35,37 +49,73 @@ const DashboardHeader = () => {
               </span>
             </button>
           </DialogTrigger>
-          <DialogContent className=" bg-zinc-950">
+          <DialogContent className="text-zinc-300 bg-zinc-950">
             <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
+              <DialogTitle>New Expense</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
+                Add a new expense to your selected budget.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right text-zinc-300">
-                  Name
+              <div className="w-full">
+                <Label htmlFor="amount" className="text-right text-zinc-300">
+                  Amount
                 </Label>
-                <Input
-                  id="name"
-                  defaultValue="Pedro Duarte"
-                  className="col-span-3"
-                />
+                <Input id="amount" className="w-full" name="amount" />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="w-full">
                 <Label htmlFor="username" className="text-right text-zinc-300">
-                  Username
+                  Budget
                 </Label>
-                <Input
-                  id="username"
-                  defaultValue="@peduarte"
-                  className="col-span-3"
-                />
+
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      role="combobox"
+                      className={cn(
+                        `flex h-10 w-full border border-violet-800/40 hover:bg-transparent bg-black text-neutral-400  shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
+          file:text-sm file:font-medium placeholder:text-neutral-600 
+          focus-visible:outline-none focus-visible:ring-[2px] 
+           disabled:cursor-not-allowed disabled:opacity-50
+           dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
+           group-hover/input:shadow-none transition duration-400
+           `
+                      )}
+                    >
+                      Select Budget
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-full p-0">
+                    <Command>
+                      <CommandInput placeholder="Search framework..." />
+                      <CommandList>
+                        <CommandEmpty>No results found.</CommandEmpty>
+                        <CommandItem>
+                          <span>Calendar</span>
+                        </CommandItem>
+                        <CommandItem>
+                          <span>Search Emoji</span>
+                        </CommandItem>
+                        <CommandItem>
+                          <span>Calculator</span>
+                        </CommandItem>
+                        <CommandItem>
+                          <span>Profile</span>
+                        </CommandItem>
+                        <CommandItem>
+                          <span>Billing</span>
+                        </CommandItem>
+                        <CommandItem>
+                          <span>Settings</span>
+                        </CommandItem>
+                      </CommandList>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit">Add Expense</Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
