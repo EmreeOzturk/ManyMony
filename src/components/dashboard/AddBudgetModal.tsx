@@ -36,6 +36,10 @@ const AddBudgetModal = () => {
               Name
             </Label>
             <Input id="name" className="w-full" name="name" type="number" />
+            <Label htmlFor="limit" className="text-right text-zinc-300">
+              Limit
+            </Label>
+            <Input id="name" className="w-full" name="limit" type="number" />
             <Label htmlFor="category" className="text-right text-zinc-300">
               Category
             </Label>
