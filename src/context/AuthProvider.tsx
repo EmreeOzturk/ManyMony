@@ -3,7 +3,7 @@ import { account } from "../lib/appwrite";
 import { toast } from "react-toastify";
 import type { Models } from "appwrite";
 import { ID } from "appwrite";
-import { checkFormData, saveDataToLocalStorage } from "../helper";
+import { checkFormData, removeDataFromLocalStorage, saveDataToLocalStorage } from "../helper";
 import Loading from "../pages/Loading";
 import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex, phoneRegex } from "../helper/consts";
@@ -45,7 +45,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           .then((response) => {
             setUserId(response.userId);
             setPhoneVerification(true);
-
+            saveDataToLocalStorage("userId", response.userId);
             navigate("/dashboard");
           })
           .catch((error) => {
@@ -66,6 +66,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           .createEmailPasswordSession(email as string, password as string)
           .then((response) => {
             setUser(response);
+            saveDataToLocalStorage("userId", response.userId);
             toast.success("Login successful", {
               position: "bottom-right",
             });
@@ -117,6 +118,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logoutAction = async () => {
     try {
+      removeDataFromLocalStorage("userId");
       await account.deleteSession("current");
       setUser(null);
       toast.success("Logout successful", {
@@ -138,6 +140,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         token as string
       );
       setUser(session);
+      saveDataToLocalStorage("userId", session.userId);
       toast.success("Login successful", {
         position: "bottom-right",
       });
