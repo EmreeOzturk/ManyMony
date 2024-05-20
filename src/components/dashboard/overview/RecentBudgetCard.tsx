@@ -10,9 +10,9 @@ const RecentBudgetCard = ({
   Icon: React.ReactNode;
 }) => {
   return (
-    <div className="shadow-indigo-200 shadow-sm h-1/4 rounded-md w-full flex items-center justify-between px-8 py-2 ">
+    <div className="shadow-indigo-200 border-b h-1/4 rounded-md hover:bg-indigo-950/70 w-full flex items-center justify-between px-8 ">
       <div className="flex items-center gap-2 w-20">
-        <div className="bg-zinc-700 p-[6px] rounded-sm">{Icon}</div>
+        <div className="bg-zinc-700 p-[3px] rounded-sm">{Icon}</div>
         <p className="text-[16px] text-zinc-300">{title}</p>
       </div>
       <div className="flex w-1/2 items-center ">
