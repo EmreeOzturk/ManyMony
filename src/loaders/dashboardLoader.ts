@@ -7,11 +7,11 @@ export const dashboardLoader: LoaderFunction = async ({ context, request }) => {
   const budgets = await databases.listDocuments(
     "66343e800011dbbdd0f4",
     "66343eb4001c491d89a7",
-    [Query.equal("userId", userId)]
+    [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
   );
   console.log(budgets);
   console.log("dashboardLoader");
   console.log(context);
   console.log(request.headers);
-  return [];
+  return budgets;
 };
