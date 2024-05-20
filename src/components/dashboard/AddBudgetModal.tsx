@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogHeader,
-  // DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/src/components/ui/dialog";
@@ -15,13 +14,14 @@ import { Label } from "@/src/components/ui/label";
 import { Form, useActionData } from "react-router-dom";
 import { useAuth } from "@/src/hooks/useAuth";
 import { useState, useEffect } from "react";
+import { memo } from "react";
 
 type AuthType = {
   user: {
     $id: string;
   };
 };
-const AddBudgetModal = () => {
+const AddBudgetModal = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
@@ -139,7 +139,6 @@ const AddBudgetModal = () => {
           </div>
           <DialogFooter>
             <Button variant={"ghost"} type="submit">
-              {/* <DialogClose >Add Budget</DialogClose> */}
               Add Budget
             </Button>
           </DialogFooter>
@@ -147,6 +146,6 @@ const AddBudgetModal = () => {
       </DialogContent>
     </Dialog>
   );
-};
+});
 
 export default AddBudgetModal;
