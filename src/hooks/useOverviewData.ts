@@ -38,11 +38,20 @@ const useOverviewData = () => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   }) as Models.Document[];
 
+  const chartData = documents.map((budget) => {
+    return {
+      name: budget.name,
+      "Budget Limit": budget.limit,
+      "Budget Spent": budget.usage,
+    };
+  });
+
   return {
     totalBudget,
     totalExpense,
     recentBudgets,
     recentExpenses,
+    chartData,
   };
 };
 
