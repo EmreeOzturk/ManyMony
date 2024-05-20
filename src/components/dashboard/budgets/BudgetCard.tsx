@@ -33,11 +33,14 @@ const BudgetCard = ({
           <div className="font-bold text-xl mb-2">{name}</div>
           <p className="text-zinc-300 text-lg">${amount}</p>
           <div className="flex items-center justify-start mt-6 gap-2">
-            {categories.map((category) => (
+            {/* {categories.map((category) => (
               <Badge className="px-4 py-2 text-sm" key={category}>
                 {category}
               </Badge>
-            ))}
+            ))} */}
+            <Badge className="px-4 py-2 text-sm">
+              {categories}
+            </Badge>
           </div>
         </div>
       </Link>
