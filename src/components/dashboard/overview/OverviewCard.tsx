@@ -11,7 +11,7 @@ const OverviewCard = ({
 }) => {
   return (
     <div
-      className="w-1/3 h-32 p-4 flex items-start justify-center flex-col gap-2 rounded-lg bg-indigo-950/40 border border-indigo-500/40
+      className="w-1/2 h-32 p-4 flex items-start justify-center flex-col gap-2 rounded-lg bg-indigo-950/40 border border-indigo-500/40
             isolate
          overflow-hidden
     shadow-xl shadow-black/5
