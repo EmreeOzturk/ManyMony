@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import Budgets from "@/src/components/dashboard/budgets/Budgets";
 import Overview from "@/src/components/dashboard/overview/Overview";
 import Transcations from "@/src/components/dashboard/transactions/Transactions";
-import Analytics from "@/src/components/dashboard/Analytics";
+import Analytics from "@/src/components/dashboard/analytic/Analytics";
 
 const useTabs = () => {
   const tabs = useMemo(
