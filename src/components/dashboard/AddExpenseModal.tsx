@@ -76,7 +76,7 @@ const AddExpenseModal = () => {
           </div>
         </div>
         <DialogFooter>
-          <Button variant={"ghost"} type="submit">
+          <Button asChild variant={"ghost"} type="submit">
             <DialogClose>Add Expense</DialogClose>
           </Button>
         </DialogFooter>
