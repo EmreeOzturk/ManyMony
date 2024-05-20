@@ -7,7 +7,7 @@ import { expensesAction } from "./actions/expensesAction.ts";
 import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./pages/Error.tsx";
-import App from "./App.tsx"; 
+import App from "./App.tsx";
 import AllExpenses from "./pages/dashboard/AllExpenses.tsx";
 import BudgetDetail from "./pages/dashboard/BudgetDetail.tsx";
 import { budgetDetailLoader } from "./loaders/budgetDetailLoader.ts";
@@ -17,6 +17,8 @@ import RegisterPage from "./pages/auth/RegisterPage.tsx";
 import PrivateRoute from "./pages/constraints/PrivateRoute.tsx";
 import UnauthenticatedRoute from "./pages/constraints/UnauthenticatedRoute.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
+import { dashboardAction } from "./actions/dashboardAction.ts";
+import { dashboardLoader } from "./loaders/dashboardLoader.ts";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +50,8 @@ const router = createBrowserRouter([
             path: "/dashboard",
             element: <Dashboard />,
             errorElement: <Error />,
+            action: dashboardAction,
+            loader: dashboardLoader,
             // action adn loader
           },
           {
