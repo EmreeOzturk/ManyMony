@@ -3,13 +3,17 @@ import OverviewCard from "./OverviewCard";
 import RecentExpenses from "./RecentExpenses";
 import RecentBudgets from "./RecentBudgets";
 import { BarChart } from "@tremor/react";
-import { chartdata2 } from "../analytic/Analytics";
 import { useOverviewData } from "@/src/hooks/useOverviewData";
 const dataFormatter = (number: number) =>
   Intl.NumberFormat("us").format(number).toString();
 const Overview = () => {
-  const { totalBudget, totalExpense, recentBudgets, recentExpenses } =
-    useOverviewData();
+  const {
+    totalBudget,
+    totalExpense,
+    recentBudgets,
+    recentExpenses,
+    chartData,
+  } = useOverviewData();
 
   console.log(totalBudget, totalExpense, recentBudgets, recentExpenses);
   return (
@@ -31,7 +35,7 @@ const Overview = () => {
           <div className="border-indigo-500/40 bg-indigo-950/30 border h-full rounded-md">
             <BarChart
               className="mt-6"
-              data={chartdata2}
+              data={chartData}
               index="name"
               categories={["Budget Limit", "Budget Spent"]}
               colors={["blue", "teal", "amber", "rose", "indigo", "emerald"]}
