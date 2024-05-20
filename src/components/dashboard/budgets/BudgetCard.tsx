@@ -20,7 +20,7 @@ const BudgetCard = ({
       initial={{ opacity: 0, y: 100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="relative flex flex-col cursor-pointer "
+      className="relative flex flex-col cursor-pointer hover:bg-indigo-950 transition-transform duration-300 ease-in-out"
     >
       <Link to="/" className="relative flex flex-col cursor-pointer ">
         <div className="max-w-sm w-72 px-6 py-8 h-[270px] border bg-indigo-950/40 border-indigo-500/40 rounded-xl overflow-hidden shadow-lg">
