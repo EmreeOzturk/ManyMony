@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ReactElement } from "react";
 import { Button } from "../../ui/button";
 import { Edit, Trash } from "lucide-react";
+import { Form } from "react-router-dom";
 import {
   Popover,
   PopoverContent,
@@ -16,6 +17,7 @@ const TransactionTableRow = ({
   amount,
   index,
   Icon,
+  id,
 }: {
   date: string;
   name: string;
@@ -23,6 +25,7 @@ const TransactionTableRow = ({
   amount: number;
   index: number;
   Icon?: ReactElement;
+  id: string;
 }) => {
   return (
     <motion.tr
@@ -50,14 +53,21 @@ const TransactionTableRow = ({
             <Ellipsis />
           </PopoverTrigger>
           <PopoverContent className="w-56 space-x-2  px-4 bg-zinc-900">
-            <Button className="text-xs bg-transparent text-zinc-300 " variant={"outline"}>
+            <Button
+              className="text-xs bg-transparent text-zinc-300 "
+              variant={"outline"}
+            >
               <Edit className="w-4 h-4 mr-2" />
               Edit
             </Button>
-            <Button className="text-xs" variant={"destructive"}>
-              <Trash className="w-4 h-4 mr-2" />
-              Delete
-            </Button>
+            <Form method="POST" className=" inline-block">
+              <input type="hidden" name="_action" value="deleteExpense" />
+              <input type="hidden" name="_id" value={id} />
+              <Button className="text-xs" variant={"destructive"}>
+                <Trash className="w-4 h-4 mr-2" />
+                Delete
+              </Button>
+            </Form>
           </PopoverContent>
         </Popover>
       </TableCell>
