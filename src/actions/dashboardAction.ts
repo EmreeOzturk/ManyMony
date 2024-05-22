@@ -83,6 +83,69 @@ export const dashboardAction: ActionFunction = async ({
     }
   }
 
+  if (actionType === "deleteExpense") {
+    console.log("deleteExpense");
+    const expenseId = formData.get("_id");
+    const errors = {} as Record<string, string>;
+    console.log(expenseId);
+    if (!expenseId) {
+      errors["expenseId"] = "Expense ID is required";
+      toast.error("Expense ID is required", {
+        autoClose: 2000,
+        position: "bottom-right",
+      });
+    }
+
+    if (Object.keys(errors).length > 0) {
+      return errors;
+    }
+
+    try {
+      const expense = await databases.getDocument(
+        "66343e800011dbbdd0f4",
+        "66343ebc0025e1be1729",
+        expenseId?.toString() as string
+      );
+      console.log(expense);
+      const budgetId = expense.budget?.$id;
+      const expenseAmount = expense.amount;
+      const oldUsage = await databases.getDocument(
+        "66343e800011dbbdd0f4",
+        "66343eb4001c491d89a7",
+        budgetId as string
+      );
+
+      await databases.deleteDocument(
+        "66343e800011dbbdd0f4",
+        "66343ebc0025e1be1729",
+        expenseId?.toString() as string
+      );
+
+      await databases.updateDocument(
+        "66343e800011dbbdd0f4",
+        "66343eb4001c491d89a7",
+        budgetId as string,
+        {
+          usage: Number(oldUsage.usage) - Number(expenseAmount),
+        }
+      );
+      toast.success("Expense deleted successfully", {
+        autoClose: 2000,
+        position: "bottom-right",
+      });
+      return {
+        message: "Expense deleted successfully",
+        status: "success",
+      };
+    } catch (error) {
+      console.log(error);
+      return {
+        message: "Failed to delete expense",
+        status: "error",
+      };
+    }
+  }
+
   if (actionType === "createExpense") {
     const budgetId = formData.get("budget");
     const expenseAmount = formData.get("amount");
