@@ -40,6 +40,7 @@ const Transcations = () => {
               amount={transaction.amount}
               index={index}
               Icon={<Banana />}
+              id={transaction.id}
             />
           ))}
         </TableBody>
