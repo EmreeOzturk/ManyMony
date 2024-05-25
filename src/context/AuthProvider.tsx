@@ -3,7 +3,11 @@ import { account } from "../lib/appwrite";
 import { toast } from "react-toastify";
 import type { Models } from "appwrite";
 import { ID } from "appwrite";
-import { checkFormData, removeDataFromLocalStorage, saveDataToLocalStorage } from "../helper";
+import {
+  checkFormData,
+  removeDataFromLocalStorage,
+  saveDataToLocalStorage,
+} from "../helper";
 import Loading from "../pages/Loading";
 import { useNavigate } from "react-router-dom";
 import { emailRegex, passwordRegex, phoneRegex } from "../helper/consts";
@@ -22,6 +26,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const accountDetails = await account.get();
       setUser(accountDetails as unknown as Models.Session | null);
+      setUserId(accountDetails.$id);
       saveDataToLocalStorage("userId", accountDetails.$id);
     } catch (error) {
       console.error("Error checking user status:", error);
@@ -155,6 +160,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
   const store = {
     user,
+    userId,
     loginAction,
     registerAction,
     logoutAction,
