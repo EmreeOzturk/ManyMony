@@ -10,6 +10,7 @@ import TransactionTableRow from "./TransactionTableRow";
 import { Banana } from "lucide-react";
 import { useTransactionData } from "@/src/hooks/useTransactionData";
 const Transcations = () => {
+  console.log("transaction")
   const { recentTransactions } = useTransactionData();
   return (
     <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-zinc-900">
@@ -40,6 +41,8 @@ const Transcations = () => {
               index={index}
               Icon={<Banana />}
               id={transaction.id}
+              budgetId={transaction.budgetId}
+              usage={transaction.usage}
             />
           ))}
         </TableBody>
