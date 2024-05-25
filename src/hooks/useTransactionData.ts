@@ -8,9 +8,11 @@ const useTransactionData = () => {
     const transactions = budget.expense.map((transaction: Models.Document) => {
       return {
         name: budget.name,
+        category: budget.category,
+        budgetId: budget.$id,
+        usage: budget.usage,
         amount: transaction.amount,
         date: transaction.$createdAt,
-        category: budget.category,
         id: transaction.$id,
       };
     });
