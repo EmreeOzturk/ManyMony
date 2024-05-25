@@ -17,20 +17,17 @@ import { useState, useEffect } from "react";
 import { memo } from "react";
 
 type AuthType = {
-  user: {
-    $id: string;
-  };
+  userId: string;
 };
 const AddBudgetModal = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuth() as AuthType;
+  const { userId } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   useEffect(() => {
     if (data && data?.status === "success") {
       setIsOpen(false);
     }
   }, [data]);
-  console.log(data);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
@@ -50,7 +47,7 @@ const AddBudgetModal = memo(() => {
           </DialogHeader>
           <div className="grid gap-4 py-4">
             <input type="hidden" name="_action" value="createBudget" />
-            <input type="hidden" name="userId" value={user?.$id} />
+            <input type="hidden" name="userId" value={userId} />
             <div className="w-full">
               <Label htmlFor="name" className="text-right text-zinc-300">
                 Name
