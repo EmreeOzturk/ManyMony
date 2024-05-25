@@ -23,7 +23,6 @@ type AuthType = {
 };
 const AddExpenseModal =memo(() => {
   const { documents } = useLoaderData() as { documents: Models.Document[] };
-  console.log(documents);
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
@@ -32,7 +31,6 @@ const AddExpenseModal =memo(() => {
       setIsOpen(false);
     }
   }, [data]);
-  console.log(data);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
