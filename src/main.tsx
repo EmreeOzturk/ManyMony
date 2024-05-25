@@ -8,7 +8,6 @@ import Error from "./pages/Error.tsx";
 import App from "./App.tsx";
 import BudgetDetail from "./pages/dashboard/BudgetDetail.tsx";
 import { budgetDetailLoader } from "./loaders/budgetDetailLoader.ts";
-import { budgetDetailAction } from "./actions/budgetDetailAction.ts";
 import LoginPage from "./pages/auth/LoginPage.tsx";
 import RegisterPage from "./pages/auth/RegisterPage.tsx";
 import PrivateRoute from "./pages/constraints/PrivateRoute.tsx";
@@ -56,7 +55,6 @@ const router = createBrowserRouter([
             element: <BudgetDetail />,
             errorElement: <Error />,
             loader: budgetDetailLoader,
-            action: budgetDetailAction,
           },
           {
             path: "/analytics",
