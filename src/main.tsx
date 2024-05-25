@@ -2,13 +2,10 @@ import "./index.css";
 import "react-toastify/dist/ReactToastify.css";
 import ReactDOM from "react-dom/client";
 import LangingPage from "./pages/LangingPage.tsx";
-import { expensesLoader } from "./loaders/expensesLoader.ts";
-import { expensesAction } from "./actions/expensesAction.ts";
 import { ToastContainer } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./pages/Error.tsx";
 import App from "./App.tsx";
-import AllExpenses from "./pages/dashboard/AllExpenses.tsx";
 import BudgetDetail from "./pages/dashboard/BudgetDetail.tsx";
 import { budgetDetailLoader } from "./loaders/budgetDetailLoader.ts";
 import { budgetDetailAction } from "./actions/budgetDetailAction.ts";
@@ -53,18 +50,6 @@ const router = createBrowserRouter([
             action: dashboardAction,
             loader: dashboardLoader,
             // action adn loader
-          },
-          {
-            path: "/budgets",
-            errorElement: <Error />,
-            element: <div>budgets</div>,
-          },
-          {
-            path: "/expenses",
-            element: <AllExpenses />,
-            loader: expensesLoader,
-            action: expensesAction,
-            errorElement: <Error />,
           },
           {
             path: "/budgets/:budgetId",
