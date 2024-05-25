@@ -12,18 +12,18 @@ import {
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { useAuth } from "@/src/hooks/useAuth";
 import { Models } from "appwrite";
-import { memo } from "react";
 type AuthType = {
   user: {
     $id: string;
   };
 };
-const AddExpenseModal =memo(() => {
+const AddExpenseModal = memo(() => {
   const { documents } = useLoaderData() as { documents: Models.Document[] };
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedBudget, setSelectedBudget] = useState<string>("" as string);
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   useEffect(() => {
@@ -52,6 +52,13 @@ const AddExpenseModal =memo(() => {
             <div className="w-full">
               <input type="hidden" name="_action" value="createExpense" />
               <input type="hidden" name="userId" value={user?.$id} />
+              <input
+                type="hidden"
+                name="oldUsage"
+                value={
+                  documents?.find((doc) => doc.$id === selectedBudget)?.usage
+                }
+              />
               <Label htmlFor="budget" className="text-right text-zinc-300">
                 Budget
               </Label>
@@ -67,6 +74,8 @@ const AddExpenseModal =memo(() => {
            group-hover/input:shadow-none transition duration-400
            `
                 )}
+                value={selectedBudget}
+                onChange={(e) => setSelectedBudget(e.target.value)}
               >
                 {documents?.map((doc: Models.Document) => (
                   <option className="bg-black" key={doc.$id} value={doc.$id}>
