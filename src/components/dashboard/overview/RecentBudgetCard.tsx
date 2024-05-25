@@ -23,7 +23,7 @@ const RecentBudgetCard = ({
             animate={{ width: `${percentage}%`, transition: { duration: 2 } }}
           />
         </div>
-        <span className="text-sm">{percentage.toFixed(1)}%</span>
+        <span className="text-sm">{percentage.toFixed(0)}%</span>
       </div>
       <div className="cursor-pointer">
         <p className="text-lg font-normal text-blue-400 underline">View</p>
