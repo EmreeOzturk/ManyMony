@@ -7,6 +7,7 @@ import { useOverviewData } from "@/src/hooks/useOverviewData";
 const dataFormatter = (number: number) =>
   Intl.NumberFormat("us").format(number).toString();
 const Overview = () => {
+  console.log("overview")
   const {
     totalBudget,
     totalExpense,
