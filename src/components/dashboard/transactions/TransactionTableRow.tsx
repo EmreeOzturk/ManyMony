@@ -18,6 +18,8 @@ const TransactionTableRow = ({
   index,
   Icon,
   id,
+  budgetId,
+  usage,
 }: {
   date: string;
   name: string;
@@ -26,6 +28,8 @@ const TransactionTableRow = ({
   index: number;
   Icon?: ReactElement;
   id: string;
+  budgetId: string;
+  usage: string;
 }) => {
   return (
     <motion.tr
@@ -63,6 +67,9 @@ const TransactionTableRow = ({
             <Form method="POST" className=" inline-block">
               <input type="hidden" name="_action" value="deleteExpense" />
               <input type="hidden" name="_id" value={id} />
+              <input type="hidden" name="_budgetId" value={budgetId} />
+              <input type="hidden" name="amount" value={amount} />
+              <input type="hidden" name="usage" value={usage} />
               <Button className="text-xs" variant={"destructive"}>
                 <Trash className="w-4 h-4 mr-2" />
                 Delete
