@@ -15,7 +15,6 @@ const Overview = () => {
     chartData,
   } = useOverviewData();
 
-  console.log(totalBudget, totalExpense, recentBudgets, recentExpenses);
   return (
     <div className="flex gap-2 flex-col justify-between items-start w-full overflow-hidden relative h-full rounded-2xl p-4 text-xl md:text-4xl font-bold text-zinc-300 bg-zinc-900">
       <div className="flex w-full gap-2 flex-1">
