@@ -3,7 +3,6 @@ import { useLoaderData } from "react-router-dom";
 
 const useOverviewData = () => {
   const { documents } = useLoaderData() as { documents: Models.Document[] };
-  console.log(documents);
 
   const totalBudget = documents.reduce((acc, curr) => {
     return acc + Number(curr.limit);
