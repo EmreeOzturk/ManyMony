@@ -1,8 +1,12 @@
-import { toast } from "react-toastify";
 import type { ActionFunction } from "react-router-dom";
-import { saveDataToLocalStorage } from "../helper";
+import { toast } from "react-toastify";
 import { databases } from "../lib/appwrite";
-import { ID } from "appwrite";
+import { AppwriteException, ID } from "appwrite";
+import {
+  checkCreateBudgetFormData,
+  checkCreateExpenseFormData,
+  checkDeleteExpenseFormData,
+} from "../helper/checkFormData";
 export const dashboardAction: ActionFunction = async ({
   request,
 }: {
@@ -10,70 +14,52 @@ export const dashboardAction: ActionFunction = async ({
 }) => {
   const formData = await request.formData();
   const actionType = formData.get("_action");
-  if (actionType === "createUser") {
-    try {
-      const userName = formData.get("userName");
-      saveDataToLocalStorage("userName", userName?.toString() || "");
-      return toast.success(`Welcome ${userName}`);
-    } catch (error) {
-      toast.error("Failed to create account");
-      throw new Error("Failed to create account");
-    }
-  }
 
   if (actionType === "createBudget") {
     const budgetName = formData.get("budgetName");
     const budgetLimit = formData.get("budgetLimit");
-    const categpry = formData.get("budgetCategory");
+    const category = formData.get("budgetCategory");
     const userId = formData.get("userId");
-    const errors = {} as Record<string, string>;
 
-    if (!budgetName) {
-      errors["budgetName"] = "Budget name is required";
-      toast.error("Budget name is required", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
-    }
-    if (!budgetLimit) {
-      errors["budgetLimit"] = "Budget limit is required";
-      toast.error("Budget limit is required", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
-    }
-    if (!categpry) {
-      errors["categpry"] = "Budget category is required";
-      toast.error("Budget category is required", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
-    }
+    const errors = checkCreateBudgetFormData(
+      budgetName as string,
+      budgetLimit as string,
+      category as string
+    );
     if (Object.keys(errors).length > 0) {
       return errors;
     }
     try {
-      await databases.createDocument(
-        "66343e800011dbbdd0f4",
-        "66343eb4001c491d89a7",
-        ID.unique(),
-        {
-          name: budgetName?.toString(),
-          limit: Number(budgetLimit),
-          category: categpry,
-          userId: userId?.toString(),
-        }
-      );
-      toast.success("Budget added successfully", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
+      databases
+        .createDocument(
+          "66343e800011dbbdd0f4", // => DB ID
+          "66343eb4001c491d89a7", // => Collection ID
+          ID.unique(),
+          {
+            name: budgetName?.toString(),
+            limit: Number(budgetLimit),
+            category: category,
+            userId: userId?.toString(),
+          }
+        )
+        .then(() => {
+          toast.success("Budget added successfully", {
+            autoClose: 2000,
+            position: "bottom-right",
+          });
+        })
+        .catch((error: AppwriteException) => {
+          console.log(error);
+          return {
+            message: "Failed to create budget",
+            status: "error",
+          };
+        });
       return {
         message: "Budget added successfully",
         status: "success",
       };
     } catch (error) {
-      console.log(error);
       return {
         message: "Failed to create budget",
         status: "error",
@@ -83,57 +69,52 @@ export const dashboardAction: ActionFunction = async ({
 
   if (actionType === "deleteExpense") {
     const expenseId = formData.get("_id");
-    const errors = {} as Record<string, string>;
-    if (!expenseId) {
-      errors["expenseId"] = "Expense ID is required";
-      toast.error("Expense ID is required", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
-    }
+    const budgetId = formData.get("_budgetId");
+    const amount = formData.get("amount");
+    const usage = formData.get("usage");
 
+    const errors = checkDeleteExpenseFormData(
+      expenseId as string,
+      amount as string,
+      budgetId as string
+    );
     if (Object.keys(errors).length > 0) {
       return errors;
     }
 
     try {
-      const expense = await databases.getDocument(
+      const deleteExpense = databases.deleteDocument(
         "66343e800011dbbdd0f4",
         "66343ebc0025e1be1729",
         expenseId?.toString() as string
       );
-      const budgetId = expense.budget?.$id;
-      const expenseAmount = expense.amount;
-      const oldUsage = await databases.getDocument(
-        "66343e800011dbbdd0f4",
-        "66343eb4001c491d89a7",
-        budgetId as string
-      );
-
-      await databases.deleteDocument(
-        "66343e800011dbbdd0f4",
-        "66343ebc0025e1be1729",
-        expenseId?.toString() as string
-      );
-
-      await databases.updateDocument(
+      const updateBudget = databases.updateDocument(
         "66343e800011dbbdd0f4",
         "66343eb4001c491d89a7",
         budgetId as string,
         {
-          usage: Number(oldUsage.usage) - Number(expenseAmount),
+          usage: Number(usage) - Number(amount),
         }
       );
-      toast.success("Expense deleted successfully", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
+      await Promise.all([deleteExpense, updateBudget])
+        .then(() => {
+          toast.success("Expense deleted successfully", {
+            autoClose: 2000,
+            position: "bottom-right",
+          });
+        })
+        .catch((error: AppwriteException) => {
+          console.log(error);
+          return {
+            message: "Failed to delete expense",
+            status: "error",
+          };
+        });
       return {
         message: "Expense deleted successfully",
         status: "success",
       };
     } catch (error) {
-      console.log(error);
       return {
         message: "Failed to delete expense",
         status: "error",
@@ -145,30 +126,21 @@ export const dashboardAction: ActionFunction = async ({
     const budgetId = formData.get("budget");
     const expenseAmount = formData.get("amount");
     const userId = formData.get("userId");
-    const errors = {} as Record<string, string>;
+    const oldUsage = formData.get("oldUsage");
 
-    if (!budgetId) {
-      errors["budget"] = "Budget is required";
-      toast.error("Budget is required", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
-    }
-
-    if (!expenseAmount) {
-      errors["amount"] = "Amount is required";
-      toast.error("Amount is required", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
-    }
+    console.log(oldUsage);
+    const errors = checkCreateExpenseFormData(
+      budgetId as string,
+      expenseAmount as string,
+      userId as string
+    );
 
     if (Object.keys(errors).length > 0) {
       return errors;
     }
 
     try {
-      await databases.createDocument(
+      const createExpense = databases.createDocument(
         "66343e800011dbbdd0f4",
         "66343ebc0025e1be1729",
         ID.unique(),
@@ -178,20 +150,17 @@ export const dashboardAction: ActionFunction = async ({
           userId: userId?.toString(),
         }
       );
-      const oldUsage = await databases.getDocument(
-        "66343e800011dbbdd0f4",
-        "66343eb4001c491d89a7",
-        budgetId?.toString() as string
-      );
 
-      await databases.updateDocument(
+      const updateBudget = databases.updateDocument(
         "66343e800011dbbdd0f4",
         "66343eb4001c491d89a7",
         budgetId?.toString() as string,
         {
-          usage: Number(oldUsage.usage) + Number(expenseAmount),
+          usage: Number(oldUsage) + Number(expenseAmount),
         }
       );
+
+      await Promise.all([createExpense, updateBudget]);
       toast.success("Expense added successfully", {
         autoClose: 2000,
         position: "bottom-right",
@@ -201,7 +170,6 @@ export const dashboardAction: ActionFunction = async ({
         status: "success",
       };
     } catch (error) {
-      console.log(error);
       return {
         message: "Failed to create expense",
         status: "error",
