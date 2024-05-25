@@ -11,7 +11,6 @@ import { Banana } from "lucide-react";
 import { useTransactionData } from "@/src/hooks/useTransactionData";
 const Transcations = () => {
   const { recentTransactions } = useTransactionData();
-  console.log(recentTransactions);
   return (
     <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-zinc-900">
       <Table>
