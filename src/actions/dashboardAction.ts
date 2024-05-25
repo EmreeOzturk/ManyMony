@@ -22,7 +22,6 @@ export const dashboardAction: ActionFunction = async ({
   }
 
   if (actionType === "createBudget") {
-    console.log("createBudget");
     const budgetName = formData.get("budgetName");
     const budgetLimit = formData.get("budgetLimit");
     const categpry = formData.get("budgetCategory");
@@ -54,7 +53,7 @@ export const dashboardAction: ActionFunction = async ({
       return errors;
     }
     try {
-      const result = await databases.createDocument(
+      await databases.createDocument(
         "66343e800011dbbdd0f4",
         "66343eb4001c491d89a7",
         ID.unique(),
@@ -65,7 +64,6 @@ export const dashboardAction: ActionFunction = async ({
           userId: userId?.toString(),
         }
       );
-      console.log(result);
       toast.success("Budget added successfully", {
         autoClose: 2000,
         position: "bottom-right",
@@ -84,10 +82,8 @@ export const dashboardAction: ActionFunction = async ({
   }
 
   if (actionType === "deleteExpense") {
-    console.log("deleteExpense");
     const expenseId = formData.get("_id");
     const errors = {} as Record<string, string>;
-    console.log(expenseId);
     if (!expenseId) {
       errors["expenseId"] = "Expense ID is required";
       toast.error("Expense ID is required", {
@@ -106,7 +102,6 @@ export const dashboardAction: ActionFunction = async ({
         "66343ebc0025e1be1729",
         expenseId?.toString() as string
       );
-      console.log(expense);
       const budgetId = expense.budget?.$id;
       const expenseAmount = expense.amount;
       const oldUsage = await databases.getDocument(
@@ -173,7 +168,7 @@ export const dashboardAction: ActionFunction = async ({
     }
 
     try {
-      const result = await databases.createDocument(
+      await databases.createDocument(
         "66343e800011dbbdd0f4",
         "66343ebc0025e1be1729",
         ID.unique(),
@@ -197,7 +192,6 @@ export const dashboardAction: ActionFunction = async ({
           usage: Number(oldUsage.usage) + Number(expenseAmount),
         }
       );
-      console.log(result);
       toast.success("Expense added successfully", {
         autoClose: 2000,
         position: "bottom-right",
