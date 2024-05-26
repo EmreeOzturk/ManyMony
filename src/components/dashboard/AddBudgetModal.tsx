@@ -31,7 +31,6 @@ const AddBudgetModal = memo(() => {
       setIsOpen(false);
       setLoading(false);
     } else {
-      console.log(data);
       setLoading(false);
     }
   }, [data]);
@@ -152,7 +151,7 @@ const AddBudgetModal = memo(() => {
                   <LoaderIcon className="animate-spin h-5 w-5" />
                 </span>
               ) : (
-                "Add Expense"
+                "Add Budget"
               )}
             </Button>
           </DialogFooter>
