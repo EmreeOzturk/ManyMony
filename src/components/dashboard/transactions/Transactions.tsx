@@ -17,7 +17,6 @@ import { memo, useState } from "react";
 import { Button } from "../../ui/button";
 const Transcations = memo(() => {
   const [page, setPage] = useState(1);
-  console.log("transaction");
   const { recentTransactions } = useTransactionData();
   return (
     <div className="w-full overflow-y-auto relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-zinc-900">
@@ -39,7 +38,6 @@ const Transcations = memo(() => {
             </PaginationItem>
             {[...Array(Math.ceil(recentTransactions?.length / 10))].map(
               (_, index) => {
-                console.log(index + 1);
                 return (
                   <PaginationItem key={index}>
                     <Button
