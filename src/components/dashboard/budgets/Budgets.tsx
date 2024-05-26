@@ -14,6 +14,7 @@ const Budgets = () => {
             percentage={(budget.usage / budget.limit) * 100}
             categories={budget.category}
             index={index}
+            budgetId={budget.$id}
           />
         );
       })}
