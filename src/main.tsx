@@ -15,6 +15,7 @@ import UnauthenticatedRoute from "./pages/constraints/UnauthenticatedRoute.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import { dashboardAction } from "./actions/dashboardAction.ts";
 import { dashboardLoader } from "./loaders/dashboardLoader.ts";
+import { budgetDetailAction } from "./actions/budgetDetailAction.ts";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -55,6 +56,7 @@ const router = createBrowserRouter([
             element: <BudgetDetail />,
             errorElement: <Error />,
             loader: budgetDetailLoader,
+            action: budgetDetailAction,
           },
         ],
       },
