@@ -16,6 +16,7 @@ import { useAuth } from "@/src/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { memo } from "react";
 import ModalTriggerButton from "./ModalTriggerButton";
+import { LoaderIcon } from "lucide-react";
 
 type AuthType = {
   userId: string;
@@ -24,18 +25,28 @@ const AddBudgetModal = memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const { userId } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (data && data?.status === "success") {
       setIsOpen(false);
+      setLoading(false);
+    } else {
+      console.log(data);
+      setLoading(false);
     }
   }, [data]);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger >
-       <ModalTriggerButton text="Add Budget" />
+      <DialogTrigger>
+        <ModalTriggerButton text="Add Budget" />
       </DialogTrigger>
       <DialogContent className="text-zinc-300 bg-zinc-950">
-        <Form method="POST" action="/dashboard">
+        <Form
+          method="POST"
+          onSubmit={() => {
+            setLoading(true);
+          }}
+        >
           <DialogHeader>
             <DialogTitle>New Budget</DialogTitle>
             <DialogDescription>
@@ -54,6 +65,7 @@ const AddBudgetModal = memo(() => {
                 className="w-full"
                 name="budgetName"
                 type="text"
+                disabled={loading}
               />
               <Label htmlFor="limit" className="text-right text-zinc-300">
                 Limit
@@ -63,6 +75,7 @@ const AddBudgetModal = memo(() => {
                 className="w-full"
                 name="budgetLimit"
                 type="number"
+                disabled={loading}
               />
               <Label htmlFor="category" className="text-right text-zinc-300">
                 Category
@@ -70,6 +83,7 @@ const AddBudgetModal = memo(() => {
               <select
                 name="budgetCategory"
                 id="category"
+                disabled={loading}
                 className={cn(
                   `flex h-10 w-full border border-violet-800/40 hover:bg-transparent bg-black text-neutral-400  shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
           file:text-sm file:font-medium placeholder:text-neutral-600 
@@ -132,8 +146,14 @@ const AddBudgetModal = memo(() => {
             </div>
           </div>
           <DialogFooter>
-            <Button variant={"ghost"} type="submit">
-              Add Budget
+            <Button disabled={loading} variant={"ghost"} type="submit">
+              {loading ? (
+                <span>
+                  <LoaderIcon className="animate-spin h-5 w-5" />
+                </span>
+              ) : (
+                "Add Expense"
+              )}
             </Button>
           </DialogFooter>
         </Form>
