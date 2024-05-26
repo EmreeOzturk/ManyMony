@@ -29,13 +29,11 @@ const AddExpenseModal = memo(() => {
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   const [loading, setLoading] = useState(false);
-  console.log(loading);
   useEffect(() => {
     if (data && data?.status === "success") {
       setIsOpen(false);
       setLoading(false);
     } else {
-      console.log(data);
       setLoading(false);
     }
   }, [data]);
