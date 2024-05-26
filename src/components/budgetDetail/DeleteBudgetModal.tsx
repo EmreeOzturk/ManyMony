@@ -9,18 +9,13 @@ import {
   DialogTrigger,
 } from "@/src/components/ui/dialog";
 import { Form, useActionData } from "react-router-dom";
-import { useAuth } from "@/src/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { memo } from "react";
 import { LoaderIcon } from "lucide-react";
 import ModalTriggerButton from "../dashboard/ModalTriggerButton";
 
-type AuthType = {
-  userId: string;
-};
-const DeleteBudgetModal = memo(() => {
+const DeleteBudgetModal = memo(({ budgetId }: { budgetId: string }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { userId } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -38,8 +33,9 @@ const DeleteBudgetModal = memo(() => {
       </DialogTrigger>
       <DialogContent className="text-zinc-300 bg-zinc-950">
         <Form
-          method="POST"
+          method="DELETE"
           onSubmit={() => {
+            console.log("submitting");
             setLoading(true);
           }}
         >
@@ -49,10 +45,10 @@ const DeleteBudgetModal = memo(() => {
               Are you sure you want to delete this budget?
             </DialogDescription>
           </DialogHeader>
-          <input type="hidden" name="_action" value="createBudget" />
-          <input type="hidden" name="userId" value={userId} />
+          <input type="hidden" name="_action" value="deleteBudget" />
+          <input type="hidden" name="budgetId" value={budgetId} />
           <DialogFooter>
-            <Button disabled={loading} variant={"ghost"} type="submit">
+            <Button disabled={loading} variant={"destructive"} type="submit">
               {loading ? (
                 <span>
                   <LoaderIcon className="animate-spin h-5 w-5" />
