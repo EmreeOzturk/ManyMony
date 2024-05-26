@@ -1,5 +1,6 @@
 import { Button } from "@/src/components/ui/button";
 import { cn } from "@/src/utils/cn";
+import { LoaderIcon } from "lucide-react";
 import {
   Dialog,
   DialogFooter,
@@ -28,10 +29,14 @@ const AddExpenseModal = memo(() => {
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   const [loading, setLoading] = useState(false);
-  console.log(loading)
+  console.log(loading);
   useEffect(() => {
     if (data && data?.status === "success") {
       setIsOpen(false);
+      setLoading(false);
+    } else {
+      console.log(data);
+      setLoading(false);
     }
   }, [data]);
   return (
@@ -40,7 +45,12 @@ const AddExpenseModal = memo(() => {
         <ModalTriggerButton text="Add Expense" />
       </DialogTrigger>
       <DialogContent className="text-zinc-300 bg-zinc-950">
-        <Form method="POST">
+        <Form
+          onSubmit={() => {
+            setLoading(true);
+          }}
+          method="POST"
+        >
           <DialogHeader>
             <DialogTitle>New Expense</DialogTitle>
             <DialogDescription>
@@ -54,6 +64,7 @@ const AddExpenseModal = memo(() => {
               <input
                 type="hidden"
                 name="oldUsage"
+                disabled={loading}
                 value={
                   documents?.find((doc) => doc.$id === selectedBudget)?.usage
                 }
@@ -63,6 +74,7 @@ const AddExpenseModal = memo(() => {
               </Label>
               <select
                 name="budget"
+                disabled={loading}
                 id="budget"
                 className={cn(
                   `flex h-10 w-full border border-violet-800/40 hover:bg-transparent bg-black text-neutral-400  shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
@@ -73,7 +85,7 @@ const AddExpenseModal = memo(() => {
            group-hover/input:shadow-none transition duration-400
            `
                 )}
-                value={selectedBudget}
+                defaultValue={selectedBudget}
                 onChange={(e) => setSelectedBudget(e.target.value)}
               >
                 {documents?.map((doc: Models.Document) => (
@@ -96,14 +108,14 @@ const AddExpenseModal = memo(() => {
             </div>
           </div>
           <DialogFooter>
-            <Button
-              onClick={() => {
-                setLoading(true);
-              }}
-              variant={"ghost"}
-              type="submit"
-            >
-              Add Expense
+            <Button disabled={loading} variant={"ghost"} type="submit">
+              {loading ? (
+                <span>
+                  <LoaderIcon className="animate-spin h-5 w-5" />
+                </span>
+              ) : (
+                "Add Expense"
+              )}
             </Button>
           </DialogFooter>
         </Form>
