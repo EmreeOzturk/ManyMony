@@ -16,9 +16,7 @@ import { useTransactionData } from "@/src/hooks/useTransactionData";
 import { memo, useState } from "react";
 import { Button } from "../../ui/button";
 const Transcations = memo(() => {
-  // const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
-  // console.log(searchParams.get("page"));
   console.log("transaction");
   const { recentTransactions } = useTransactionData();
   return (
