@@ -4,10 +4,11 @@ import RecentExpenses from "./RecentExpenses";
 import RecentBudgets from "./RecentBudgets";
 import { BarChart } from "@tremor/react";
 import { useOverviewData } from "@/src/hooks/useOverviewData";
+import { memo } from "react";
 const dataFormatter = (number: number) =>
   Intl.NumberFormat("us").format(number).toString();
-const Overview = () => {
-  console.log("overview")
+const Overview = memo(() => {
+  console.log("overview");
   const {
     totalBudget,
     totalExpense,
@@ -15,7 +16,6 @@ const Overview = () => {
     recentExpenses,
     chartData,
   } = useOverviewData();
-
 
   return (
     <div className="flex gap-2 flex-col justify-between items-start w-full overflow-hidden relative h-full rounded-2xl p-4 text-xl md:text-4xl font-bold text-zinc-300 bg-zinc-900">
@@ -45,11 +45,11 @@ const Overview = () => {
             />
           </div>
         </div>
-        <RecentExpenses data={recentExpenses} />
+        <RecentExpenses data={recentExpenses.slice(0, 8)} />
       </div>
       <RecentBudgets data={recentBudgets} />
     </div>
   );
-};
+});
 
 export default Overview;
