@@ -9,17 +9,13 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/src/components/ui/pagination";
 import TransactionTableRow from "./TransactionTableRow";
 import { Banana, ChevronLeft, ChevronRight } from "lucide-react";
 import { useTransactionData } from "@/src/hooks/useTransactionData";
 import { memo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Button } from "../../ui/button";
 const Transcations = memo(() => {
-  const [isActive, setIsActive] = useState(false);
   // const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
   // console.log(searchParams.get("page"));
@@ -30,15 +26,19 @@ const Transcations = memo(() => {
       <div className="absolute bottom-5 right-0 left-0 flex justify-center items-center w-full">
         <Pagination>
           <PaginationContent>
-            {/* <PaginationItem>
+            <PaginationItem>
               <Button
+                disabled={page === 1}
                 className="flex justify-between items-center"
                 variant="ghost"
+                onClick={() => {
+                  setPage(page - 1);
+                }}
               >
                 <ChevronLeft className="h-4 w-4" />
                 <span>Previous</span>
               </Button>
-            </PaginationItem> */}
+            </PaginationItem>
             {[...Array(Math.ceil(recentTransactions?.length / 10))].map(
               (_, index) => {
                 console.log(index + 1);
@@ -57,15 +57,19 @@ const Transcations = memo(() => {
                 );
               }
             )}
-            {/* <PaginationItem>
+            <PaginationItem>
               <Button
+                disabled={page === Math.ceil(recentTransactions?.length / 10)}
                 className="flex justify-between items-center"
                 variant="ghost"
+                onClick={() => {
+                  setPage(page + 1);
+                }}
               >
                 <span>Next</span>
                 <ChevronRight className="h-4 w-4" />
               </Button>
-            </PaginationItem> */}
+            </PaginationItem>
           </PaginationContent>
         </Pagination>
       </div>
