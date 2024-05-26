@@ -136,7 +136,10 @@ export const dashboardAction: ActionFunction = async ({
     );
 
     if (Object.keys(errors).length > 0) {
-      return errors;
+      return {
+        status: "error",
+        data: errors,
+      };
     }
 
     try {
