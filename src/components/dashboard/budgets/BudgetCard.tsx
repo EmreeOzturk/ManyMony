@@ -8,12 +8,14 @@ const BudgetCard = ({
   percentage,
   categories,
   index,
+  budgetId,
 }: {
   name: string;
   amount: number;
   percentage: number;
   categories: string[];
   index: number;
+  budgetId: string;
 }) => {
   return (
     <motion.div
@@ -22,7 +24,10 @@ const BudgetCard = ({
       transition={{ delay: index * 0.1 }}
       className="relative flex flex-col cursor-pointer hover:bg-indigo-950 transition-transform duration-300 ease-in-out"
     >
-      <Link to="/" className="relative flex flex-col cursor-pointer ">
+      <Link
+        to={`/budgets/${budgetId}`}
+        className="relative flex flex-col cursor-pointer "
+      >
         <div className="max-w-sm w-72 px-6 py-8 h-[270px] border bg-indigo-950/40 border-indigo-500/40 rounded-xl overflow-hidden shadow-lg">
           <div className="absolute top-0 right-0 px-3 py-3 rounded-bl-2xl border-zinc-600/40 border-l border-b  text-xs font-bold bg-zinc-900 text-zinc-300">
             {percentage.toFixed(0)}%
