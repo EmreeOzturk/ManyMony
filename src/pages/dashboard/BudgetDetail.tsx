@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import {
   Table,
-  TableBody,
+  // TableBody,
   TableHead,
   TableHeader,
   TableRow,
@@ -17,7 +17,7 @@ import {
   PaginationContent,
   PaginationItem,
 } from "@/src/components/ui/pagination";
-import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
+// import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
 import { Button } from "@/src/components/ui/button";
 // budget has name, limit, usage, category, expenses
 
@@ -27,6 +27,7 @@ type BudgetType = {
   usage: number;
   category: string;
   expenses: Models.Document[];
+  $id: string;
 };
 
 const BudgetDetail = () => {
@@ -73,7 +74,7 @@ const BudgetDetail = () => {
                 <div className="w-1/2">
                   <div className="flex justify-end text-xl gap-2">
                     <EditBudgetModal />
-                    <DeleteBudgetModal />
+                    <DeleteBudgetModal budgetId={budget?.$id}/>
                   </div>
                 </div>
               </div>
@@ -96,23 +97,21 @@ const BudgetDetail = () => {
                       <span>Previous</span>
                     </Button>
                   </PaginationItem>
-                  {[...Array(2)].map(
-                    (_, index) => {
-                      return (
-                        <PaginationItem key={index}>
-                          <Button
-                            className="flex justify-between items-center"
-                            onClick={() => {
-                              setPage(index + 1);
-                            }}
-                            variant={page === index + 1 ? "outline" : "ghost"}
-                          >
-                            {index + 1}
-                          </Button>
-                        </PaginationItem>
-                      );
-                    }
-                  )}
+                  {[...Array(2)].map((_, index) => {
+                    return (
+                      <PaginationItem key={index}>
+                        <Button
+                          className="flex justify-between items-center"
+                          onClick={() => {
+                            setPage(index + 1);
+                          }}
+                          variant={page === index + 1 ? "outline" : "ghost"}
+                        >
+                          {index + 1}
+                        </Button>
+                      </PaginationItem>
+                    );
+                  })}
                   <PaginationItem>
                     <Button
                       disabled={
