@@ -15,6 +15,7 @@ import { Form, useActionData } from "react-router-dom";
 import { useAuth } from "@/src/hooks/useAuth";
 import { useState, useEffect } from "react";
 import { memo } from "react";
+import ModalTriggerButton from "./ModalTriggerButton";
 
 type AuthType = {
   userId: string;
@@ -30,12 +31,8 @@ const AddBudgetModal = memo(() => {
   }, [data]);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <button className="border flex items-center border-zinc-800 hover:scale-105 transition-all group hover:border-indigo-300 justify-center rounded-md px-4 py-2">
-          <span className="relative block text-zinc-600 group-hover:text-indigo-300">
-            Add Budget
-          </span>
-        </button>
+      <DialogTrigger >
+       <ModalTriggerButton text="Add Budget" />
       </DialogTrigger>
       <DialogContent className="text-zinc-300 bg-zinc-950">
         <Form method="POST" action="/dashboard">
