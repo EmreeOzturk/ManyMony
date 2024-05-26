@@ -56,16 +56,6 @@ const router = createBrowserRouter([
             errorElement: <Error />,
             loader: budgetDetailLoader,
           },
-          {
-            path: "/analytics",
-            errorElement: <Error />,
-            element: <div>analytics</div>,
-          },
-          {
-            path: "/settings",
-            errorElement: <Error />,
-            element: <div>settings</div>,
-          },
         ],
       },
     ],
