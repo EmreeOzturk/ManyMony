@@ -5,17 +5,19 @@ const useTransactionData = () => {
   const { documents } = useLoaderData() as { documents: Models.Document[] };
 
   const transactions = documents.map((budget) => {
-    const transactions = budget.expense.map((transaction: Models.Document) => {
-      return {
-        name: budget.name,
-        category: budget.category,
-        budgetId: budget.$id,
-        usage: budget.usage,
-        amount: transaction.amount,
-        date: transaction.$createdAt,
-        id: transaction.$id,
-      };
-    });
+    const transactions = budget?.expense?.map(
+      (transaction: Models.Document) => {
+        return {
+          name: budget.name,
+          category: budget.category,
+          budgetId: budget.$id,
+          usage: budget.usage,
+          amount: transaction.amount,
+          date: transaction.$createdAt,
+          id: transaction.$id,
+        };
+      }
+    );
 
     return transactions;
   });
