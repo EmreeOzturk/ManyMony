@@ -56,8 +56,11 @@ const BudgetDetail = () => {
                       <div className="flex gap-2">
                         <span className="font-bold">Usage: </span>
                         <span>
-                          ${budget.usage} ={" "}
-                          {((budget.usage / budget.limit) * 100).toFixed(2)}%
+                          ${Math.abs(budget.usage)} ={" "}
+                          {Math.abs(
+                            (budget.usage / budget.limit) * 100
+                          ).toFixed(1)}
+                          %
                         </span>
                       </div>
                     </div>
@@ -160,7 +163,7 @@ const BudgetDetail = () => {
                       Icon={<Banana />}
                       id={transaction.$id}
                       budgetId={budget.$id}
-                      usage={transaction.usage}
+                      usage={budget.usage}
                     />
                   ))}
               </TableBody>
