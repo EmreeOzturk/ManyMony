@@ -25,10 +25,13 @@ type AuthType = {
 const AddExpenseModal = memo(() => {
   const { documents } = useLoaderData() as { documents: Models.Document[] };
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedBudget, setSelectedBudget] = useState<string>("" as string);
+  const [selectedBudget, setSelectedBudget] = useState<string>(
+    documents[0].$id
+  );
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   const [loading, setLoading] = useState(false);
+  console.log(documents?.find((doc) => doc.$id === selectedBudget)?.usage);
   useEffect(() => {
     if (data && data?.status === "success") {
       setIsOpen(false);
