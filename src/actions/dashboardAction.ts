@@ -30,7 +30,7 @@ export const dashboardAction: ActionFunction = async ({
       return errors;
     }
     try {
-      databases
+      await databases
         .createDocument(
           "66343e800011dbbdd0f4", // => DB ID
           "66343eb4001c491d89a7", // => Collection ID
