@@ -144,7 +144,7 @@ const BudgetDetail = () => {
                   ?.slice((page - 1) * 10, (page - 1) * 10 + 10)
                   ?.map((transaction, index) => (
                     <TransactionTableRow
-                      key={transaction.id}
+                      key={transaction.$id}
                       date={new Date(transaction.$createdAt).toLocaleString(
                         "en-US",
                         {
@@ -159,7 +159,7 @@ const BudgetDetail = () => {
                       index={index}
                       Icon={<Banana />}
                       id={transaction.$id}
-                      budgetId={transaction.budgetId}
+                      budgetId={budget.$id}
                       usage={transaction.usage}
                     />
                   ))}
