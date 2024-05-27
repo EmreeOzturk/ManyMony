@@ -74,7 +74,12 @@ const BudgetDetail = () => {
                 </div>
                 <div className="w-1/2">
                   <div className="flex justify-end text-xl gap-2">
-                    <EditBudgetModal />
+                    <EditBudgetModal
+                      budgetId={budget?.$id}
+                      budgetName={budget.name}
+                      budgetLimit={budget.limit}
+                      budgetCategory={budget.category}
+                    />
                     <DeleteBudgetModal budgetId={budget?.$id} />
                   </div>
                 </div>
