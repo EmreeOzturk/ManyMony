@@ -32,8 +32,6 @@ type BudgetType = {
 const BudgetDetail = () => {
   const budget = useLoaderData() as BudgetType;
   const [page, setPage] = useState(1);
-  console.log(budget.$id);
-  console.log(budget);
   return (
     <div className="h-screen w-screen relative flex flex-col items-center justify-center">
       <BackToHome url="/dashboard" text="Go Dashboard" />
@@ -97,21 +95,23 @@ const BudgetDetail = () => {
                       <span>Previous</span>
                     </Button>
                   </PaginationItem>
-                  {[...Array(2)].map((_, index) => {
-                    return (
-                      <PaginationItem key={index}>
-                        <Button
-                          className="flex justify-between items-center"
-                          onClick={() => {
-                            setPage(index + 1);
-                          }}
-                          variant={page === index + 1 ? "outline" : "ghost"}
-                        >
-                          {index + 1}
-                        </Button>
-                      </PaginationItem>
-                    );
-                  })}
+                  {[...Array(Math.ceil(budget.expense?.length / 10))].map(
+                    (_, index) => {
+                      return (
+                        <PaginationItem key={index}>
+                          <Button
+                            className="flex justify-between items-center"
+                            onClick={() => {
+                              setPage(index + 1);
+                            }}
+                            variant={page === index + 1 ? "outline" : "ghost"}
+                          >
+                            {index + 1}
+                          </Button>
+                        </PaginationItem>
+                      );
+                    }
+                  )}
                   <PaginationItem>
                     <Button
                       disabled={page === Math.ceil(budget.expense?.length / 10)}
