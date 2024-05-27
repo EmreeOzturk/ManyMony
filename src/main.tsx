@@ -16,6 +16,7 @@ import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import { dashboardAction } from "./actions/dashboardAction.ts";
 import { dashboardLoader } from "./loaders/dashboardLoader.ts";
 import { budgetDetailAction } from "./actions/budgetDetailAction.ts";
+import BudgetDetailError from "./pages/dashboard/BudgetDetailError.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,7 +54,7 @@ const router = createBrowserRouter([
           {
             path: "/budgets/:budgetId",
             element: <BudgetDetail />,
-            errorElement: <Error />,
+            errorElement: <BudgetDetailError />,
             loader: budgetDetailLoader,
             action: budgetDetailAction,
           },
