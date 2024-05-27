@@ -2,8 +2,11 @@ import type { ActionFunction } from "react-router-dom";
 import { redirect } from "react-router-dom";
 import { databases } from "../lib/appwrite";
 import { toast } from "react-toastify";
-import { checkDeleteExpenseFormData } from "../helper/checkFormData";
-import { AppwriteException } from "appwrite";
+import {
+  checkCreateExpenseFormData,
+  checkDeleteExpenseFormData,
+} from "../helper/checkFormData";
+import { AppwriteException, ID } from "appwrite";
 
 export const budgetDetailAction: ActionFunction = async ({
   request,
@@ -133,6 +136,64 @@ export const budgetDetailAction: ActionFunction = async ({
       console.log(e);
       return {
         status: "failed",
+      };
+    }
+  }
+  if (actionType === "createExpense") {
+    const amount = formData.get("amount");
+    const budgetId = formData.get("budgetId");
+    const userId = formData.get("userId");
+    const oldUsage = formData.get("oldUsage");
+
+    const errors = checkCreateExpenseFormData(
+      amount as string,
+      budgetId as string,
+      userId as string
+    );
+    if (Object.keys(errors).length > 0) {
+      return errors;
+    }
+    try {
+      const createExpense = databases.createDocument(
+        "66343e800011dbbdd0f4",
+        "66343ebc0025e1be1729",
+        ID.unique(),
+        {
+          amount: Number(amount),
+          budget: budgetId,
+          userId: userId,
+        }
+      );
+      const updateBudget = databases.updateDocument(
+        "66343e800011dbbdd0f4",
+        "66343eb4001c491d89a7",
+        budgetId as string,
+        {
+          usage: Number(oldUsage) + Number(amount),
+        }
+      );
+      await Promise.all([createExpense, updateBudget])
+        .then(() => {
+          toast.success("Expense added successfully", {
+            autoClose: 2000,
+            position: "bottom-right",
+          });
+        })
+        .catch((error: AppwriteException) => {
+          console.log(error);
+          return {
+            message: "Failed to add expense",
+            status: "error",
+          };
+        });
+      return {
+        message: "Expense added successfully",
+        status: "success",
+      };
+    } catch (error) {
+      return {
+        message: "Failed to add expense",
+        status: "error",
       };
     }
   }
