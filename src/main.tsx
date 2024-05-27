@@ -49,7 +49,6 @@ const router = createBrowserRouter([
             errorElement: <Error />,
             action: dashboardAction,
             loader: dashboardLoader,
-            // action adn loader
           },
           {
             path: "/budgets/:budgetId",
