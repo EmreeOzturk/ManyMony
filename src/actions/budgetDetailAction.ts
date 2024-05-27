@@ -15,10 +15,8 @@ export const budgetDetailAction: ActionFunction = async ({
 
   if (actionType === "deleteBudget") {
     const budgetId = formData.get("budgetId");
-    console.log(budgetId);
 
     try {
-      console.log("Deleting budget");
       databases
         .deleteDocument(
           "66343e800011dbbdd0f4",

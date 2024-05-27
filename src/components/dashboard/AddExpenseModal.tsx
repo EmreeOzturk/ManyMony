@@ -31,7 +31,6 @@ const AddExpenseModal = memo(() => {
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   const [loading, setLoading] = useState(false);
-  console.log(documents?.find((doc) => doc.$id === selectedBudget)?.usage);
   useEffect(() => {
     if (data && data?.status === "success") {
       setIsOpen(false);

@@ -8,7 +8,6 @@ import { memo } from "react";
 const dataFormatter = (number: number) =>
   Intl.NumberFormat("us").format(number).toString();
 const Overview = memo(() => {
-  console.log("overview");
   const {
     totalBudget,
     totalExpense,

@@ -128,7 +128,6 @@ export const dashboardAction: ActionFunction = async ({
     const userId = formData.get("userId");
     const oldUsage = formData.get("oldUsage");
 
-    console.log(oldUsage);
     const errors = checkCreateExpenseFormData(
       budgetId as string,
       expenseAmount as string,

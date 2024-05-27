@@ -35,7 +35,6 @@ const DeleteBudgetModal = memo(({ budgetId }: { budgetId: string }) => {
         <Form
           method="DELETE"
           onSubmit={() => {
-            console.log("submitting");
             setLoading(true);
           }}
         >
