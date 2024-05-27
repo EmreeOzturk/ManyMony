@@ -9,5 +9,26 @@ export const dashboardLoader: LoaderFunction = async () => {
     "66343eb4001c491d89a7",
     [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
   );
+
+  // const getDataa = async () => {
+  //   const allBudget = await fetch(
+  //     "https://manymonyapp.azurewebsites.net/api/budgets/getAll",
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "text/plain",
+  //       },
+  //       mode: "cors",
+  //     }
+  //   );
+  //   console.log(allBudget?.status);
+  //   const allBudgetData = await allBudget.json();
+  //   return allBudgetData;
+  // };
+
+  // useEffect(() => {
+  //   getDataa();
+  // }, []);
+
   return budgets;
 };
