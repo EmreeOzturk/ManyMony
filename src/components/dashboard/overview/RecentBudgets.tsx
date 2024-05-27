@@ -21,6 +21,7 @@ const RecentBudgets = ({
             title={budget.name}
             percentage={(budget.usage / budget.limit) * 100}
             Icon={<Drama />}
+            budgetId={budget.id}
           />
         );
       })}
