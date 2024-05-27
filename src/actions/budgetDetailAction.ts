@@ -96,4 +96,44 @@ export const budgetDetailAction: ActionFunction = async ({
       };
     }
   }
+  if (actionType === "editBudget") {
+    const budgetId = formData.get("budgetId");
+    const budgetName = formData.get("budgetName");
+    const budgetLimit = formData.get("budgetLimit");
+    const budgetCategory = formData.get("budgetCategory");
+
+    try {
+      databases
+        .updateDocument(
+          "66343e800011dbbdd0f4",
+          "66343eb4001c491d89a7",
+          budgetId as string,
+          {
+            name: budgetName && budgetName,
+            limit: budgetLimit && Number(budgetLimit),
+            category: budgetCategory && budgetCategory,
+          }
+        )
+        .then(() => {
+          toast.success("Budget updated successfully", {
+            autoClose: 2000,
+            position: "bottom-right",
+          });
+        })
+        .catch(() => {
+          toast.error("Failed to update budget", {
+            autoClose: 2000,
+            position: "bottom-right",
+          });
+        });
+      return {
+        status: "success",
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        status: "failed",
+      };
+    }
+  }
 };
