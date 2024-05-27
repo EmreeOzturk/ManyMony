@@ -19,6 +19,7 @@ import {
 } from "@/src/components/ui/pagination";
 import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
 import { Button } from "@/src/components/ui/button";
+import AddExpenseModal from "@/src/components/budgetDetail/AddExpenseModal";
 
 type BudgetType = {
   name: string;
@@ -74,6 +75,11 @@ const BudgetDetail = () => {
                 </div>
                 <div className="w-1/2">
                   <div className="flex justify-end text-xl gap-2">
+                    <AddExpenseModal
+                      budgetId={budget?.$id}
+                      budgetName={budget.name}
+                      budgetUsage={budget.usage}
+                    />
                     <EditBudgetModal
                       budgetId={budget?.$id}
                       budgetName={budget.name}
