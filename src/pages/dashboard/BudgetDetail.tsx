@@ -7,7 +7,7 @@ import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import {
   Table,
-  // TableBody,
+  TableBody,
   TableHead,
   TableHeader,
   TableRow,
@@ -17,22 +17,22 @@ import {
   PaginationContent,
   PaginationItem,
 } from "@/src/components/ui/pagination";
-// import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
+import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
 import { Button } from "@/src/components/ui/button";
-// budget has name, limit, usage, category, expenses
 
 type BudgetType = {
   name: string;
   limit: number;
   usage: number;
   category: string;
-  expenses: Models.Document[];
+  expense: Models.Document[];
   $id: string;
 };
 
 const BudgetDetail = () => {
   const budget = useLoaderData() as BudgetType;
   const [page, setPage] = useState(1);
+  console.log(budget.$id);
   console.log(budget);
   return (
     <div className="h-screen w-screen relative flex flex-col items-center justify-center">
@@ -74,7 +74,7 @@ const BudgetDetail = () => {
                 <div className="w-1/2">
                   <div className="flex justify-end text-xl gap-2">
                     <EditBudgetModal />
-                    <DeleteBudgetModal budgetId={budget?.$id}/>
+                    <DeleteBudgetModal budgetId={budget?.$id} />
                   </div>
                 </div>
               </div>
@@ -114,9 +114,7 @@ const BudgetDetail = () => {
                   })}
                   <PaginationItem>
                     <Button
-                      disabled={
-                        page === Math.ceil(budget.expenses?.length / 10)
-                      }
+                      disabled={page === Math.ceil(budget.expense?.length / 10)}
                       className="flex justify-between items-center"
                       variant="ghost"
                       onClick={() => {
@@ -141,28 +139,31 @@ const BudgetDetail = () => {
                 </TableRow>
               </TableHeader>
 
-              {/* <TableBody>
-                {budget?.expenses
-                  .slice((page - 1) * 10, (page - 1) * 10 + 10)
-                  .map((transaction, index) => (
+              <TableBody>
+                {budget?.expense
+                  ?.slice((page - 1) * 10, (page - 1) * 10 + 10)
+                  ?.map((transaction, index) => (
                     <TransactionTableRow
                       key={transaction.id}
-                      date={new Date(transaction.date).toLocaleString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}
-                      name={transaction.name}
-                      category={transaction.category}
+                      date={new Date(transaction.$createdAt).toLocaleString(
+                        "en-US",
+                        {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )}
+                      name={budget.name}
+                      category={budget.category}
                       amount={transaction.amount}
                       index={index}
                       Icon={<Banana />}
-                      id={transaction.id}
+                      id={transaction.$id}
                       budgetId={transaction.budgetId}
                       usage={transaction.usage}
                     />
                   ))}
-              </TableBody> */}
+              </TableBody>
             </Table>
           </div>
         </div>
