@@ -33,9 +33,9 @@ const Overview = memo(() => {
               Icon={<TrendingDown className="text-red-400" />}
             />
           </div>
-          <div className="border-indigo-500/40 bg-indigo-950/30 border h-full rounded-md">
+          <div className="border-indigo-500/40 bg-indigo-950/30 border  rounded-md">
             <BarChart
-              className="mt-6"
+              // className="mt-6"
               data={chartData}
               index="name"
               categories={["Budget Limit", "Budget Spent"]}
