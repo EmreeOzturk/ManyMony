@@ -1,14 +1,18 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const RecentBudgetCard = ({
   title,
   percentage,
   Icon,
+  budgetId,
 }: {
   title: string;
   percentage: number;
   Icon: React.ReactNode;
+  budgetId: string;
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="shadow-indigo-200 border-b h-1/4 rounded-md hover:bg-indigo-950/70 w-full flex items-center justify-between px-8 ">
       <div className="flex items-center gap-2 w-20">
@@ -26,7 +30,14 @@ const RecentBudgetCard = ({
         <span className="text-sm">{percentage.toFixed(0)}%</span>
       </div>
       <div className="cursor-pointer">
-        <p className="text-lg font-normal text-blue-400 underline">View</p>
+        <button
+          onClick={() => {
+            navigate(`/budgets/${budgetId}`);
+          }}
+          className="text-lg font-normal text-blue-400 underline"
+        >
+          View
+        </button>
       </div>
     </div>
   );
