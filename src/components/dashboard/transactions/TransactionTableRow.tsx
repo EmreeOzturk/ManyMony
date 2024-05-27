@@ -30,11 +30,12 @@ const TransactionTableRow = ({
   Icon?: ReactElement;
   id: string;
   budgetId: string;
-  usage: string;
+  usage: number;
 }) => {
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const data = useActionData() as { status: string };
+
   useEffect(() => {
     if (data && data?.status === "success") {
       setLoading(false);
@@ -62,29 +63,11 @@ const TransactionTableRow = ({
       </TableCell>
       <TableCell className="text-right">${amount}</TableCell>
       <TableCell className="flex justify-end pr-6">
-        {/* <Form method="POST" className=" inline-block">
-          <input type="hidden" name="_action" value="deleteExpense" />
-          <input type="hidden" name="_id" value={id} />
-          <input type="hidden" name="_budgetId" value={budgetId} />
-          <input type="hidden" name="amount" value={amount} />
-          <input type="hidden" name="usage" value={usage} />
-          <Button className="text-xs" variant={"destructive"}>
-            <Trash className="w-4 h-4 mr-2" />
-            Delete
-          </Button>
-        </Form> */}
         <Popover open={isOpen} onOpenChange={setIsOpen}>
           <PopoverTrigger>
             <Ellipsis />
           </PopoverTrigger>
           <PopoverContent className="w-full  bg-zinc-900">
-            {/* <Button
-              className="text-xs bg-transparent text-zinc-300 "
-              variant={"outline"}
-            >
-              <Edit className="w-4 h-4 mr-2" />
-              Edit
-            </Button> */}
             <Form
               onSubmit={() => {
                 setLoading(true);
