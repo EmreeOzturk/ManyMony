@@ -22,7 +22,11 @@ const useAnalyticData = () => {
   const lineData = documents.map((budget) => {
     const transactions = budget.expense.map((transaction: Models.Document) => {
       return {
-        date: transaction.$createdAt,
+        date: new Date(transaction.$createdAt).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
         "Daily Spendings": transaction.amount,
       };
     });
