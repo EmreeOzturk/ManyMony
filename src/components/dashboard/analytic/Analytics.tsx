@@ -4,12 +4,11 @@ import { useAnalyticData } from "@/src/hooks/useAnalyticData";
 const dataFormatter = (number: number) =>
   `$${Intl.NumberFormat("us").format(number).toString()}`;
 
-
 const valueFormatter = (number: number) =>
   `$ ${Intl.NumberFormat("us").format(number).toString()}`;
 
 const Analytics = () => {
-  const {chartData, piaData,lineData} = useAnalyticData();
+  const { chartData, piaData, lineData } = useAnalyticData();
   return (
     <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl  font-bold text-zinc-300 bg-zinc-900">
       <div className="flex items-center justify-center  w-full h-full">
@@ -44,13 +43,7 @@ const Analytics = () => {
             className="w-40"
           />
           <Legend
-            categories={[
-              "Food Budget",
-              "Entertainment Budget",
-              "Groceries Budget",
-              "Transport Budget",
-              "Shopping Budget",
-            ]}
+            categories={piaData.map((d) => d.name)}
             colors={["blue", "cyan", "indigo", "violet", "fuchsia"]}
             className="max-w-xs"
           />
