@@ -1,7 +1,7 @@
 import { Ellipsis, LoaderIcon } from "lucide-react";
 import { TableCell } from "../../ui/table";
 import { motion } from "framer-motion";
-import { ReactElement, useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "../../ui/button";
 import { Trash } from "lucide-react";
 import { Form, useActionData } from "react-router-dom";
@@ -11,23 +11,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/src/components/ui/popover";
+import iconMapping, { Category } from "@/src/helper/iconMapping";
 const TransactionTableRow = ({
   date,
   name,
   category,
   amount,
   index,
-  Icon,
   id,
   budgetId,
   usage,
 }: {
   date: string;
   name: string;
-  category: string;
+  category: Category;
   amount: number;
   index: number;
-  Icon?: ReactElement;
   id: string;
   budgetId: string;
   usage: number;
@@ -35,7 +34,7 @@ const TransactionTableRow = ({
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const data = useActionData() as { status: string };
-
+  const IconComp = iconMapping[category];
   useEffect(() => {
     if (data && data?.status === "success") {
       setLoading(false);
@@ -54,7 +53,7 @@ const TransactionTableRow = ({
       </TableCell>
       <TableCell>
         <span className="flex items-center gap-2">
-          {Icon && Icon}
+          {IconComp && <IconComp  />}
           {name}
         </span>
       </TableCell>
