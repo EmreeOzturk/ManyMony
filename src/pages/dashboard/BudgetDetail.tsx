@@ -93,7 +93,7 @@ const BudgetDetail = () => {
             </div>
           </div>
           <div className="relative w-full h-96">
-            <div className="absolute bottom-5 right-0 left-0 flex justify-center items-center w-full">
+            <div className="absolute bottom-0 right-0 left-0 flex justify-center items-center w-full">
               <Pagination>
                 <PaginationContent>
                   <PaginationItem>
@@ -109,7 +109,7 @@ const BudgetDetail = () => {
                       <span>Previous</span>
                     </Button>
                   </PaginationItem>
-                  {[...Array(Math.ceil(budget.expense?.length / 10))].map(
+                  {[...Array(Math.ceil(budget.expense?.length / 5))].map(
                     (_, index) => {
                       return (
                         <PaginationItem key={index}>
@@ -155,7 +155,13 @@ const BudgetDetail = () => {
 
               <TableBody>
                 {budget?.expense
-                  ?.slice((page - 1) * 10, (page - 1) * 10 + 10)
+                  ?.sort((a, b) => {
+                    return (
+                      new Date(b.$createdAt).getTime() -
+                      new Date(a.$createdAt).getTime()
+                    );
+                  })
+                  ?.slice((page - 1) * 5, (page - 1) * 5 + 5)
                   ?.map((transaction, index) => (
                     <TransactionTableRow
                       key={transaction.$id}
