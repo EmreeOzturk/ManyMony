@@ -2,7 +2,7 @@ import DeleteBudgetModal from "@/src/components/budgetDetail/DeleteBudgetModal";
 import EditBudgetModal from "@/src/components/budgetDetail/EditBudgetModal";
 import BackToHome from "@/src/components/header/BackToHome";
 import { Models } from "appwrite";
-import { Banana, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -20,7 +20,7 @@ import {
 import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
 import { Button } from "@/src/components/ui/button";
 import AddExpenseModal from "@/src/components/budgetDetail/AddExpenseModal";
-import { Category } from "@/src/helper/iconMapping";
+import iconMapping, { Category } from "@/src/helper/iconMapping";
 
 type BudgetType = {
   name: string;
@@ -34,6 +34,7 @@ type BudgetType = {
 const BudgetDetail = () => {
   const budget = useLoaderData() as BudgetType;
   const [page, setPage] = useState(1);
+  const IconComponent = iconMapping[budget.category as Category];
   return (
     <div className="h-screen w-screen relative flex flex-col items-center justify-center">
       <BackToHome url="/dashboard" text="Go Dashboard" />
@@ -45,18 +46,24 @@ const BudgetDetail = () => {
                 <div className="w-1/2 flex flex-col items-start gap-4">
                   <div className="flex justify-between">
                     <div className="flex justify-center items-center gap-2">
-                      <Banana className="h-12 w-12 border rounded-full p-1.5" />
-                      <span>{budget?.name}</span>
+                      <div className="w-12 h-12 flex justify-center items-center bg-zinc-800 rounded-full">
+                        {IconComponent && <IconComponent />}
+                      </div>
+                      <span className="mb-2">{budget?.name}</span>
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
                     <div className="flex flex-col gap-2">
                       <div className="flex gap-2">
-                        <span className="font-bold">Limit: </span>
+                        <span className="font-extrabold text-zinc-100">
+                          Limit:{" "}
+                        </span>
                         <span>{budget?.limit}</span>
                       </div>
                       <div className="flex gap-2">
-                        <span className="font-bold">Usage: </span>
+                        <span className="font-extrabold text-zinc-100">
+                          Usage:{" "}
+                        </span>
                         <span>
                           ${Math.abs(budget.usage)} ={" "}
                           {Math.abs(
@@ -68,7 +75,7 @@ const BudgetDetail = () => {
                     </div>
                     <div className="flex flex-col gap-2">
                       <div className="flex gap-2">
-                        <span className="font-bold">Category: </span>
+                        <span className="font-extrabold text-zinc-100">Category: </span>
                         <span className="font-bold">{budget.category}</span>
                       </div>
                     </div>
