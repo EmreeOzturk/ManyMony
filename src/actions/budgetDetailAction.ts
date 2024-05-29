@@ -16,36 +16,36 @@ export const budgetDetailAction: ActionFunction = async ({
   const formData = await request.formData();
   const actionType = formData.get("_action");
 
-  if (actionType === "deleteBudget") {
-    const budgetId = formData.get("budgetId");
+  // if (actionType === "deleteBudget") {
+  //   const budgetId = formData.get("budgetId");
 
-    try {
-      databases
-        .deleteDocument(
-          "66343e800011dbbdd0f4",
-          "66343eb4001c491d89a7",
-          budgetId as string
-        )
-        .then(() => {
-          toast.success("Budget deleted successfully", {
-            autoClose: 2000,
-            position: "bottom-right",
-          });
-        })
-        .catch(() => {
-          toast.error("Failed to delete budget", {
-            autoClose: 2000,
-            position: "bottom-right",
-          });
-        });
-      return redirect("/dashboard");
-    } catch (e) {
-      console.log(e);
-      return {
-        status: "failed",
-      };
-    }
-  }
+  //   try {
+  //     databases
+  //       .deleteDocument(
+  //         "66343e800011dbbdd0f4",
+  //         "66343eb4001c491d89a7",
+  //         budgetId as string
+  //       )
+  //       .then(() => {
+  //         toast.success("Budget deleted successfully", {
+  //           autoClose: 2000,
+  //           position: "bottom-right",
+  //         });
+  //       })
+  //       .catch(() => {
+  //         toast.error("Failed to delete budget", {
+  //           autoClose: 2000,
+  //           position: "bottom-right",
+  //         });
+  //       });
+  //     return redirect("/dashboard");
+  //   } catch (e) {
+  //     console.log(e);
+  //     return {
+  //       status: "failed",
+  //     };
+  //   }
+  // }
   if (actionType === "deleteExpense") {
     const expenseId = formData.get("_id");
     const budgetId = formData.get("_budgetId");
