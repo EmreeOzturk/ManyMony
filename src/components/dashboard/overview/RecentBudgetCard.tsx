@@ -1,22 +1,26 @@
+import iconMapping, { Category } from "@/src/helper/iconMapping";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const RecentBudgetCard = ({
   title,
   percentage,
-  Icon,
   budgetId,
+  category,
 }: {
   title: string;
   percentage: number;
-  Icon: React.ReactNode;
   budgetId: string;
+  category: Category;
 }) => {
   const navigate = useNavigate();
+  const IconComponent = iconMapping[category];
   return (
     <div className="shadow-indigo-200 border-b h-1/4 rounded-md hover:bg-indigo-950/70 w-full flex items-center justify-between px-8 ">
       <div className="flex items-center justify-start  gap-2 w-20">
-        <div className="bg-zinc-700 p-[3px] rounded-sm">{Icon}</div>
+        <div className="bg-zinc-700 p-[3px] rounded-sm">
+          {IconComponent && <IconComponent />}
+        </div>
         <p className="text-[16px] text-zinc-300">{title}</p>
       </div>
       <div className="flex w-1/2 items-center ">
