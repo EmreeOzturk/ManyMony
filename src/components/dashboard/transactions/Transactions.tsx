@@ -11,7 +11,7 @@ import {
   PaginationItem,
 } from "@/src/components/ui/pagination";
 import TransactionTableRow from "./TransactionTableRow";
-import { Banana, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTransactionData } from "@/src/hooks/useTransactionData";
 import { memo, useState } from "react";
 import { Button } from "../../ui/button";
@@ -95,7 +95,6 @@ const Transcations = memo(() => {
                 category={transaction.category}
                 amount={transaction.amount}
                 index={index}
-                Icon={<Banana />}
                 id={transaction.id}
                 budgetId={transaction.budgetId}
                 usage={transaction.usage}
