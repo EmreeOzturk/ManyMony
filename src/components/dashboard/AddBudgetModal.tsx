@@ -141,6 +141,9 @@ const AddBudgetModal = memo(() => {
                 <option className="bg-black" value="CAR">
                   Car
                 </option>
+                <option className="bg-black" value="HOME">
+                  Home
+                </option>
               </select>
             </div>
           </div>
