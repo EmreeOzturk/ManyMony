@@ -17,6 +17,7 @@ const useOverviewData = () => {
       limit: budget.limit,
       usage: budget.usage,
       id: budget.$id,
+      category: budget.category,
     };
   });
 
