@@ -24,10 +24,22 @@ const RecentBudgetCard = ({
           <motion.div
             className="absolute top-0 left-0 h-full bg-indigo-400 rounded-md"
             initial={{ width: 0 }}
-            animate={{ width: `${percentage}%`, transition: { duration: 2 } }}
+            animate={{
+              width: `${Math.min(percentage, 100)}%`,
+              transition: { duration: 2 },
+            }}
           />
         </div>
-        <span className="text-sm">{percentage.toFixed(0)}%</span>
+        <span
+          className={`text-sm ${percentage > 100 && "text-red-600"}
+          ${percentage < 25 && "text-green-500"}
+          ${percentage > 50 && "text-emerald-500"}
+          ${percentage > 25 && "text-blue-500"}
+          ${percentage > 80 && "text-orange-500"}
+        `}
+        >
+          {percentage.toFixed(0)}%
+        </span>
       </div>
       <div className="cursor-pointer flex items-center justify-center hover:scale-110 transition-all">
         <button
