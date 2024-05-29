@@ -20,6 +20,7 @@ import {
 import TransactionTableRow from "@/src/components/dashboard/transactions/TransactionTableRow";
 import { Button } from "@/src/components/ui/button";
 import AddExpenseModal from "@/src/components/budgetDetail/AddExpenseModal";
+import { Category } from "@/src/helper/iconMapping";
 
 type BudgetType = {
   name: string;
@@ -174,10 +175,9 @@ const BudgetDetail = () => {
                         }
                       )}
                       name={budget.name}
-                      category={budget.category}
+                      category={budget.category as Category}
                       amount={transaction.amount}
                       index={index}
-                      Icon={<Banana />}
                       id={transaction.$id}
                       budgetId={budget.$id}
                       usage={budget.usage}
