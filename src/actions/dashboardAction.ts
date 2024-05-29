@@ -1,4 +1,4 @@
-import type { ActionFunction } from "react-router-dom";
+import { type ActionFunction } from "react-router-dom";
 import { toast } from "react-toastify";
 import { databases } from "../lib/appwrite";
 import { AppwriteException, ID } from "appwrite";
@@ -175,6 +175,25 @@ export const dashboardAction: ActionFunction = async ({
       return {
         message: "Failed to create expense",
         status: "error",
+      };
+    }
+  }
+  if (actionType === "deleteBudget") {
+    const budgetId = formData.get("budgetId");
+    console.log("budgetId", budgetId);
+    try {
+      await databases.deleteDocument(
+        "66343e800011dbbdd0f4",
+        "66343eb4001c491d89a7",
+        budgetId as string
+      );
+      return {
+        status: "success",
+      };
+    } catch (e) {
+      console.log(e);
+      return {
+        status: "failed",
       };
     }
   }
