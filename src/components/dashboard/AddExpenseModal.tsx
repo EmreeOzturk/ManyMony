@@ -28,7 +28,6 @@ const AddExpenseModal = memo(() => {
   const [selectedBudget, setSelectedBudget] = useState<string>(
     documents[0]?.$id
   );
-  console.log(documents[0])
   const { user } = useAuth() as AuthType;
   const data = useActionData() as { status: string };
   const [loading, setLoading] = useState(false);
