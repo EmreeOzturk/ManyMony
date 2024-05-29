@@ -34,6 +34,7 @@ const DeleteBudgetModal = memo(({ budgetId }: { budgetId: string }) => {
       <DialogContent className="text-zinc-300 bg-zinc-950">
         <Form
           method="DELETE"
+          action="/dashboard"
           onSubmit={() => {
             setLoading(true);
           }}
