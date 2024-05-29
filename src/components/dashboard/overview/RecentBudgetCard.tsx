@@ -33,8 +33,8 @@ const RecentBudgetCard = ({
         <span
           className={`text-sm ${percentage > 100 && "text-red-600"}
           ${percentage < 25 && "text-green-500"}
-          ${percentage > 50 && "text-emerald-500"}
-          ${percentage > 25 && "text-blue-500"}
+          ${percentage > 25 && "text-cyan-500"}
+          ${percentage > 50 && "text-blue-500"}
           ${percentage > 80 && "text-orange-500"}
         `}
         >
