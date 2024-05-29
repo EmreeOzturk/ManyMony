@@ -1,4 +1,4 @@
-import { Drama } from "lucide-react";
+import { Category } from "@/src/helper/iconMapping";
 import RecentBudgetCard from "./RecentBudgetCard";
 
 const RecentBudgets = ({
@@ -9,6 +9,7 @@ const RecentBudgets = ({
     limit: number;
     usage: number;
     id: string;
+    category: Category;
   }[];
 }) => {
   return (
@@ -20,8 +21,8 @@ const RecentBudgets = ({
             key={budget.id}
             title={budget.name}
             percentage={(budget.usage / budget.limit) * 100}
-            Icon={<Drama />}
             budgetId={budget.id}
+            category={budget.category}
           />
         );
       })}
