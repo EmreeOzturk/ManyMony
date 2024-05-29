@@ -1,7 +1,7 @@
-import { Album } from "lucide-react";
 import { Badge } from "@/src/components/ui/badge";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import iconMapping, { Category } from "@/src/helper/iconMapping";
 const BudgetCard = ({
   name,
   amount,
@@ -13,10 +13,11 @@ const BudgetCard = ({
   name: string;
   amount: number;
   percentage: number;
-  categories: string[];
+  categories: Category;
   index: number;
   budgetId: string;
 }) => {
+  const IconComp = iconMapping[categories];
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -33,7 +34,7 @@ const BudgetCard = ({
             {percentage.toFixed(0)}%
           </div>
           <div className="w-12 h-12 rounded-xl bg-zinc-900 p-2 flex items-center justify-center mb-2">
-            <Album className="w-10 h-10 object-cover text-zinc-300" />
+            {IconComp && <IconComp />}
           </div>
           <div className="font-bold text-xl mb-2">{name}</div>
           <p className="text-zinc-300 text-lg">${amount}</p>
