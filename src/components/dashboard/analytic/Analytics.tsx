@@ -39,12 +39,60 @@ const Analytics = () => {
             category="limit"
             index="name"
             valueFormatter={valueFormatter}
-            colors={["blue", "cyan", "indigo", "violet", "fuchsia"]}
+            colors={
+              [
+                "cyan",
+                "indigo",
+                "violet",
+                "fuchsia",
+                "rose",
+                "amber",
+                "emerald",
+                "cyan",
+                "indigo",
+                "violet",
+                "fuchsia",
+                "rose",
+                "amber",
+                "emerald",
+                "teal",
+                "violet",
+                "fuchsia",
+                "rose",
+                "amber",
+                "emerald",
+                "teal",
+              ] as string[]
+            }
             className="w-40"
           />
           <Legend
             categories={piaData.map((d) => d.name)}
-            colors={["blue", "cyan", "indigo", "violet", "fuchsia"]}
+            colors={
+              [
+                "cyan",
+                "indigo",
+                "violet",
+                "fuchsia",
+                "rose",
+                "amber",
+                "emerald",
+                "cyan",
+                "indigo",
+                "violet",
+                "fuchsia",
+                "rose",
+                "amber",
+                "emerald",
+                "teal",
+                "violet",
+                "fuchsia",
+                "rose",
+                "amber",
+                "emerald",
+                "teal",
+              ] as string[]
+            }
             className="max-w-xs"
           />
         </div>
